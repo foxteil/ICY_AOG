@@ -1,0 +1,49 @@
+@charset "UTF-8";
+body {
+	width: 400px;	
+	height : 800px;
+  font-family: "Open Sans", sans-serif;
+  display: flex;
+  flex-direction: column;
+  margin: 10px;
+}
+#admin-box{
+	width: 500%;
+	height : 150%;
+	background-color : RGB(218,227,243);
+	margin : 8px; 
+}
+#little img{
+	    position: relative;
+    left: 10px;
+    width: 1.9cm;
+    height: 2.1cm;
+}
+.span-hplist{
+       background-color: #F7F7F7;
+    position: relative;
+    top: -5px;
+    left: 39px;
+    padding: 18px 5px;
+    margin: 7px 5px;
+    width: 95%;
+    height: 64%;
+}
+.admin_title{
+	    display: flex;
+}
+.admin_btn1{
+	    line-height: 2cm;
+    margin: 10px;
+    background-color: #3057B9;
+    padding: 21px;
+    width: 11.0cm;
+    height: 2cm;
+    border-radius: 22px;
+    position: relative;
+    left: 41px;
+    color: white;
+    font-size: 34pt;
+    text-align: center;
+    font-weight: bold;
+}

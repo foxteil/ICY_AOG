@@ -3,37 +3,44 @@
 <!DOCTYPE html>
 <html>
 <head>
+
 <meta charset="UTF-8">
-<link rel="stylesheet" href="css/reserve.css">
-<link rel="icon" type="image/png" href="img/gtg.png">
+<link rel="stylesheet" href="/resources/css/reserve.css">
+<link rel="icon" type="/resources/img/png" href="/resources/img/gtg.png">
 <title>메인페이지</title>
 </head>
 <body>
 	<div id="box">
-		<button class="btn" type="reset" onclick="logout()">로그아웃</button>
-		<a id="main_logo" href="start.jsp"> <img src="img/gtg_main.png"
+		<button class="btn" id="main" onclick="reserve(this)">로그아웃</button>
+		<a id="main_logo" href="start.jsp"> <img src="/resources/img/gtg_main.png"
 			style="width: 5cm; height: 5cm; position: relative; left: -8px; top: 80px;">
 		</a>
 		<div class="res">
-		<h2 class="reserve" onclick="simple()"> 
-			간편<br/>예약
+		<h2 class="reserve" id="LSEARCH" onclick="reserve(this)"> 
+			지역선택
 		</h2>
-		<h2 class="reserve" onclick="normal()">
-			일반<br/>예약
-		</h2>
-		<h2 class="reserve" onclick="bookmark()">
-			관심<br/>병원
+		<div class="partform">
+		<h5 class="part" id="PART" onclick="reserve(this)">이비인후과</h5>
+		<h5 class="part" onclick="reserve(this)">정형외과</h5>
+		<h5 class="part" onclick="reserve(this)">안  과</h5> <br/>
+		<h5 class="part" onclick="reserve(this)">통증의학과</h5>
+		<h5 class="part" onclick="reserve(this)">내  과</h5>
+		<h5 class="part" onclick="reserve(this)">치  과</h5>
+		<h5 class="part" onclick="reserve(this)">기  타</h5>
+		</div>
+		<h2 class="reserve" id="ORDER" onclick="reserve(this)">
+			예약하러가기
 		</h2>
 		</div>
 		
 		<div class="mypage">
-		<h2 class="my" onclick="check()"> 
+		<h2 class="my" id="RESCHECK" onclick="reserve(this)"> 
 			예약<br/>확인
 		</h2>
-		<h2 class="my" onclick="review()">
-			후기<br/>작성
+		<h2 class="my" id="BOOKMARKFORM" onclick="reserve(this)">
+			관심<br/>병원
 		</h2>
-		<h2 class="my" onclick="mypage()">
+		<h2 class="my" id="MYPAGEFORM" onclick="reserve(this)">
 			MY
 		</h2>
 		</div>
@@ -41,56 +48,14 @@
 </body>
 
 <script>
-	function simple() {
+	function reserve(opt) {
 		var form = document.createElement("form");
-		form.action = "sreservation.jsp";
+		form.action = opt.id;
 		form.method = "post";
 		document.body.appendChild(form);
 		form.submit();
 	}
 
-	function normal() {
-		var form = document.createElement("form");
-		form.action = "reservation.jsp";
-		form.method = "post";
-		document.body.appendChild(form);
-		form.submit();
-	}
-	function bookmark() {
-		var form = document.createElement("form");
-		form.action = "interest.jsp";
-		form.method = "post";
-		document.body.appendChild(form);
-		form.submit();
-	}
-	function check() {
-		var form = document.createElement("form");
-		form.action = "check.jsp";
-		form.method = "post";
-		document.body.appendChild(form);
-		form.submit();
-	}
-
-	function review() {
-		var form = document.createElement("form");
-		form.action = "review.jsp";
-		form.method = "post";
-		document.body.appendChild(form);
-		form.submit();
-	}
-	function mypage() {
-		var form = document.createElement("form");
-		form.action = "mypage.jsp";
-		form.method = "post";
-		document.body.appendChild(form);
-		form.submit();
-	}
-	function logout() {
-		var form = document.createElement("form");
-		form.action = "main.jsp";
-		form.method = "post";
-		document.body.appendChild(form);
-		form.submit();
-	}
+	
 </script>
 </html>
