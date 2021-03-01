@@ -21,7 +21,30 @@
 		<beans:property name="suffix" value=".jsp" />
 	</beans:bean>
 	
-	<context:component-scan base-package="ICY.HOONZZANG.COM" />
+	
+	<!-- Gson -->
+	<beans:bean id="gson" class="com.google.gson.Gson"></beans:bean>
+	
+	<!-- Spring Email Service -->
+	<beans:bean id="springMail" class="org.springframework.mail.javamail.JavaMailSenderImpl">
+		<beans:property name="host" value="smtp.naver.com"></beans:property>
+		<beans:property name="port" value="465"></beans:property>
+		<beans:property name="username" value="coqlstn@naver.com"></beans:property>
+		<beans:property name="password" value="!!coco707160"></beans:property>
+		<beans:property name="javaMailProperties">
+			<beans:props>
+				<beans:prop key="mail.smtp.starttls.enable">true</beans:prop>
+				<beans:prop key="mail.smtps.ssl.trust">*</beans:prop>
+				<beans:prop key="mail.smtp.auth">true</beans:prop>
+				<beans:prop key="mail.smtps.ssl.checkserveridentity">true</beans:prop>
+				<beans:prop key="mail.smtp.socketFactory.class">javax.net.ssl.SSLSocketFactory</beans:prop>
+			</beans:props>
+		</beans:property>
+	</beans:bean>
+	
+	
+	<context:component-scan base-package="icy.aog.controller"/>
+
 	
 	
 	

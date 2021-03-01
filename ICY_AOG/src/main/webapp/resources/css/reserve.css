@@ -1,0 +1,305 @@
+body {
+	width: 400px;	
+	height : 800px;
+  font-family: "Open Sans", sans-serif;
+  display: flex;
+  flex-direction: column;
+  margin: 10px;
+}
+#box{
+	width: 340px;
+	height : 680px;
+	background-color : RGB(218,227,243);
+	margin : 8px; 
+}
+
+.select{
+	width: 3.91cm;
+    height: 1cm;
+    font-size: 16pt;
+    font-weight: bold;
+    text-align: center;
+    background-color: RGB(68,114,196);
+    margin: 8px;
+    margin-bottom: 150px;
+    position: relative;
+    top: 126px;
+    left: 2%;
+    float: left;
+}
+
+.my{
+	    width: 2cm;
+    height: 2cm;
+    font-size: 18pt;
+    font-weight: bold;
+    margin: auto;
+    text-align: center;
+    background-color: #F2F2F2;
+    margin: 18px;
+    position: relative;
+    top: 245px;
+    left: 1%;
+    float: left;
+}
+
+.btn{
+	width: 2.08cm;
+    height: 0.85cm;
+	background-color: RGB(68,114,196);
+    position: relative;
+    bottom: 144px;
+    left: 247px;
+	
+}
+
+.res{
+    
+}
+select{
+	width: 4cm;
+    height: 0.91cm;
+    background-color: RGB(68,114,196);
+    position: relative;
+    top: 118px;
+    font-size: 16pt;
+    color: darkgrey;
+    line-height: 0.91cm;
+    align-items: center;
+}
+
+.submit{
+	width: 2cm;
+    height: 2cm;
+    background-color: RGB(68,114,196);
+    font-size: 16pt;
+    color: darkgrey;
+    position: relative;
+    top: 110px;
+    left: 234px;
+    float: left;
+    text-align: center;
+    margin: 11px;
+    line-height: 2cm;
+}
+.part{
+display: inline;
+    background: white;
+    font-weight: 100;
+    font-size: 9pt;
+    width: 2.42cm;
+    height: 0.5cm;
+    border: 1px solid black;
+    border-radius: 8px;
+    margin: 5px;
+    padding: 0px 16px;
+}
+.partform{
+	position: relative;
+    top: 86px;
+    left: 2px;
+}
+.reserve{
+	    color: white;
+    width: 3.9cm;
+    height: 0.95cm;
+    position: relative;
+    top: 93px;
+    left: 96px;
+    background-color: #6182D6;
+    margin: 0px -11px 14px 0px;
+    font-size: 15pt;
+    text-align: center;
+    line-height: 0.95cm;
+  
+  }
+.span-search{
+	    position: relative;
+    top: 11px;
+    left: 17px;
+}
+.span-search input[type="text"]{
+	    width: 7.82cm;
+    height: 1.11cm;
+    border: 3pt solid #455E9D;
+}
+#SEARCH img{
+	    width: 0.66cm;
+    height: 0.71cm;
+    position: relative;
+    right: 36px;
+    top: 8px;
+}
+#little img{
+	    position: relative;
+    left: 10px;
+    width: 1.9cm;
+    height: 2.1cm;
+}
+#BOOKMARK img{
+	width: 0.7cm;
+    height: 0.7cm;
+    position: relative;
+    left: 294px;
+    bottom: 13px;
+}
+.hpname{
+	font-size: 18pt;
+    color: #2C4582;
+    font-weight: bold;
+    position: relative;
+    right: +22px;
+}
+.hppart{
+	     font-size: 11pt;
+    color: #A6A6A6;
+    position: relative;
+    left: 35px;
+
+}
+.hptime{
+	font-size: 11pt;
+    color: #A6A6A6;
+    position: relative;
+    top: 17px;
+    left: 14px;
+}
+.span-hplist{
+    background-color: #F7F7F7;
+    position: relative;
+    top: 13px;
+    padding: 18px 5px;
+    margin: 7px 5px;
+}
+#HDETAIL{
+	background-color: #F7F7F7;
+    position: relative;
+    border: 1px solid black;
+    padding: 0px 15px;
+    border-radius: 11px;
+    left: 264px;
+    top: 17px;
+    margin: 0px;
+    font-size:11px;
+}
+.hpimage img{
+	    width: 8.64cm;
+    height: 4.8cm;
+    position: relative;
+    left: 8px;
+}
+.btn {
+    width: 2.4cm;
+    height: 0.65cm;
+    background-color: #C0CDEF;
+    top: 2px;
+    left: 13px;
+    margin: 1px 6px;
+    line-height: 0.65cm;
+    border: none;
+    border-radius: 7px;
+}
+.info{
+	    width: 2.53cm;
+    height: 1.03cm;
+    background-color: #6182D6;
+    padding: 0px 4px;
+    margin: 6px 2px;
+    line-height: 1.03cm;
+    text-align: center;
+    font-weight: bold;
+    position: relative;
+    left: 20px;
+}
+.resinfo{
+	width: 5.13cm;
+	height: 1.03cm;
+	background-color: #ECEBEA;
+	 padding: 0px 4px;
+   margin : 6px 24px;
+    line-height: 1.03cm;
+}
+.hpinfo{
+	    position: relative;
+    bottom: 5px;
+    left: -7px;
+    display: inline-flex;
+}
+#doctor{
+	    width: 4cm;
+    height: 0.7cm;
+    line-height: 1.02cm;
+    text-align: center;
+    font-weight: bold;
+    position: relative;
+    top: -14px;
+    left: 15px;
+    font-size: 13pt;
+    color: black;
+    line-height: 0.91cm;
+    align-items: center;
+}
+#doctor-select{
+    background-color: white;
+}
+#FINISH{
+	    width: 2cm;
+    height: 1cm;
+    position: relative;
+    top: 123px;
+    left: 102px;
+     background-color: #6182D6;
+}
+.finish_info{
+	font-weight: bold;
+    text-align: center;
+    position: relative;
+    left: 39px;
+    top: -28px;
+    font-size: 14pt;
+}
+.finish_title{
+	    text-align: center;
+    position: relative;
+    top: 0px;
+    color: #203A7B;
+    font-weight: bold;
+    font-size: 28pt;
+}
+.res_btn{
+	    width: 6.74cm;
+    height: 1.14cm;
+    margin: 5px;
+    position: relative;
+    bottom: 283px;
+    left: 40px;
+    font-size: 16pt;
+}
+.check_info{
+    text-align: center;
+    position: relative;
+    left: 39px;
+    top: -7px;
+    font-size: 14pt;
+}
+.res_btn{
+	    position: relative;
+    left: 39px;
+    top: -7px;
+    width: 2.52cm;
+    height: 0.59cm;
+    font-size: 11pt;
+    line-height: 0.59cm;
+}
+.mypage-info{
+	    width: 3.68cm;
+    height: 1.1cm;
+    background-color: #6182D6;
+    padding: 0px 4px;
+    margin: 6px 9px;
+    line-height: 1.03cm;
+    text-align: center;
+    font-weight: bold;
+    position: relative;
+    left: 6px;
+}
