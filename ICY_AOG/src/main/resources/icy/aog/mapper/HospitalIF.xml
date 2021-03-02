@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="icy.aog.mapper.HospitalIF">
+		<select id="getDr" resultType="icy.aog.bean.Hospital">
+		SELECT DR_NAME AS drName FROM DR
+		</select>
+
+
+</mapper>
