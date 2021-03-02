@@ -4,7 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 
-import icy.aog.beans.Reservation;
+import icy.aog.beans.ReservationBean;
 
 
 
@@ -23,7 +23,7 @@ public class MyPage {
 	
 	public MyPage() {}
 
-	public String entrance(Reservation rv, Model model) {
+	public String entrance(ReservationBean rv, Model model) {
 		
 		
 		System.out.println("스위치진입전");
@@ -61,7 +61,7 @@ public class MyPage {
 		return page;
 	}
 
-	private String upMInformCtl(Reservation rv, Model model2) {
+	private String upMInformCtl(ReservationBean rv, Model model2) {
 		System.out.println("확인");
 		// TODO Auto-generated method stub
 		page = "info";
@@ -69,46 +69,46 @@ public class MyPage {
 		return page;
 	}
 
-	private String reviewCtl(Reservation rv, Model model2) {
+	private String reviewCtl(ReservationBean rv, Model model2) {
 		/*
 		 * if(rv.getResCode().equals("r")) { //getReview; }else { //insReview; }
 		 */
 		return null;
 	}
 
-	private String bookFormCtl(Reservation rv, Model model2) {
+	private String bookFormCtl(ReservationBean rv, Model model2) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
-	private String bookMarkCtl(Reservation rv, Model model2) {
+	private String bookMarkCtl(ReservationBean rv, Model model2) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
-	private String myPageCtl(Reservation rv, Model model2) {
+	private String myPageCtl(ReservationBean rv, Model model2) {
 		System.out.println( "마이페이지");
 		page = "mypageform";
 		model2.addAttribute("Info", "upinfo");
 		return page;
 	}
 
-	private String upMInfoCtl(Reservation rv, Model model2) {
+	private String upMInfoCtl(ReservationBean rv, Model model2) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
-	private String upfaFormCtl(Reservation rv, Model model2) {
+	private String upfaFormCtl(ReservationBean rv, Model model2) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
-	private String upFamilyCtl(Reservation rv, Model model2) {
+	private String upFamilyCtl(ReservationBean rv, Model model2) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
-	private String RDetailCtl(Reservation rv, Model model2) {
+	private String RDetailCtl(ReservationBean rv, Model model2) {
 		// TODO Auto-generated method stub
 		return null;
 	}

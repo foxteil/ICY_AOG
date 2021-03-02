@@ -30,6 +30,14 @@
 </body>
 
 <script>
+	function moveLogin(){
+		var id = document.getElementsByName("MInfo")[0];	
+		var pw = document.getElementsByName("MInfo")[1];
+		
+		var form = document.createElement("form");
+		form.action = "Login?"
+	}
+	
 	function member(obj) {
 		var form = document.createElement("form");
 		var c = c;

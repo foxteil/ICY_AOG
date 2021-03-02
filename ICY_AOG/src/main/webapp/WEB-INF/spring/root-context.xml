@@ -14,6 +14,33 @@
    <!-- Root Context: defines shared resources visible to all other web components -->
    
    
-  
+   <!-- DB연결 정보 -->
+   
+   <bean id="SAJO" class="com.zaxxer.hikari.HikariConfig">  <!-- HikariConfig BSBS = new HikariConfig() -->
+      <property name="driverClassName" value="oracle.jdbc.driver.OracleDriver"></property>
+      <property name="jdbcUrl" value="jdbc:oracle:thin:@db.icy.hoonzzang.com:7021:xe"></property>
+      <property name="username" value="FOX"></property>
+      <property name="password" value="1234"></property>
+   </bean>
+
+   <!-- DBCP 정보 -->
+   
+   <bean id="dbsource" class="com.zaxxer.hikari.HikariDataSource" destroy-method="close">
+      <constructor-arg ref="SAJO"/>
+   </bean>
+   
+   
+   <!--SqlSession 정보  -->
+   <bean id="sqlSession" class="org.mybatis.spring.SqlSessionFactoryBean" >
+         <property name="dataSource" ref="dbsource"></property>
+   </bean>
+   
+   
+   <!-- Transaction 정보 -->
+   <bean id="tran" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+         <property name="dataSource" ref="dbsource"></property>
+   </bean>
+   
+  <mybatis-spring:scan base-package="icy/aog/mapper"/>
       
 </beans>
