@@ -1,30 +1,40 @@
 package icy.aog.controller;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.ModelAndView;
 
 import icy.aog.beans.AuthBean;
+import icy.aog.services.Authentication;
 
 @Controller
 public class HomeController {
 
+	@Autowired
+	private Authentication auth;
+	
+	
 	@RequestMapping(value = "/", method = {RequestMethod.GET,RequestMethod.POST})
 	public String start(Model model,AuthBean ab ) {
-		String page ;
-		if(ab.getSCode().equals("c")) {
-			page = "start";
-		}else {
-			page = "adminstart"; 
-		}
+		String page = "start" ;
+//		if(ab.getSCode().equals(null)) {
+//			page = "start";
+//		}else if(ab.getSCode().equals("c")){
+//			page = "adminstart"; 
+//		}
 		return page;
 	}
 	@RequestMapping(value = "/LOGIN", method = {RequestMethod.GET,RequestMethod.POST})
 	public String logIn(Model model,AuthBean ab) {
+		ModelAndView mav= new ModelAndView();
+		ab.setSCode("login");
+		mav= auth.entrance(ab);
 		String page="main";
 		
-		return page;
+		return mav.getViewName();
 	}
 	
 	@RequestMapping(value = "/KAKAOLOG", method = {RequestMethod.GET,RequestMethod.POST})
