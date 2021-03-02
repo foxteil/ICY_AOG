@@ -21,6 +21,7 @@ public class HomeController {
 	
 	@RequestMapping(value = "/", method = {RequestMethod.GET,RequestMethod.POST})
 	public String start(@ModelAttribute AuthBean ab) {
+		ab.setSCode("START");
 		mav = new ModelAndView();
 		mav = auth.entrance(ab);
 		return mav.getViewName(); 

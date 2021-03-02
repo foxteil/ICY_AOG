@@ -24,6 +24,9 @@ public class Authentication {
 		System.out.println("entrance 진입");
 		
 		switch (ab.getSCode()) {
+		case "START":
+			page = startCtl(ab);
+			break;
 		case "LOGIN":
 		System.out.println("LOGIN 스위치분기");
 			page = logInCtl(ab);
@@ -54,6 +57,11 @@ public class Authentication {
 		
 	}
 	
+	private ModelAndView startCtl(AuthBean ab) {
+		page.setViewName("start");
+		return page;
+}
+
 	private ModelAndView pwFormCtl(AuthBean ab) {
 		page.setViewName("pwform");
 		return page;
