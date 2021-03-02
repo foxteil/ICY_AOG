@@ -3,7 +3,7 @@ package icy.aog.beans;
 import lombok.Data;
 
 @Data
-public class Reservation {
+public class ReservationBean {
 
 	private String sCode;
 	private String Id;

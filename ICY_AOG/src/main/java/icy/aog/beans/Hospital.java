@@ -5,6 +5,7 @@ import lombok.Data;
 @Data
 public class Hospital {
 
+	private String sCode;
 	private String hpCode;
 	private String hpName;
 	private String hpAddr;
@@ -23,5 +24,8 @@ public class Hospital {
 	private String rvGrade;
 	private String rvDate;
 	private String htTag;
+	private String dCode;
+
+	
 	
 }
