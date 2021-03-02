@@ -1,13 +1,19 @@
 package icy.aog.controller;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import icy.aog.beans.Reservation;
+import icy.aog.services.MyPage;
+
 @Controller
 public class MemberController {
-
+	@Autowired 
+	private MyPage MyPage;
+	
 	@RequestMapping(value = "/LSEARCH", method = { RequestMethod.GET, RequestMethod.POST })
 	public String LSEARCH(Model model) {
 		String page = "start";
@@ -86,63 +92,59 @@ public class MemberController {
 	}
 
 	@RequestMapping(value = "/UPMINFORM", method = { RequestMethod.GET, RequestMethod.POST })
-	public String UPMINFORM(Model model) {
-		String page = "upminform";
-		return page;
+	public String UPMINFORM(Model model, Reservation rv) {
+		rv.setSCode("UPMINFORM");
+		System.out.println("확인");
+		return MyPage.entrance(rv, model);
 
 	}
 
 	@RequestMapping(value = "/REVIEW", method = { RequestMethod.GET, RequestMethod.POST })
-	public String REVIEW(Model model) {
-		String page = "rescheck";
-		return page;
+	public String REVIEW(Model model, Reservation rv) {
+		return MyPage.entrance(rv, model);
 
 	}
 
 	@RequestMapping(value = "/BOOKMARKFORM", method = { RequestMethod.GET, RequestMethod.POST })
-	public String BOOKMARKFORM(Model model) {
-		String page = "bookmarkform";
-		return page;
+	public String BOOKMARKFORM(Model model, Reservation rv) {
+		return MyPage.entrance(rv, model);
 
 	}
 
 	@RequestMapping(value = "/BOOKMARK", method = { RequestMethod.GET, RequestMethod.POST })
-	public String BOOKMARK(Model model) {
-		String page = "order.jsp";
-		return page;
-
+	public String BOOKMARK(Model model, Reservation rv) {
+		return MyPage.entrance(rv, model);
 	}
 
 	@RequestMapping(value = "/MYPAGEFORM", method = { RequestMethod.GET, RequestMethod.POST })
-	public String MYPAGEFORM(Model model) {
-		String page = "mypageform";
-		return page;
+	public String MYPAGEFORM(Model model, Reservation rv) {
+		rv.setSCode("MYPAGEFORM");
+		return MyPage.entrance(rv, model);
 
 	}
 
 	@RequestMapping(value = "/UPMINFO", method = { RequestMethod.GET, RequestMethod.POST })
-	public String UPMINFO(Model model) {
-		String page = "upminfo";
-		return page;
+	public String UPMINFO(Model model, Reservation rv) {
+		return MyPage.entrance(rv, model);
 
 	}
 
 	@RequestMapping(value = "/UPFAFORM", method = { RequestMethod.GET, RequestMethod.POST })
-	public String UPFAFORM(Model model) {
+	public String UPFAFORM(Model model, Reservation rv) {
 		String page = "upfaform";
 		return page;
 
 	}
 
 	@RequestMapping(value = "/UPFAMILY", method = { RequestMethod.GET, RequestMethod.POST })
-	public String UPFAMILY(Model model) {
+	public String UPFAMILY(Model model, Reservation rv) {
 		String page = "upfamily";
 		return page;
 
 	}
 
 	@RequestMapping(value = "/RDETAIL", method = { RequestMethod.GET, RequestMethod.POST })
-	public String RDETAIL(Model model) {
+	public String RDETAIL(Model model, Reservation rv) {
 		String page = "rdetail";
 		return page;
 
@@ -150,7 +152,7 @@ public class MemberController {
 	
 	/*임시*/
 	@RequestMapping(value = "/FAMILY", method = { RequestMethod.GET, RequestMethod.POST })
-	public String family(Model model) {
+	public String family(Model model, Reservation rv) {
 		String page = "family";
 		return page;
 
