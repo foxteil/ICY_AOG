@@ -19,12 +19,12 @@ public class HomeController {
 	
 	@RequestMapping(value = "/", method = {RequestMethod.GET,RequestMethod.POST})
 	public String start(Model model,AuthBean ab ) {
-		String page ;
-		if(ab.getSCode().equals("c")) {
-			page = "start";
-		}else {
-			page = "adminstart"; 
-		}
+		String page = "start" ;
+//		if(ab.getSCode().equals(null)) {
+//			page = "start";
+//		}else if(ab.getSCode().equals("c")){
+//			page = "adminstart"; 
+//		}
 		return page;
 	}
 	@RequestMapping(value = "/LOGIN", method = {RequestMethod.GET,RequestMethod.POST})
