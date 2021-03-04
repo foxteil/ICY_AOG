@@ -4,7 +4,6 @@ import java.io.UnsupportedEncodingException;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -19,8 +18,6 @@ public class AdminController {
 
 	@Autowired
 	private Admin admin;
-	
-	
 	ModelAndView mav;
 
 	@RequestMapping(value = "/RESERVELIST", method = { RequestMethod.GET, RequestMethod.POST })
@@ -211,11 +208,16 @@ public class AdminController {
 
 	   public String Enroll(@ModelAttribute Hospital hp) {
 
+		   
 		   hp.setSCode("ENROLL");
 		   mav = admin.entrance(hp );
 	      String page =  "Enroll";
+	   
+
 	      return page;
+
 	   }
+	   
 	   //							me
 	   @RequestMapping(value = "/RESAVAILABLE", method = { RequestMethod.GET, RequestMethod.POST })
 
@@ -226,8 +228,12 @@ public class AdminController {
 		   hp.setSCode("RESAVAILABLE");
 		   mav = admin.entrance(hp );
 	      String page =  "resAvailable";
+	   
 
 	      return page;
+
 	   }
+
+
 
 }

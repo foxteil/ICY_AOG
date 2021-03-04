@@ -19,57 +19,93 @@
 		<br />
 		<div class="div">
 			<h2 class="auth_item1">
-				<label for="id">대표자정보</label>
+				<label for="pw">사업자번호</label>
 			</h2>
-			<input id="id" type="text" placeholder="아이디를 입력해주세요." /> <br />
+			<input id="hpCode" name="hpCode" type="text" maxlength=10 placeholder="사업자번호를 입력해주세요." /><br />
 		</div>
+		<div class="div">
+			<h2 class="auth_item1">
+				<label for="id">직원ID</label>
+			</h2>
+			<input id="id" name="id" type="text" maxlength=20 placeholder="아이디를 입력해주세요." /> <br />
+		</div>
+		<form action="" method=post onSubmit="return checkPw(this);">
 		<div class="div">
 			<h2 class="auth_item1">
 				<label for="pw">비밀번호</label>
 			</h2>
-			<input id="pw" type="password" placeholder="비밀번호를 입력해주세요." /><br />
+			<input type="password" name=pw1 minlength=4 maxlength=15 size=7 placeholder="(4~15자리)" />
+			<input type="password" name=pw2 size=7 placeholder="재입력" />
+			<input name=b1 type=submit value="확 인">
 		</div>
+		</form> 
 		<div class="div">
 			<h2 class="auth_item1">
-				<label for="pw2">비밀번호</label>
+				<label for="rank">직급</label>
 			</h2>
-			<input id="pw2" type="password" placeholder="비밀번호를 확인해주세요." /><br />
-		</div>
-		<div class="div">
-			<h2 class="auth_item1">
-				<label for="name">이름</label>
-			</h2>
-			<input id="name" type="text" placeholder="이름을 입력해주세요." /><br />
+			<input id="rank" name="rank" type="text" maxlength=5 placeholder="직급을 입력해주세요." /><br />
 		</div>
 		<div class="div">
 			<h2 class="auth_item1">
 				<label for="phone">핸드폰번호</label>
 			</h2>
-			<input id="phone" type="text" placeholder="핸드폰번호를 입력해주세요." /> <br />
+			<input id="phone" name="phone" type="text" maxlength=11 placeholder=" 핸드폰번호를 입력해주세요." /> <br />
 		</div>
 		<div class="div">
 			<h2 class="auth_item1">
-				<label for="jumin">주민번호</label>
+				<label for="name">이름</label>
 			</h2>
-			<input id="jumin" type="text" placeholder="주민등록번호를 입력해주세요." /><br />
+			<input id="name" name="name" type="text" maxlength=5 placeholder="이름을 입력해주세요." /><br />
 		</div>
-		<div class="div">
-			<h2 class="auth_item1">
-				<label for="addr">주소</label>
-			</h2>
-			<input id="addr" type="text" placeholder="주소를 입력해주세요." /> <br />
-		</div>
-		<button id="JOIN" onclick="member(this)">회원가입</button>
+		
+		<button id="JOIN" onclick="insJoin()">회원가입</button>
 	</div>
 </body>
 
 <script>
-	function member(obj) {
+
+	function insJoin(){
+		var hpCode = document.getElementsByName("hpCode")[0];
+		var id = document.getElementsByName("id")[0];
+		var pw = document.getElementsByName("pw1")[0];
+		var rank = document.getElementsByName("rank")[0];
+		var phone = document.getElementsByName("phone")[0];
+		var name = document.getElementsByName("name")[0];
+		var jCode = document.createElement("input");
+			jCode.value = "A";
+			jCode.name = "jCode";
+			
+			hpCode.name = "aHpCode";
+			id.name = "aId";
+			pw.name = "aPw";
+			rank.name = "aRank";
+			phone.name = "aPhone";
+			name.name = "aName";
+		
 		var form = document.createElement("form");
-		form.action = obj.id;
+		form.action = "AJOIN";
 		form.method = "post";
+		
+		form.appendChild(hpCode);
+		form.appendChild(id);
+		form.appendChild(pw);
+		form.appendChild(rank);
+		form.appendChild(phone);
+		form.appendChild(name);
+		form.appendChild(jCode);
+		
 		document.body.appendChild(form);
 		form.submit();
+	}
+	
+	function checkPw(it) {
+		if (it.pw1.value == it.pw2.value) {
+			alert("비밀번호가 일치합니다.");
+			return false;
+		} else {
+			alert("비밀번호가 일치하지않습니다. 올바르게 입력해주세요.");
+			return false;
+		}
 	}
 </script>
 </html>

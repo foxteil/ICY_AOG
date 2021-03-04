@@ -19,7 +19,7 @@
    <bean id="SAJO" class="com.zaxxer.hikari.HikariConfig">  <!-- HikariConfig BSBS = new HikariConfig() -->
       <property name="driverClassName" value="oracle.jdbc.driver.OracleDriver"></property>
       <property name="jdbcUrl" value="jdbc:oracle:thin:@db.icy.hoonzzang.com:7021:xe"></property>
-      <property name="username" value="FOX"></property>
+      <property name="username" value="WALLY"></property>
       <property name="password" value="1234"></property>
    </bean>
 

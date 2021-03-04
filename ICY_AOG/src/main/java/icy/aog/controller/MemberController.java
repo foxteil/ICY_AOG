@@ -2,159 +2,187 @@ package icy.aog.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
+
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.ModelAndView;
 
 import icy.aog.beans.ReservationBean;
 import icy.aog.services.MyPage;
+import icy.aog.services.Reservation;
 
 @Controller
 public class MemberController {
+	@Autowired
+	private Reservation rv;
 	@Autowired 
-	private MyPage MyPage;
+	private MyPage mypage;
 	
+	ModelAndView mav = new ModelAndView();
 	@RequestMapping(value = "/LSEARCH", method = { RequestMethod.GET, RequestMethod.POST })
-	public String LSEARCH(Model model) {
-		String page = "start";
-		return page;
-
+	public String LSEARCH(@ModelAttribute ReservationBean res) {
+		res.setSCode("LSEARCH");
+		mav = rv.entrance(res);
+		return mav.getViewName();
 	}
 
 	@RequestMapping(value = "/RESCHECK", method = { RequestMethod.GET, RequestMethod.POST })
-	public String RESCHECK(Model model) {
-		String page = "rescheck";
-		return page;
-
+	public String RESCHECK(@ModelAttribute ReservationBean res) {
+		res.setSCode("RESCHECK");
+		mav = rv.entrance(res);
+		return mav.getViewName();
 	}
-	
+
 	@RequestMapping(value = "/PART", method = { RequestMethod.GET, RequestMethod.POST })
-	public String PART(Model model) {
-		String page = "start";
-		return page;
+	public String PART(@ModelAttribute ReservationBean res) {
+		res.setSCode("PART");
+		mav = rv.entrance(res);
+		return mav.getViewName();
 
 	}
 
 	@RequestMapping(value = "/ORDER", method = { RequestMethod.GET, RequestMethod.POST })
-	public String ORDER(Model model) {
-		String page = "order";
-		return page;
-
+	public String ORDER(@ModelAttribute ReservationBean res) {
+		System.out.println("ORDER");
+		res.setSCode("ORDER");
+		mav = rv.entrance(res);
+		return mav.getViewName();
 	}
 
 	@RequestMapping(value = "/HDETAIL", method = { RequestMethod.GET, RequestMethod.POST })
-	public String HDETAIL(Model model) {
-		String page = "hdetail";
-		return page;
-
+	public String HDETAIL(@ModelAttribute ReservationBean res) {
+		res.setSCode("HDETAIL");
+		mav = rv.entrance(res);
+		return mav.getViewName();
 	}
 
 	@RequestMapping(value = "/MAP", method = { RequestMethod.GET, RequestMethod.POST })
-	public String MAP(Model model) {
-		String page = "map";
-		return page;
+	public ModelAndView MAP(@ModelAttribute ReservationBean res) {
+
+		return rv.entrance(res);
 
 	}
 
 	@RequestMapping(value = "/RESFORM", method = { RequestMethod.GET, RequestMethod.POST })
-	public String RESFORM(Model model) {
-		String page = "resform";
-		return page;
+	public String RESFORM(@ModelAttribute ReservationBean res) {
+		res.setSCode("RESFORM");
+		mav = rv.entrance(res);
+		return mav.getViewName();
 
 	}
 
 	@RequestMapping(value = "/DATECHECK", method = { RequestMethod.GET, RequestMethod.POST })
-	public String DATECHECK(Model model) {
-		String page = "datecheck";
-		return page;
+	public String DATECHECK(@ModelAttribute ReservationBean res) {
+		res.setSCode("DATECHECK");
+		mav = rv.entrance(res);
+		return mav.getViewName();
 
 	}
 
 	@RequestMapping(value = "/FINISH", method = { RequestMethod.GET, RequestMethod.POST })
-	public String FINISH(Model model) {
-		String page = "finish";
-		return page;
+	public String FINISH(@ModelAttribute ReservationBean res) {
+		res.setSCode("FINISH");
+		mav = rv.entrance(res);
+		return mav.getViewName();
 
 	}
 
 	@RequestMapping(value = "/CANCLE", method = { RequestMethod.GET, RequestMethod.POST })
-	public String CANCLE(Model model) {
-		String page = "rescheck";
-		return page;
+	public String CANCLE(@ModelAttribute ReservationBean res) {
+		res.setSCode("CANCLE");
+		mav = rv.entrance(res);
+		return mav.getViewName();
 
 	}
 
 	@RequestMapping(value = "/SEARCH", method = { RequestMethod.GET, RequestMethod.POST })
-	public String SEARCH(Model model) {
-		String page = "search";
-		return page;
+	public String SEARCH(@ModelAttribute ReservationBean res) {
+		res.setSCode("SEARCH");
+		mav = rv.entrance(res);
 
+		return mav.getViewName();
 	}
 
 	@RequestMapping(value = "/UPMINFORM", method = { RequestMethod.GET, RequestMethod.POST })
-	public String UPMINFORM(Model model, ReservationBean rv) {
-		rv.setSCode("UPMINFORM");
-		System.out.println("확인");
-		return MyPage.entrance(rv, model);
+	public String UPMINFORM(@ModelAttribute ReservationBean res) {
+
+		res.setSCode("UPMINFORM");
+		mav = mypage.entrance(res);
+		return mav.getViewName();
 
 	}
 
 	@RequestMapping(value = "/REVIEW", method = { RequestMethod.GET, RequestMethod.POST })
-	public String REVIEW(Model model, ReservationBean rv) {
-		return MyPage.entrance(rv, model);
+	public String REVIEW(@ModelAttribute ReservationBean res) {
+
+		res.setSCode("REVIEW");
+		mav = mypage.entrance(res);
+		return mav.getViewName();
 
 	}
 
 	@RequestMapping(value = "/BOOKMARKFORM", method = { RequestMethod.GET, RequestMethod.POST })
-	public String BOOKMARKFORM(Model model, ReservationBean rv) {
-		return MyPage.entrance(rv, model);
+	public String BOOKMARKFORM(@ModelAttribute ReservationBean res) {
+		res.setSCode("BOOKMARKFORM");
+		mav = mypage.entrance(res);
+		return mav.getViewName();
 
 	}
 
 	@RequestMapping(value = "/BOOKMARK", method = { RequestMethod.GET, RequestMethod.POST })
-	public String BOOKMARK(Model model, ReservationBean rv) {
-		return MyPage.entrance(rv, model);
+	public String BOOKMARK(@ModelAttribute ReservationBean res) {
+		res.setSCode("BOOKMARK");
+		mav = mypage.entrance(res);
+		return mav.getViewName();
+
 	}
 
 	@RequestMapping(value = "/MYPAGEFORM", method = { RequestMethod.GET, RequestMethod.POST })
-	public String MYPAGEFORM(Model model, ReservationBean rv) {
-		rv.setSCode("MYPAGEFORM");
-		return MyPage.entrance(rv, model);
+	public String MYPAGEFORM(@ModelAttribute ReservationBean res) {
+		System.out.println("");
+		res.setSCode("MYPAGEFORM");
+		mav = mypage.entrance(res);
+		return mav.getViewName();
 
 	}
 
 	@RequestMapping(value = "/UPMINFO", method = { RequestMethod.GET, RequestMethod.POST })
-	public String UPMINFO(Model model, ReservationBean rv) {
-		return MyPage.entrance(rv, model);
+	public String UPMINFO(@ModelAttribute ReservationBean res) {
+		res.setSCode("UPMINFO");
+		mav = mypage.entrance(res);
+		return mav.getViewName();
 
 	}
 
 	@RequestMapping(value = "/UPFAFORM", method = { RequestMethod.GET, RequestMethod.POST })
-	public String UPFAFORM(Model model, ReservationBean rv) {
-		String page = "upfaform";
-		return page;
-
+	public String UPFAFORM(@ModelAttribute ReservationBean res) {
+		res.setSCode("UPFAFORM");
+		mav = mypage.entrance(res);
+		return mav.getViewName();
 	}
 
 	@RequestMapping(value = "/UPFAMILY", method = { RequestMethod.GET, RequestMethod.POST })
-	public String UPFAMILY(Model model, ReservationBean rv) {
-		String page = "upfamily";
-		return page;
+	public String UPFAMILY(@ModelAttribute ReservationBean res) {
+		res.setSCode("UPFAMILY");
+		mav = mypage.entrance(res);
+		return mav.getViewName();
 
 	}
 
 	@RequestMapping(value = "/RDETAIL", method = { RequestMethod.GET, RequestMethod.POST })
-	public String RDETAIL(Model model, ReservationBean rv) {
-		String page = "rdetail";
-		return page;
-
+	public String RDETAIL(@ModelAttribute ReservationBean res) {
+		res.setSCode("RDETAIL");
+		mav = mypage.entrance(res);
+		return mav.getViewName();
 	}
-	
-	/*임시*/
+
+	/* 임시 */
 	@RequestMapping(value = "/FAMILY", method = { RequestMethod.GET, RequestMethod.POST })
-	public String family(Model model, ReservationBean rv) {
-		String page = "family";
-		return page;
+	public String family(@ModelAttribute ReservationBean res) {
+		res.setSCode("FAMILY");
+		mav = mypage.entrance(res);
+		return mav.getViewName();
 
 	}
 

@@ -3,10 +3,24 @@
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="icy.aog.mapper.MemberIF">
+	<select id="isState" resultType="string">
+		SELECT MM_STCODE FROM MM WHERE MM_ID = #{MId} AND MM_PW = #{MPw}
+	</select>
 	<select id="isUser" resultType="int">
-		SELECT COUNT(*) FROM MM WHERE MM_ID = #{mId}
+		SELECT COUNT(*) FROM MM WHERE MM_ID = #{MId} AND MM_PW = #{MPw}
 	</select>
 	<select id="isAdmin" resultType="int">
-		SELECT COUNT(*) FROM STF WHERE STF_CODE = #{stfCode}
+		SELECT COUNT(*) FROM STF WHERE STF_CODE = #{AId} AND STF_PW = #{APw}
+	</select>
+	<select id="insMember" resultType="icy.aog.beans.AuthBean">
+		INSERT INTO MM(MM_ID, MM_STCODE, MM_PW) VALUES(#{MId},'A',#{MPw})
+	</select>
+	<select id="insFamily" resultType="icy.aog.beans.AuthBean">
+		INSERT INTO FA(FA_JUMIN, FA_MMID, FA_NAME, FA_PHONE, FA_ADDR, FA_STCODE)
+		VALUES(#{MJumin},#{MId},#{MName},#{MPhone},#{MAddr},'M')
+	</select>
+	<select id="insStaff" resultType="icy.aog.beans.AuthBean">
+		INSERT INTO STF(STF_CODE, STF_HPCODE, STF_PW, STF_RANK, STF_NAME, STF_PHONE)
+		VALUES(#{AId},#{AHpCode},#{APw},#{ARank},#{AName},#{APhone})
 	</select>
 </mapper>

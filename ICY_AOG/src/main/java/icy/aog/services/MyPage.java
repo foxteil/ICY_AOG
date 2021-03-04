@@ -2,119 +2,103 @@ package icy.aog.services;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.ui.Model;
+import org.springframework.transaction.PlatformTransactionManager;
+import org.springframework.web.servlet.ModelAndView;
 
 import icy.aog.beans.ReservationBean;
 
-
-
 @Service
 public class MyPage {
-	Model model = null;
-	String page;
-//	@Autowired
-//	private  MapperIf mapper;
-//	@Autowired
-//	private Gson gson;
-//	@Autowired
-//	private platformTransactionManager tran;
-//	
+	ModelAndView mav = new ModelAndView();
 
-	
 	public MyPage() {}
+	
+	@Autowired
+	private PlatformTransactionManager tran;
 
-	public String entrance(ReservationBean rv, Model model) {
-		
-		
+	public ModelAndView entrance(ReservationBean rv) {
+
 		System.out.println("스위치진입전");
-		switch(rv.getSCode()) {
+		switch (rv.getSCode()) {
 		case "UPMINFORM":
-			page = upMInformCtl(rv, model);
+			mav = upMInformCtl(rv);
 			break;
 		case "REVIEW":
-			page = reviewCtl(rv, model);
+			mav = reviewCtl(rv);
 			break;
 		case "BOOKMARKFORM":
-			page = bookFormCtl(rv, model);
+			mav = bookFormCtl(rv);
 			break;
 		case "BOOKMARK":
-			page = bookMarkCtl(rv, model);
+			mav = bookMarkCtl(rv);
 			break;
 		case "MYPAGEFORM":
 			System.out.println("마이페이지");
-			page = myPageCtl(rv, model);
+			mav = myPageCtl(rv);
 			break;
 		case "UPMINF":
-			page = upMInfoCtl(rv, model);
+			mav = upMInfoCtl(rv);
 			break;
 		case "UPFAFORM":
-			page = upfaFormCtl(rv, model);
+			mav = upfaFormCtl(rv);
 			break;
 		case "UPFAMILY":
-			page = upFamilyCtl(rv, model);
+			mav = upFamilyCtl(rv);
 			break;
 		case "RDETAIL":
-			page = RDetailCtl(rv, model);
+			mav = RDetailCtl(rv);
 			break;
-					
+
 		}
-		return page;
+		return mav;
 	}
 
-	private String upMInformCtl(ReservationBean rv, Model model2) {
+	private ModelAndView upMInformCtl(ReservationBean rv) {
 		System.out.println("확인");
-		// TODO Auto-generated method stub
-		page = "info";
-		model.addAttribute("Info", "upinfo");
-		return page;
+		mav.setViewName("mypageform");
+		return mav;
 	}
 
-	private String reviewCtl(ReservationBean rv, Model model2) {
-		/*
-		 * if(rv.getResCode().equals("r")) { //getReview; }else { //insReview; }
-		 */
-		return null;
+	private ModelAndView reviewCtl(ReservationBean rv) {
+		mav.setViewName("mypageform");
+		return mav;
 	}
 
-	private String bookFormCtl(ReservationBean rv, Model model2) {
-		// TODO Auto-generated method stub
-		return null;
+	private ModelAndView bookFormCtl(ReservationBean rv) {
+		mav.setViewName("bookmarkform");
+		return mav;
 	}
 
-	private String bookMarkCtl(ReservationBean rv, Model model2) {
-		// TODO Auto-generated method stub
-		return null;
+	private ModelAndView bookMarkCtl(ReservationBean rv) {
+		mav.setViewName("mypageform");
+		return mav;
 	}
 
-	private String myPageCtl(ReservationBean rv, Model model2) {
-		System.out.println( "마이페이지");
-		page = "mypageform";
-		model2.addAttribute("Info", "upinfo");
-		return page;
+	private ModelAndView myPageCtl(ReservationBean rv) {
+		System.out.println("진입");
+		mav.setViewName("mypageform");
+		mav.addObject("Info", "제발");
+		return mav;
 	}
 
-	private String upMInfoCtl(ReservationBean rv, Model model2) {
-		// TODO Auto-generated method stub
-		return null;
+	private ModelAndView upMInfoCtl(ReservationBean rv) {
+		mav.setViewName("mypageform");
+		return mav;
 	}
 
-	private String upfaFormCtl(ReservationBean rv, Model model2) {
-		// TODO Auto-generated method stub
-		return null;
+	private ModelAndView upfaFormCtl(ReservationBean rv) {
+		mav.setViewName("mypageform");
+		return mav;
 	}
 
-	private String upFamilyCtl(ReservationBean rv, Model model2) {
-		// TODO Auto-generated method stub
-		return null;
+	private ModelAndView upFamilyCtl(ReservationBean rv) {
+		mav.setViewName("mypageform");
+		return mav;
 	}
 
-	private String RDetailCtl(ReservationBean rv, Model model2) {
-		// TODO Auto-generated method stub
-		return null;
+	private ModelAndView RDetailCtl(ReservationBean rv) {
+		mav.setViewName("mypageform");
+		return mav;
 	}
 
-
-	
-
-	
 }

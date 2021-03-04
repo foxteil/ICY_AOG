@@ -1,119 +1,115 @@
 package icy.aog.services;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.ui.Model;
 import org.springframework.web.servlet.ModelAndView;
 
 import icy.aog.beans.ReservationBean;
 
 @Service
 public class Reservation {
-	public Reservation() {
+public Reservation() {
 
+}
+ModelAndView mav =new ModelAndView() ;
+
+
+public ModelAndView entrance (ReservationBean res) {
+	ModelAndView mav=null;
+	switch (res.getSCode()) {
+	case "LSEARCH":
+		mav= lsearchCtl(res);
+		break;
+	case "PART":
+		mav=partCtl(res);
+		break;
+	case "ORDER":
+		mav=orderCtl(res);
+		break;
+	case "HDETAIL":
+		mav=hDetailCtl(res);
+		break;
+	case "MAP":
+		mav=mapCtl(res);
+		break;
+	case "RESFORM":
+		mav=resFormCtl(res);
+		break;
+	case "DATECHECK":
+		mav=dateCheckCtl(res);
+		break;
+	case "FINISH":
+		mav=finishCtl(res);
+		break;
+	case "RESCHECK":
+		mav=resCheckCtl(res);
+		break;
+	case "CANCLE":
+		mav=cancleCtl(res);
+		break;
+	case "SEARCH":
+		mav=searchCtl(res);
+		break;
+		
 	}
+	
+	return   mav;
+	
+}
+private ModelAndView searchCtl( ReservationBean res) {
+	res.setSCode("SEARCH");
+	mav.setViewName("order");
+	return mav;
+}
+private ModelAndView cancleCtl(ReservationBean res) {
+	res.setSCode("CANCLE");
+	mav.setViewName("rescheck");
+	return mav;
+}
+private ModelAndView resCheckCtl( ReservationBean res) {
+	res.setSCode("RESCHECK");
+	mav.setViewName("rescheck");
+	return mav;
+}
+private ModelAndView finishCtl( ReservationBean res) {
+	res.setSCode("FINISH");
+	mav.setViewName("finish");
+	return mav;
+}
+private ModelAndView dateCheckCtl( ReservationBean res) {
+	res.setSCode("DATECHECK");
+	mav.setViewName("resform");
+	return mav;
+}
+private ModelAndView resFormCtl( ReservationBean res) {
+	res.setSCode("RESFORM");
+	mav.setViewName("resform");
+	return mav;
+}
+private ModelAndView mapCtl( ReservationBean res) {
+	res.setSCode("MAP");
+	mav.setViewName("map");
+	return mav;
+}
+private ModelAndView hDetailCtl( ReservationBean res) {
+	res.setSCode("HDETAIL");
+	mav.setViewName("hdetail");
+	return mav;
+}
+private ModelAndView orderCtl(ReservationBean res) {
+	System.out.println("ORDER");
+	res.setSCode("ORDER");
+	mav.setViewName("order");
+	return mav;
+}
+private ModelAndView partCtl( ReservationBean res) {
+	res.setSCode("PART");
+	mav.setViewName("start");
+	return mav;
+}
+private ModelAndView lsearchCtl(ReservationBean res) {
+	res.setSCode("PART");
+	mav.setViewName("start");
+	return mav;
+}
 
-	ModelAndView mav = new ModelAndView();
-
-	public ModelAndView entrance(ReservationBean rb) {
-		ModelAndView mav = null;
-		switch (rb.getSCode()) {
-		case "LSEARCH":
-			mav = lsearchCtl(rb);
-			break;
-		case "PART":
-			mav = partCtl(rb);
-			break;
-		case "ORDER":
-			mav = orderCtl(rb);
-			break;
-		case "HDETAIL":
-			mav = hDetailCtl(rb);
-			break;
-		case "MAP":
-			mav = mapCtl(rb);
-			break;
-		case "RESFROM":
-			mav = resFromCtl(rb);
-			break;
-		case "DATECHECK":
-			mav = dateCheckCtl(rb);
-			break;
-		case "FINISH":
-			mav = finishCtl(rb);
-			break;
-		case "RESCHECK":
-			mav = resCheckCtl(rb);
-			break;
-		case "CANCLE":
-			mav = cancleCtl(rb);
-			break;
-		case "SEARCH":
-			mav = searchCtl(rb);
-			break;
-
-		}
-
-		return mav;
-
-	}
-
-	private ModelAndView lsearchCtl(ReservationBean rb) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	private ModelAndView searchCtl(ReservationBean rb) {
-
-		return null;
-	}
-
-	private ModelAndView cancleCtl(ReservationBean rb) {
-
-		return null;
-	}
-
-	private ModelAndView resCheckCtl(ReservationBean rb) {
-
-		return null;
-	}
-
-	private ModelAndView finishCtl(ReservationBean rb) {
-
-		return null;
-	}
-
-	private ModelAndView dateCheckCtl(ReservationBean rb) {
-
-		return null;
-	}
-
-	private ModelAndView resFromCtl(ReservationBean rb) {
-
-		return null;
-	}
-
-	private ModelAndView mapCtl(ReservationBean rb) {
-
-		return null;
-	}
-
-	private ModelAndView hDetailCtl(ReservationBean rb) {
-
-		return null;
-	}
-
-	private ModelAndView orderCtl(ReservationBean rb) {
-
-		return null;
-	}
-
-	private ModelAndView partCtl(ReservationBean rb) {
-		rb.setHpCode("병원코드");
-
-		mav.addObject("TEST", rb.getHpCode());
-		mav.setViewName("part");
-		System.out.println("a11d1d");
-		return mav;
-	}
 }

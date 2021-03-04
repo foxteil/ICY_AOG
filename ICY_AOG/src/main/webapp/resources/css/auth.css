@@ -26,8 +26,9 @@ select:focus {
   outline: none;
   border-color: var(--color-blue);
 }
+/*
 input{
-	width: 178px;
+ 	width: 178px; 
 	height: 43px;
 	font-size : 16px;
 	font-weight : bold;
@@ -40,7 +41,21 @@ input{
 	position: relative;
     top: 1px;
 }
-
+*/
+.input2{
+	width: 80px;
+	height: 43px;
+	font-size : 16px;
+	font-weight : bold;
+	align-content: center;
+	background-color: RGB(143,170,220);
+	margin: auto;
+	text-align: center;
+	margin : 8px; 
+	border: none;	
+	position: relative;
+    top: 1px;
+}
      .input:focus {
         animation-name: border-focus;
         animation-duration: 1s;
@@ -52,11 +67,11 @@ h2{
 
 	
 button{
-	width : 2cm;
+	width : 3cm;
 	height: 26.5px;
 	position: relative;
     top: 20%;
-    left: 44%;
+    left: 33%;
     margin: 8px;
     background-color: RGB(68,114,196);	
     font-size : 12pt;
@@ -115,10 +130,10 @@ button{
 }
 
 .auth_item1{
-	width: 113px;
+	width: 80px;
 	height: 44px;
 	line-height : 36px;
-	font-size : 19px;
+	font-size : 15px;
 	font-weight : bold;
 	align-content: center;
 	background-color: RGB(143,170,220);
