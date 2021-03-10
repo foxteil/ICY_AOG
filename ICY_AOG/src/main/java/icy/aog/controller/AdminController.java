@@ -4,7 +4,6 @@ import java.io.UnsupportedEncodingException;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -19,8 +18,6 @@ public class AdminController {
 
 	@Autowired
 	private Admin admin;
-	
-	
 	ModelAndView mav;
 
 	@RequestMapping(value = "/RESERVELIST", method = { RequestMethod.GET, RequestMethod.POST })
@@ -75,9 +72,8 @@ public class AdminController {
 		mav = admin.entrance(HB);
 		return mav.getViewName();
 	}
-	// 윤정
 	
-	   //							me
+								
 	   @RequestMapping(value = "/DRINFOFORM", method = { RequestMethod.GET, RequestMethod.POST })
 	   public String drinfoForm(@ModelAttribute Hospital hp) {
 		   mav = new ModelAndView();
@@ -91,8 +87,7 @@ public class AdminController {
 	      return page;
 
 	   }
-	   
-	   //							me
+	   							
 	   @RequestMapping(value = "/DRINFO", method = { RequestMethod.GET, RequestMethod.POST })
 	   public String drInfo(@ModelAttribute Hospital hp) {
 
@@ -118,7 +113,7 @@ public class AdminController {
 
 	   }
 	   
-	   //							me
+	   
 	   @RequestMapping(value = "/HPINFOFORM", method = { RequestMethod.GET, RequestMethod.POST })
 	   public String hpInfoForm(@ModelAttribute Hospital hp) {
 
@@ -134,7 +129,7 @@ public class AdminController {
 
 	   }
 	   
-	   //							me
+	   
 	   @RequestMapping(value = "/HPINFO", method = { RequestMethod.GET, RequestMethod.POST })
 
 	   public String hpInfo(@ModelAttribute Hospital hp) {
@@ -149,7 +144,7 @@ public class AdminController {
 
 	   }
 	   
-	   //							me
+	   							
 	   @RequestMapping(value = "/RESCONFIRM", method = { RequestMethod.GET, RequestMethod.POST })
 
 	   public String resConfirm(@ModelAttribute Hospital hp) {
@@ -164,7 +159,7 @@ public class AdminController {
 
 	   }
 	   
-	   //							me
+	   
 	   @RequestMapping(value = "/ENROLLFORM", method = { RequestMethod.GET, RequestMethod.POST })
 
 	   public String enrollForm(@ModelAttribute Hospital hp) {
@@ -178,7 +173,7 @@ public class AdminController {
 	      return page;
 
 	   }
-	   //							me  직원등록
+	   
 	   @RequestMapping(value = "/INSENROLLFORM", method = { RequestMethod.GET, RequestMethod.POST })
 
 	   public String insenrollForm(@ModelAttribute Hospital hp) {
@@ -192,7 +187,7 @@ public class AdminController {
 	      return page;
 
 	   }
-	   //							me  직원삭제
+	   
 	   @RequestMapping(value = "/DELENROLL", method = { RequestMethod.GET, RequestMethod.POST })
 
 	   public String delEnroll(@ModelAttribute Hospital hp) {
@@ -206,7 +201,7 @@ public class AdminController {
 	      return page;
 
 	   }
-	   //							me
+	   
 	   @RequestMapping(value = "/ENROLL", method = { RequestMethod.GET, RequestMethod.POST })
 
 	   public String Enroll(@ModelAttribute Hospital hp) {
@@ -221,7 +216,7 @@ public class AdminController {
 
 	   }
 	   
-	   //							me
+	   
 	   @RequestMapping(value = "/RESAVAILABLE", method = { RequestMethod.GET, RequestMethod.POST })
 
 	   public String resAvailable(@ModelAttribute Hospital hp) {
@@ -240,4 +235,3 @@ public class AdminController {
 
 
 }
-

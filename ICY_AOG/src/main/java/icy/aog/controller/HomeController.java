@@ -9,97 +9,95 @@ import org.springframework.web.servlet.ModelAndView;
 
 import icy.aog.beans.AuthBean;
 import icy.aog.services.Authentication;
+import icy.aog.services.Reservation;
+
 
 @Controller
 public class HomeController {
-
 	@Autowired
 	private Authentication auth;
 	
-	
+	ModelAndView mav = new ModelAndView();
 	@RequestMapping(value = "/", method = {RequestMethod.GET,RequestMethod.POST})
-	public String start(Model model,AuthBean ab ) {
-		String page = "start" ;
-//		if(ab.getSCode().equals(null)) {
-//			page = "start";
-//		}else if(ab.getSCode().equals("c")){
-//			page = "adminstart"; 
-//		}
-		return page;
+	public String start(AuthBean ab ) {
+		
+		ab.setSCode("MAIN");
+		mav = auth.entrance(ab);
+		return mav.getViewName();
 	}
 	@RequestMapping(value = "/LOGIN", method = {RequestMethod.GET,RequestMethod.POST})
 	public String logIn(Model model,AuthBean ab) {
-		ModelAndView mav= new ModelAndView();
-		ab.setSCode("login");
-		mav= auth.entrance(ab);
-		String page="main";
-		
+		ab.setSCode("LOGIN");
+		mav = auth.entrance(ab);
 		return mav.getViewName();
 	}
 	
 	@RequestMapping(value = "/KAKAOLOG", method = {RequestMethod.GET,RequestMethod.POST})
-	public String kakaoLog(Model Member) {
+	public String kakaoLog(AuthBean ab) {
 		
-		String page = "kakaolog";
-		return page;
+		ab.setSCode("KAKAOLOG");
+		mav = auth.entrance(ab);
+		return mav.getViewName();
 	}
 	
 	@RequestMapping(value = "/NAVERLOG", method = {RequestMethod.GET,RequestMethod.POST})
-	public String nagerLog(Model Member) {
+	public String nagerLog(AuthBean ab) {
 		
-		String page = "naverlog";
-		return page;
+		ab.setSCode("NAVERLOG");
+		mav = auth.entrance(ab);
+		return mav.getViewName();
 	}
 	
 	@RequestMapping(value = "/FACEBOOKLOG", method = {RequestMethod.GET,RequestMethod.POST})
-	public String facebookLog(Model Member) {
+	public String facebookLog(AuthBean ab) {
 		
-		String page = "facebooklog";
-		return page;
+		ab.setSCode("FACEBOOKLOG");
+		mav = auth.entrance(ab);
+		return mav.getViewName();
 	}
 	
 	@RequestMapping(value = "/JOINFORM", method = {RequestMethod.GET,RequestMethod.POST})
-	public String joinForm(Model Member,AuthBean ab) {
+	public String joinForm(AuthBean ab) {
 		
-		String page ;
-		if(ab.getSCode().equals("c")) {
-			page = "joinform";
-		}else {
-			page = "adminjoinform"; 
-		}
-		return page;
+		ab.setSCode("JOINFORM");
+		mav = auth.entrance(ab);
+		return mav.getViewName();
 	}
 	
 	@RequestMapping(value = "/JOIN", method = {RequestMethod.GET,RequestMethod.POST})
-	public String findForm(Model Member) {
+	public String findForm(AuthBean ab) {
 		
-		String page = "start";
-		return page;
+		ab.setSCode("JOIN");
+		mav = auth.entrance(ab);
+		return mav.getViewName();
 	}
 	
 	@RequestMapping(value = "/AJOIN", method = {RequestMethod.GET,RequestMethod.POST})
-	public String Join(Model Member) {
+	public String Join(AuthBean ab) {
 		
-		String page = "ajoin";
-		return page;
+		ab.setSCode("AJOIN");
+		mav = auth.entrance(ab);
+		return mav.getViewName();
 	}
 	
 	@RequestMapping(value = "/FIND", method = {RequestMethod.GET,RequestMethod.POST})
-	public String find(Model Member) {
+	public String find(AuthBean ab) {
 		
-		String page = "find";
-		return page;
+		ab.setSCode("FIND");
+		mav = auth.entrance(ab);
+		return mav.getViewName();
 	}
 	
 	@RequestMapping(value = "/PWFORM", method = {RequestMethod.GET,RequestMethod.POST})
-	public String pwForm(Model Member) {
+	public String pwForm(AuthBean ab) {
 		
-		String page = "pwform";
-		return page;
+		ab.setSCode("PWFORM");
+		mav = auth.entrance(ab);
+		return mav.getViewName();
 	}
 	//임시
 	@RequestMapping(value = "/ADMIN", method = {RequestMethod.GET,RequestMethod.POST})
-	public String admin(Model model ) {
+	public String admin(AuthBean ab) {
 		String page = "admin";
 		return page;
 	}

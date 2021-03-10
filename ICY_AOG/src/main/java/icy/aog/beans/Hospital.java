@@ -25,7 +25,9 @@ public class Hospital {
 	private String rvDate;
 	private String htTag;
 	private String dCode;
-
-	
+	private String stfCode;
+	private String stfPw;
+	private String stfName;
+	private String stfPhone;
 	
 }
