@@ -3,15 +3,11 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<meta charset="UTF-8">
-	<link rel="stylesheet" href="/resources/css/auth.css">
-	<link rel="icon" type="img/png" href="/resources/img/gtg.png">
-	<script type="text/javascript" src="https://static.nid.naver.com/js/naveridlogin_js_sdk_2.0.0.js" charset="utf-8"></script>
-	<meta name="google-signin-scope" content="profile email">
-	<meta name="google-signin-client_id" 
-	content="155109421207-7qrhuq2f8pp44se51r25qjmg942bc5ov.apps.googleusercontent.com">
-	<script src="https://apis.google.com/js/platform.js" async defer></script>
-	<title>로그인페이지</title>
+<meta charset="UTF-8">
+<link rel="stylesheet" href="/resources/css/auth.css">
+<link rel="icon" type="img/png" href="/resources/img/gtg.png">
+
+<title>로그인페이지</title>
 </head>
 <body onLoad="init()">
 	<div id="box">
@@ -26,68 +22,23 @@
 		
 		<input class="in" name="MInfo" id="id" type="text" placeholder="아이디를 입력해주세요." /><br />
 		<input class="in" name="MInfo" id="pw" type="password" placeholder="비밀번호를 입력해주세요." /><br />
-		<button class="main_btn" id="/" onclick="moveLogin();">로그인</button>
-		<button class="main_btn" id="JOINFORM" onclick="moveJoin();">회원가입</button>
+		<button class="main_btn" id="/" onclick="moveLogin()">로그인</button>
+		<button class="main_btn" id="JOINFORM" onclick="moveJoin()">회원가입</button>
 		<div class="snsapi">
 		<a id="KAKAOLOG" onclick="kakaoLogin()"><img src="/resources/img/kakao.png"></a>
+<!-- 		<a id="naverIdLogin" onclick="naverLogin()"><img src="/resources/img/naver.png"></a> -->
 		<a id="naverIdLogin"></a>
-<!-- 		<a id="FACEBOOKLOG" onclick="member(this)"><img src="/resources/img/facebook.png"></a> -->
-		<a class="g-signin2" data-onsuccess="onSignIn" data-theme="dark"></a>
-    	<button type="button" onClick="signOut();">구글 logout</button><br>
-		<button id="kakaoLogout" onclick="kakaoLogout();">카카오 logout</button><BR>
+		<a id="FACEBOOKLOG" onclick="member(this)"><img src="/resources/img/facebook.png"></a>
+		<button id="kakaoLogout" onclick="kakaoLogout()">kakaoLogout</button><BR>
+		<button id="naverLogout" onclick="naverLogout()">naverLogout</button>
 		</div>
 		<h3 id="FIND" onclick="member(this)">아이디/비밀번호 찾기</h3>
 	</div>
-	
-	<!-- GOOGLE 로그인 -->
-	<script>
-      function onSignIn(googleUser) {
-        // Useful data for your client-side scripts:
-        var profile = googleUser.getBasicProfile();
-        //alert(profile.getId());
-        console.log("ID: " + profile.getId()); // Don't send this directly to your server!
-        console.log('Full Name: ' + profile.getName());
-        console.log('Given Name: ' + profile.getGivenName());
-        console.log('Family Name: ' + profile.getFamilyName());
-        console.log("Image URL: " + profile.getImageUrl());
-        console.log("Email: " + profile.getEmail());
-
-        alert(profile.getName());
-        
-        var name = document.createElement("input");
-		name.name = "mName";
-		name.value = profile.getName();
-        
-		var gId = document.createElement("input");
-		gId.name = "mPw";
-		gId.value = profile.getId();
-		
-		var email = document.createElement("input");
-		email.name = "mId";
-		email.value = profile.getEmail();
-		
-		var form = document.createElement("form");
-		form.action = "GOOGLELOG";
-		form.method = "post";
-
-		form.appendChild(name);
-		form.appendChild(gId);
-		form.appendChild(email);
-		document.body.appendChild(form);
-		form.submit();
-		
-        // The ID token you need to pass to your backend:
-        var id_token = googleUser.getAuthResponse().id_token;
-        console.log("ID Token: " + id_token);
-      }
-      
-      function signOut(){
-    	  gapi.auth2.getAuthInstance().disconnect();
-      }
-	</script>
-	
 </body>
-<!-- NAVER 로그인 -->
+
+
+<script type="text/javascript" src="https://static.nid.naver.com/js/naveridlogin_js_sdk_2.0.0.js" charset="utf-8"></script>
+
 <script type="text/javascript">
 	var naverLogin = new naver.LoginWithNaverId(
 		{
@@ -95,14 +46,94 @@
 			callbackUrl: "http://localhost:80/NAVERLOG",
 			isPopup: false, /* 팝업을 통한 연동처리 여부 */
 			loginButton: {color: "green", type: 1, height: 56.69} /* 로그인 버튼의 타입을 지정 */
+			//callbackHandle: true
+			/* callback 페이지가 분리되었을 경우에 callback 페이지에서는 callback처리를 해줄수 있도록 설정합니다. */
 		}		
 	);
-	
-	/* 설정정보를 초기화하고 연동을 준비 */
+
+	/* (3) 네아로 로그인 정보를 초기화하기 위하여 init을 호출 */
 	naverLogin.init();
+
+	naverLogin.getLoginStatus(function (status) {
+		if (status) {
+			var email = document.createElement("input");
+			email.name = "mId";
+			email.value = naverLogin.user.getEmail();
+			
+			var form = document.createElement("form");
+			form.action = "NAVERLOG";
+			form.method = "post";		
+			form.appendChild(email);
+	
+			document.body.appendChild(form);
+			form.submit();
+			}
+	});
+
 </script>
 
 
+<script>
+function naverLogin2(){
+		/* (4) Callback의 처리. 정상적으로 Callback 처리가 완료될 경우 main page로 redirect(또는 Popup close) */
+		window.addEventListener('load', function () {
+			naverLogin.getLoginStatus(function (status) {
+				if (status) {
+					/* (5) 필수적으로 받아야하는 프로필 정보가 있다면 callback처리 시점에 체크 */
+					var email = naverLogin.user.getEmail();
+					var birthday = naverLogin.user.getBirthday();
+					var name = naverLogin.user.getName();
+					var id = naverLogin.user.getId();
+					
+					console.log("email", email);
+					console.log("birthday", birthday);
+					console.log("name", name);
+					console.log("id", id);
+					
+					var email = document.createElement("input");
+					email.name = "mId";
+					email.value = naverLogin.user.getEmail();
+					
+					var birthday = document.createElement("input");
+					birthday.name = "mJumin";
+					birthday.value = naverLogin.user.getBirthday();
+					
+					var name = document.createElement("input");
+					name.name = "mName";
+					name.value = naverLogin.user.getName();
+					
+					var id = document.createElement("input");
+					id.name = "mPw";
+					id.value = naverLogin.user.getId();
+					
+					var form = document.createElement("form");
+	 				form.action = "NAVERLOG";
+	 				form.method = "post";
+					
+					form.appendChild(email);
+					form.appendChild(birthday);
+					form.appendChild(name);
+					form.appendChild(id);
+					
+					document.body.appendChild(form);
+	 				form.submit();
+					
+					console.log(naverLogin.user);
+					if( email == undefined || email == null) {
+						alert("이메일은 필수정보입니다. 정보제공을 동의해주세요.");
+						/* (5-1) 사용자 정보 재동의를 위하여 다시 네아로 동의페이지로 이동함 */
+						naverLogin.reprompt();
+						return;
+					}
+
+					//window.location.replace("http://" + window.location.hostname + ( (location.port==""||location.port==undefined)?"":":" + location.port) + "/sample/main.html");
+				} else {
+					console.log("callback 처리에 실패하였습니다.");
+				}
+			});
+		});
+}
+</script>
 
 <!-- KAKAO 로그인 -->
 <script src='https://code.jquery.com/jquery-3.1.1.min.js'></script>
@@ -129,8 +160,6 @@
 								console.log("email", email);
 								console.log("birthday", birthday);
 								console.log("name", name);
-								
-								alert(email+birthday+name+id);
 								
 								var email = document.createElement("input");
 								email.name = "mId";
@@ -227,7 +256,6 @@
 		
 		form.appendChild(mId);
 		form.appendChild(mPw);
-		
 		form.appendChild(logCode);
 		
 		document.body.appendChild(form);
@@ -249,5 +277,12 @@
 			}
 	}
 	
+	function naverLogout() {
+		var win = window.open("https://nid.naver.com/oauth2.0/token?grant_type=delete"
+				+"&client_id=w6upduuKl6Wl7odmmnUM&client_secret=D_ZtWS1cUh"
+				+"&access_token=AAAAOZPj500KLMOi2FNv_zbG4t3csvL7eaalzfD7nIa0tgSwupj-3YKvmfUcKLMLZDmQRbU7CJLFlR2pqBZpDHo1ZB4"
+				+"&service_provider=NAVER", "PopupWin", "width=400,height=200");
+		win.document.write("<p>NAVER 계정이 로그아웃되었습니다.</p>");
+	}
 </script>
 </html>

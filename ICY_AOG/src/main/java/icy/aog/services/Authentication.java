@@ -32,11 +32,14 @@ public class Authentication {
 		case "KAKAOLOG":
 			mav = kakaoCtl(ab, model);
 			break;
+		case "NAVERLOGINFORM":
+			mav = naverLogInformCtl(ab, model);
+			break;	
 		case "NAVERLOG":
 			mav = naverCtl(ab, model);
 			break;
-		case "FACEBOOKLOG":
-			mav = facebookCtl(ab, model);
+		case "GOOGLELOG":
+			mav = googleCtl(ab, model);
 			break;
 		case "JOINFORM":
 			mav = joinformCtl(ab, model);
@@ -66,28 +69,7 @@ public class Authentication {
 		mav.setViewName("admin2");
 		return mav;
 	}
-
-	/*
-	private ModelAndView testCtl2(AuthBean ab) {
-		System.out.println("testCtl2 진입");
-		String jsonData = gson.toJson(mmIF.getMb(ab));
-		System.out.println(jsonData);
-		mav.addObject("test2", jsonData);
-		
-		mav.setViewName("test2jsp");
-	return mav;
-}
-*/
-//	private ModelAndView testCtl(AuthBean ab) {
-//		ab.setMId("test 아이디아이디");
-//		mav.setViewName("testjsp");	
-//		mav.addObject("test1", "테스트1");
-//		mav.addObject("test2", ab.getMId());
-//		
-//	return mav;
-//}
-
-
+	
 
 	private ModelAndView pwFormCtl(AuthBean ab, Model model) {
 		mav.setViewName("pwform");
@@ -144,18 +126,38 @@ public class Authentication {
 		return mav;
 	}
 	
-	private ModelAndView facebookCtl(AuthBean ab, Model model) {
-		mav.setViewName("facebooklog");
+	private ModelAndView googleCtl(AuthBean ab, Model model) {
+		System.out.println("구글 이름 : "+ab.getMName());
+		System.out.println("구글  eMail : "+ab.getMId());
+		System.out.println("구글 회원번호 : "+ab.getMPw());
+		mav.setViewName("start"); 
+		//mav.setViewName("googletest"); 
+		return mav;
+	}
+	
+	private ModelAndView naverLogInformCtl(AuthBean ab, Model model) {
+		System.out.println("NAVER eMail : "+ab.getMId());
+		System.out.println("NAVER 회원번호 : "+ab.getMPw());
+		System.out.println("NAVER 이름 : "+ab.getMName());
+		System.out.println("NAVER 생일 : "+ab.getMJumin());
+		
+		mav.setViewName("start"); 
 		return mav;
 	}
 	
 	private ModelAndView naverCtl(AuthBean ab, Model model) {
-		mav.setViewName("naverlog");
+		System.out.println("naverCtl 진입");
+		mav.setViewName("test");
 		return mav;
 	}
 	
 	private ModelAndView kakaoCtl(AuthBean ab, Model model) {
-		mav.setViewName("kakaolog");
+		System.out.println("카카오계정 ID : " + ab.getMId());
+		System.out.println("닉네임 : " + ab.getMName());
+		System.out.println("생일 : " + ab.getMJumin());
+		System.out.println("카카오 회원번호  : " + ab.getMPw());
+		
+		mav.setViewName("start"); //카카오 로그인
 		return mav;
 	}
 	

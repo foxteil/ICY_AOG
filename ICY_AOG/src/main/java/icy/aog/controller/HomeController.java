@@ -45,6 +45,13 @@ public class HomeController {
 		return mav.getViewName();
 	}
 	
+	@RequestMapping(value = "/NAVERLOGINFORM", method = {RequestMethod.GET,RequestMethod.POST})
+	public String naverLogInform(@ModelAttribute AuthBean ab, Model model) {
+		ab.setSCode("NAVERLOGINFORM");
+		mav = auth.entrance(ab, model);
+		return mav.getViewName();
+	}
+	
 	@RequestMapping(value = "/NAVERLOG", method = {RequestMethod.GET,RequestMethod.POST})
 	public String naverLog(@ModelAttribute AuthBean ab, Model model) {
 		ab.setSCode("NAVERLOG");
@@ -52,9 +59,9 @@ public class HomeController {
 		return mav.getViewName();
 	}
 	
-	@RequestMapping(value = "/FACEBOOKLOG", method = {RequestMethod.GET,RequestMethod.POST})
-	public String facebookLog(@ModelAttribute AuthBean ab, Model model) {
-		ab.setSCode("FACEBOOKLOG");
+	@RequestMapping(value = "/GOOGLELOG", method = {RequestMethod.GET,RequestMethod.POST})
+	public String googleLog(@ModelAttribute AuthBean ab, Model model) {
+		ab.setSCode("GOOGLELOG");
 		mav = auth.entrance(ab, model);
 		return mav.getViewName();
 	}
