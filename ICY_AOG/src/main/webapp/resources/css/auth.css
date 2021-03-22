@@ -1,0 +1,276 @@
+body {
+  	width: 400px;	
+  	height : 800px;
+  	font-family: "Open Sans", sans-serif;
+  	display: flex;
+  	flex-direction: column;
+  	margin: 10px;
+}
+span {
+    cursor: pointer;
+    width: 113px;
+	height: 44pt;
+	font-size : 19px;
+	font-weight : bold;
+	align-content: center;
+/* 	background-color: RGB(143,170,220); */
+	text-align: center;
+	margin : 8px; 
+}
+button, input[type=button] {
+  	background-color: var(--color-blue);
+  	color: var(--color-white);
+}
+input:focus,
+select:focus {
+  	outline: none;
+  	border-color: var(--color-blue);
+}
+
+.input:focus {
+   	animation-name: border-focus;
+	animation-duration: 1s;
+	animation-fill-mode: forwards;
+ }
+h2{
+	display : inline-block;
+}
+
+	
+button{
+	width : 3cm;
+	height: 26.5px;
+	position: relative;
+    top: 10%;
+    left: 33%;
+    margin: 8px;
+    background-color: RGB(68,114,196);	
+    font-size : 12pt;
+}
+
+#main_logo : img{
+	width: 5cm;
+	height : 5cm;
+}
+#box{
+	width: 340px;
+	height : 680px;
+	background-color : RGB(218,227,243);
+	margin : 8px; 
+}
+#box2{
+	width: 680px;
+/* 	height : 2500px; */
+	height : auto;
+	background-color : RGB(218,227,243);
+	margin : 8px; 
+}
+
+.div{
+	width : 100%;
+	height: 70px;
+	margin-bottom: -23px;
+	position: relative;
+    top: 1px;
+}
+.auth_title{
+	width: 178px;
+	height: 44px;
+	line-height : 44px;
+	font-size : 21px;
+	font-weight : bold;
+	border: 1px solid black;
+	margin: auto;
+	text-align: center;	
+	background-color: RGB(68,114,196);	
+	margin : 8px; 
+	position: relative;
+    top: 1px;
+    left: -2%;
+	display : inline-block;
+}
+
+.main_btn{
+	width: 3.5cm;
+    height: 1.16cm;
+    line-height: 44px;
+    font-size: 21px;
+    font-weight: bold;
+    border: 1px solid black;
+    margin: auto;
+    text-align: center;
+    background-color: RGB(68,114,196);
+    margin: 8px;
+    position: relative;
+    top: 84px;
+    left: 6%;
+    display: inline-block;
+}
+
+.auth_item1{
+	width: 80px;
+	height: 44px;
+	line-height : 36px;
+	font-size : 15px;
+	font-weight : bold;
+	align-content: center;
+	background-color: RGB(143,170,220);
+	text-align: center;
+	margin : 8px; 
+}
+.auth_item2{
+	width: 80px;
+	height: 44px;
+	line-height : 36px;
+	font-size : 15px;
+	font-weight : bold;
+	align-content: center;
+	background-color: RGB(220,205,240);
+	text-align: center;
+	margin : 8px; 
+}
+.in{
+	width: 7.37cm;
+	height: 43px;
+	line-height : 43px;
+	font-size : 16px;
+	font-weight : bold;
+	align-content: center;
+	margin: auto;
+	text-align: center;
+	margin : 5px; 
+	border: none;	
+	position: relative;
+    top: 80px;
+    left: 25px;
+}
+.in2{
+	width: 177px;
+	height: 21px;
+	line-height : 43px;
+	font-size : 10px;
+	font-weight : bold;
+	align-content: center;
+	margin: auto;
+	text-align: center;
+	margin : 5px; 
+	border: none;	
+	position: relative;
+}
+.in3{
+	width: 70px;
+	height: 21px;
+	line-height : 43px;
+	font-size : 10px;
+	font-weight : bold;
+	align-content: center;
+	margin: auto;
+	text-align: center;
+	margin : 5px; 
+	border: none;	
+	position: relative;
+}
+.in3-1{
+	width: 55px;
+	height: 21px;
+	line-height : 43px;
+	font-size : 10px;
+	font-weight : bold;
+	align-content: center;
+	margin: auto;
+	text-align: center;
+	margin : 5px; 
+	border: none;	
+	position: relative;
+}
+.in4{
+	width: 40px;
+	height: 21px;
+	line-height : 1px;
+	font-size : 10px;
+	font-weight : bold;
+	align-content: center;
+	margin: auto;
+	text-align: center;
+	border: none;	
+	position: relative;
+}
+.in5{
+	width: 15px;
+	height: 15px;
+	margin: auto;
+	text-align: center;
+	border: none;	
+	position: relative;
+}
+.find{
+	width: 3.5cm;
+    height: 1.16cm;
+    line-height: 44px;
+    font-size: 13pt;
+    font-weight: bold;
+    border: 1px solid black;
+    margin: auto;
+    text-align: center;
+    background-color: RGB(68,114,196);
+    margin: 8px;
+    position: relative;
+    top: 84px;
+    left: 6%;
+    display: inline-block;
+}
+
+.login{
+	width: 4.5cm;
+    height: 1.16cm;
+    line-height: 44px;
+    font-size: 12pt;
+    font-weight: bold;
+    margin: auto;
+    text-align: center;
+    background-color: RGB(68,114,196);
+    margin: 8px;
+    position: relative;
+    top: 54%;
+    left: 46%;
+}
+
+.snsapi{
+	display: flow-root;
+    position: relative;
+    top: 83px;
+    left: 45px;
+    margin: auto;
+    padding: 0px;
+}
+.snsapi img{
+    width: 1.5cm;
+    margin: 0px 7px;
+}
+.snslogin{
+	width: 9.3cm;
+    height: 0.65cm;
+    background-color: #A0B4E6;
+    font-size: 10.5pt;
+    color: rgb(59, 56, 56);
+    position: relative;
+    font-weight: bold;
+    top: 26px;
+    right: 48%;
+    padding: 2px 11px;
+}
+#FIND{
+	    font-size: 10.5pt;
+    color: rgb(59, 56, 56);
+    position: relative;
+    top: 137px;
+    left: 183px;
+}
+#ADMIN{
+	position: relative;
+    top: 89px;
+    right: 48%;
+}
+#ADMIN img {
+    width: 64px;
+}

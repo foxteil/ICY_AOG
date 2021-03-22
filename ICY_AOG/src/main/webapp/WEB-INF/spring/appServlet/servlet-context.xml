@@ -3,9 +3,15 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xmlns:beans="http://www.springframework.org/schema/beans"
 	xmlns:context="http://www.springframework.org/schema/context"
-	xsi:schemaLocation="http://www.springframework.org/schema/mvc https://www.springframework.org/schema/mvc/spring-mvc.xsd
+	xmlns:mybatis-spring="http://mybatis.org/schema/mybatis-spring"
+	xmlns:jdbc="http://www.springframework.org/schema/jdbc"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="http://www.springframework.org/schema/jdbc http://www.springframework.org/schema/jdbc/spring-jdbc-4.3.xsd
+		http://www.springframework.org/schema/mvc https://www.springframework.org/schema/mvc/spring-mvc.xsd
+		http://mybatis.org/schema/mybatis-spring http://mybatis.org/schema/mybatis-spring-1.2.xsd
 		http://www.springframework.org/schema/beans https://www.springframework.org/schema/beans/spring-beans.xsd
-		http://www.springframework.org/schema/context https://www.springframework.org/schema/context/spring-context.xsd">
+		http://www.springframework.org/schema/context https://www.springframework.org/schema/context/spring-context.xsd
+		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.3.xsd">
 
 	<!-- DispatcherServlet Context: defines this servlet's request-processing infrastructure -->
 	
@@ -21,7 +27,26 @@
 		<beans:property name="suffix" value=".jsp" />
 	</beans:bean>
 	
-	<context:component-scan base-package="ICY.HOONZZANG.COM" />
+	
+	<!-- Gson -->
+	<beans:bean id="gson" class="com.google.gson.Gson"></beans:bean>
+	
+	<!-- Spring Email Service -->
+	
+	<beans:bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver" >	
+	   <beans:property name="maxUploadSize" value="10485760"/>
+	   </beans:bean>
+	   <beans:bean id="uploadPath" class="java.lang.String">
+	   <beans:constructor-arg value="C:\Users\yjhh1\git\ICY_AOG\ICY_AOG\src\main\webapp\resources\img"/><!-- 컴퓨터 경로로 줘야한다 -->
+	   </beans:bean>
+
+		<beans:bean id="enc" class="icia.oap.utils.Encryption"></beans:bean>
+	<beans:bean id="pu" class="icia.oap.utils.ProjectUtils"></beans:bean>
+	
+	
+	<context:component-scan base-package="icy.aog.controller" />
+	
+	<context:component-scan base-package="icy.aog.services" />
 	
 	
 	

@@ -1,119 +1,316 @@
 package icy.aog.controller;
 
+import java.io.File;
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 
+import javax.annotation.Resource;
+
 import org.springframework.beans.factory.annotation.Autowired;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
-import icy.aog.bean.Hospital;
+import icy.aog.beans.Addr;
+import icy.aog.beans.Hospital;
 import icy.aog.services.Admin;
+import lombok.extern.log4j.Log4j;
 
 @Controller
+@Log4j
 public class AdminController {
-	ModelAndView mav;
+
 	@Autowired
-	private Admin am;
+	private Admin admin;
+
+    @Resource(name="uploadPath")
+    private String uploadPath;
+	ModelAndView mav;
+	
+	 @RequestMapping(value="/upload", method=RequestMethod.POST)
+	    public ModelAndView uploadForm(MultipartFile file, ModelAndView mv, Model model) {
+	 
+	        String fileName = file.getOriginalFilename();
+	        File target = new File(uploadPath, fileName);
+	        
+	        //경로 생성
+	        if ( ! new File(uploadPath).exists()) {
+	            new File(uploadPath).mkdirs();
+	        }
+	        //파일 복사
+	        try {
+	            FileCopyUtils.copy(file.getBytes(), target);
+	            mv.addObject("file", file);
+	        } catch(Exception e) {
+	            e.printStackTrace();
+	            mv.addObject("file", "error");
+	        }
+	    	System.out.println("upload post..............................");
+	        //여기로 오는지 확인한다.
+			System.out.println("file name:" + file.getOriginalFilename());
+	        //파일이름을 콘솔에 출력
+			System.out.println("file size:" + file.getSize());
+	        //파일사이즈
+			System.out.println("file type:" + file.getContentType());
+	        //파일 타입
+			
+	        //View 위치 설정
+			
+	        mv.setViewName("adminstart");
+	        return mv;
+	    }
+	
+		//직원 등록
+		@RequestMapping(value = "/ROLL", method = { RequestMethod.GET, RequestMethod.POST })
+	    
+		public String roll(@ModelAttribute Hospital hp, Model model) {
+			hp.setSCode("ROLL");
+			System.out.println(hp.getStfName());
+			System.out.println(hp.getStfRank());
+			mav = admin.entrance(hp, model);		
+			return mav.getViewName();
+			
+			
+		}
+		//의사이미지 불러오기
+		@RequestMapping(value = "/SELDRIMG", method = { RequestMethod.GET, RequestMethod.POST })
+	    @ResponseBody
+		public String seldrimg(@ModelAttribute Hospital hp, Model model) throws UnsupportedEncodingException {
+			hp.setSCode("SELDRIMG");
+			
+			mav = admin.entrance(hp, model);
+			System.out.println(mav.getModel().get("selstf"));
+			return URLEncoder.encode(mav.getModel().get("selimg").toString(), "UTF-8");
+			
+			
+			
+		}
+		
+	@RequestMapping(value = "/UPDATEDR", method = { RequestMethod.GET, RequestMethod.POST })
+	    
+		public ModelAndView updatedr(@ModelAttribute Hospital hp, Model model) {
+			hp.setSCode("UPDATEDR");
+			
+			mav = admin.entrance(hp, model);
+			
+			return mav;
+			
+			
+		}
+
+	@RequestMapping(value = "/UPDATEHP", method = { RequestMethod.GET, RequestMethod.POST })
+
+	public String updatehp(@ModelAttribute Hospital hp, Model model) {
+		hp.setSCode("UPDATEHR");
+		
+		mav = admin.entrance(hp, model);
+		
+		return mav.getViewName() ;
+		
+		
+	}
+	@RequestMapping(value = "/UPDATESTF", method = { RequestMethod.GET, RequestMethod.POST })
+
+	public String updatestf(@ModelAttribute Hospital hp, Model model) {
+		hp.setSCode("UPDATESTF");
+		
+		mav = admin.entrance(hp, model);
+		
+		return mav.getViewName() ;
+		
+		
+	}
+
+
+	@RequestMapping(value = "/HPINFOFORM", method = { RequestMethod.GET, RequestMethod.POST })
+	public String hpInfoForm(@ModelAttribute Hospital hp, Model model) {
+
+		hp.setSCode("HPINFOFORM");
+
+		mav = admin.entrance(hp, model);
+
+
+		return mav.getViewName();
+
+	}
+
+	@RequestMapping(value = "/STFCHECK", method = { RequestMethod.GET, RequestMethod.POST })
+	public String stfcheck(@ModelAttribute Hospital hp, Model model) {
+
+		hp.setSCode("STFCHECK");
+
+		mav = admin.entrance(hp, model);
+
+
+		return mav.getViewName();
+
+	}
+	@RequestMapping(value = "/DELSTF", method = { RequestMethod.GET, RequestMethod.POST })
+	public String delstf(@ModelAttribute Hospital hp, Model model) {
+
+		hp.setSCode("DELSTF");
+		mav = admin.entrance(hp, model);
+		return mav.getViewName();
+
+	}
+	 
+	// 관리자 정보 불러오기 	
+	@RequestMapping(value = "/INSENROLLFORM", method = { RequestMethod.POST })
+	@ResponseBody
+	public String insenrollForm(@ModelAttribute Hospital hp, Model model) throws UnsupportedEncodingException {
+		hp.setSCode("INSENROLLFORM");
+		mav = admin.entrance(hp, model);
+
+		System.out.println(mav.getModel().get("selstf"));
+		return URLEncoder.encode(mav.getModel().get("selstf").toString(), "UTF-8");
+	}
+	 
+	//닥터 정보 불러오기 	
+	@RequestMapping(value = "/DRINFO", method = { RequestMethod.GET, RequestMethod.POST })
+	@ResponseBody
+	public String drInfo(@ModelAttribute Hospital hp, Model model) throws UnsupportedEncodingException {
+
+		hp.setSCode("DRINFO");
+		mav = admin.entrance(hp, model);
+		System.out.println(mav.getModel().get("seldr"));
+
+
+		return URLEncoder.encode(mav.getModel().get("seldr").toString(), "UTF-8");
+	}
+
+//	@RequestMapping(value = "/RESERVELIST", method = { RequestMethod.GET, RequestMethod.POST })
+//	public String reserveList(@ModelAttribute Hospital HB, Model model) {
+//		HB.setSCode("RESERVELIST");
+//		mav = new ModelAndView();
+//		mav = admin.entrance(HB);
+//		return mav.getViewName();
+//
+//	}
+//	
+
+	// 병원정보 불러오기 	
+	@RequestMapping(value = "/HPINFO", method = { RequestMethod.GET, RequestMethod.POST })
+	@ResponseBody
+	public String hpInfo(@ModelAttribute Hospital hp, Model model) throws UnsupportedEncodingException {
+
+		hp.setSCode("HPINFO");
+		mav = admin.entrance(hp, model);
+		System.out.println(mav.getModel().get("selhp"));
+
+		return URLEncoder.encode(mav.getModel().get("selhp").toString(), "UTF-8");
+	}
+	 
+	@RequestMapping(value= "/RELIST", method= {RequestMethod.GET, RequestMethod.POST})
+	@ResponseBody
+	public String RELIST(@ModelAttribute Hospital HB, Model model) throws UnsupportedEncodingException {
+		
+		mav = admin.entrance(HB,model);
+		System.out.println("컨트롤러에는 들어옴");
+		return URLEncoder.encode(mav.getModel().get("data").toString(),"UTF-8");
+	}
 	
 	
-	  @RequestMapping(value = "/RESERVELIST", method = { RequestMethod.GET, RequestMethod.POST })
+	
+	@RequestMapping(value= "/testajax", method= {RequestMethod.GET, RequestMethod.POST})
+	@ResponseBody
+	public String testajax(@ModelAttribute Hospital HB, Model model) throws UnsupportedEncodingException {
+		
+		HB.setSCode("TEST");
+		mav = admin.entrance(HB,model);
+		System.out.println("컨트롤러에는 들어옴");
+		return mav.getModel().get("testajax").toString();
+	}
 
-	   public String reserveList(Model mode) {
+	
+	@RequestMapping(value= "/testapi", method= {RequestMethod.GET, RequestMethod.POST})
+	public String testapi(@ModelAttribute Hospital HB, Model model) {
+		
+		return "testapi";
+	}
+	
+	@RequestMapping(value= "/testapi2", method= {RequestMethod.GET, RequestMethod.POST})
+	public String testapi2(@ModelAttribute Hospital HB, Model model) {
+		
+		return "testapi2";
+	}
+	
+	
+	
+	@RequestMapping(value = "/RESERVELIST", method = { RequestMethod.GET, RequestMethod.POST })
+	@ResponseBody
+	public String reserveList(@ModelAttribute Hospital HB, Model model) throws UnsupportedEncodingException {
+		
+		mav = new ModelAndView();
+		
+		
+		mav = admin.entrance(HB,model);
+		
+		model.addAttribute("rlist",mav.getModel().get("rList").toString());
+		System.out.println(mav.getModel().get("rList"));
+		
+		return URLEncoder.encode(mav.getModel().get("rList").toString(),"UTF-8");
 
-	      String page =  "reserveList";
-	   
+	}
 
-	      return page;
+	@RequestMapping(value = "/SETTINGFORM", method = { RequestMethod.GET, RequestMethod.POST })
+	public String settingForm(@ModelAttribute Hospital HB, Model model) {
+		System.out.println("SETTINGFORM 진입");
+		HB.setSCode("SETTINGFORM");
+		mav = new ModelAndView();
+		mav = admin.entrance(HB, model);
+		return mav.getViewName();
+	}
 
-	   }
-	   
-	   @RequestMapping(value = "/SETTINGFORM", method = { RequestMethod.GET, RequestMethod.POST })
+	@RequestMapping(value = "/HPREVIEW", method = { RequestMethod.GET, RequestMethod.POST })
+	public String hpReview(@ModelAttribute Hospital HB, Model model) throws UnsupportedEncodingException {
+		mav = new ModelAndView();
+		mav = admin.entrance(HB, model);
+		
+		return mav.getViewName();
+	}
 
-	   public String settingForm(Model mode) {
+	@RequestMapping(value = "/SCHEDULEFORM", method = { RequestMethod.GET, RequestMethod.POST })
+	public String scheduleForm(@ModelAttribute Hospital HB, Model model) throws UnsupportedEncodingException {
+		mav = new ModelAndView();
+		mav = admin.entrance(HB, model);
+		 return mav.getViewName();
+	}
 
-	      String page =  "settingForm";
-	   
+	@RequestMapping(value = "/DRTIME", method = { RequestMethod.GET, RequestMethod.POST })
 
-	      return page;
+	public String drTime(@ModelAttribute Hospital HB, Model model) {
 
-	   }
-	   @RequestMapping(value = "/HPREVIEW", method = { RequestMethod.GET, RequestMethod.POST })
+		HB.setSCode("DRTIME");
+		mav = new ModelAndView();
+		mav = admin.entrance(HB, model);
+		return mav.getViewName();
+	}
 
-	   public String hpReview(Model mode) {
+	@RequestMapping(value = "/BREAK", method = { RequestMethod.GET, RequestMethod.POST })
 
-	      String page =  "hpReview";
-	   
+	public String Break(@ModelAttribute Hospital HB, Model model) {
 
-	      return page;
-
-	   }
-	   
-	   @RequestMapping(value = "/SCHEDULEFORM", method = { RequestMethod.GET, RequestMethod.POST })
-
-	   public String scheduleForm(Model mode) {
-
-	      String page =  "scheduleForm";
-	   
-
-	      return page;
-
-	   }
-	   @RequestMapping(value = "/DRTIME", method = { RequestMethod.GET, RequestMethod.POST })
-
-	   public String drTime(Model mode) {
-
-	      String page =  "drTime";
-	   
-
-	      return page;
-
-	   }
-	   @RequestMapping(value = "/DOCTORFORM", method = { RequestMethod.GET, RequestMethod.POST })
-
-	   public String doctorForm(Model mode) {
-
-	      String page =  "doctorForm";
-	   
-
-	      return page;
-
-	   }
-	   @RequestMapping(value = "/HOSPITALFORM", method = { RequestMethod.GET, RequestMethod.POST })
-
-	   public String hospitalform(Model mode) {
-
-	      String page =  "hospitalform";
-	   
-
-	      return page;
-
-	   }
-	   @RequestMapping(value = "/BREAK", method = { RequestMethod.GET, RequestMethod.POST })
-
-	   public String Break(Model mode) {
-
-	      String page =  "Break";
-	   
-
-	      return page;
-
-	   }
-	   
-	   
-	   
+		HB.setSCode("BREAK");
+		mav = new ModelAndView();
+		mav = admin.entrance(HB, model);
+		return mav.getViewName();
+	}
+	// 윤정
+	
 	   //							me
 	   @RequestMapping(value = "/DRINFOFORM", method = { RequestMethod.GET, RequestMethod.POST })
-	   public String drinfoForm(@ModelAttribute Hospital hp) {
+	   public String drinfoForm(@ModelAttribute Hospital hp, Model model) {
 		   mav = new ModelAndView();
 		   hp.setSCode("DRINFOFORM");
 		   
-		   mav = am.entrance(hp);
+		   mav = admin.entrance(hp, model);
 		   
 	      String page =  "drinfoForm";
 	   
@@ -122,101 +319,28 @@ public class AdminController {
 
 	   }
 	   
-	   //							me
-	   @RequestMapping(value = "/DRINFO", method = { RequestMethod.GET, RequestMethod.POST })
-	   public String drInfo(@ModelAttribute Hospital hp) {
-
-		   hp.setSCode("DRINFO");
-		   mav = am.entrance(hp);
-	      String page =  "drInfo";
-	   
-
-	      return page;
-
-	   }
 	   
 	   @RequestMapping(value = "/DRINFOj", method = { RequestMethod.GET, RequestMethod.POST })
 	   @ResponseBody
-	   public String drInfoj(@ModelAttribute Hospital hp) throws UnsupportedEncodingException {
+	   public String drInfoj(@ModelAttribute Hospital hp, Model model) throws UnsupportedEncodingException {
 
 		   hp.setSCode("DRINFOj");
-		   mav = am.entrance(hp );
+		   mav = admin.entrance(hp, model);
 	      String page =  "drInfo";
 	   
 	     
 	      return null;
 
 	   }
-	   
-	   //							me
-	   @RequestMapping(value = "/HPINFOFORM", method = { RequestMethod.GET, RequestMethod.POST })
-	   public String hpInfoForm(@ModelAttribute Hospital hp) {
-
-		   hp.setSCode("HPINFOFORM");
-		   
-		   mav = am.entrance(hp );
-		   
-		   
-	      String page =  "hpInfoForm";
-	   
-
-	      return page;
-
-	   }
-	   
-	   //							me
-	   @RequestMapping(value = "/HPINFO", method = { RequestMethod.GET, RequestMethod.POST })
-
-	   public String hpInfo(@ModelAttribute Hospital hp) {
-
-		   
-		   hp.setSCode("HPINFO");
-		   mav = am.entrance(hp );
-	      String page =  "hpInfo";
-	   
-
-	      return page;
-
-	   }
-	   
-	   //							me
-	   @RequestMapping(value = "/RESCONFIRM", method = { RequestMethod.GET, RequestMethod.POST })
-
-	   public String resConfirm(@ModelAttribute Hospital hp) {
-
-		   
-		   hp.setSCode("RESCONFIRM");
-		   mav = am.entrance(hp );
-	      String page =  "resConfirm";
-	   
-
-	      return page;
-
-	   }
-	   
 	   //							me
 	   @RequestMapping(value = "/ENROLLFORM", method = { RequestMethod.GET, RequestMethod.POST })
 
-	   public String enrollForm(@ModelAttribute Hospital hp) {
+	   public String enrollForm(@ModelAttribute Hospital hp, Model model) {
 
 		   
 		   hp.setSCode("ENROLLFORM");
-		   mav = am.entrance(hp );
+		   mav = admin.entrance(hp, model);
 	      String page =  "enrollForm";
-	   
-
-	      return page;
-
-	   }
-	   //							me  직원등록
-	   @RequestMapping(value = "/INSENROLLFORM", method = { RequestMethod.GET, RequestMethod.POST })
-
-	   public String insenrollForm(@ModelAttribute Hospital hp) {
-
-		   
-		   hp.setSCode("INSENROLLFORM");
-		   mav = am.entrance(hp );
-	      String page =  "insenrollForm";
 	   
 
 	      return page;
@@ -225,11 +349,11 @@ public class AdminController {
 	   //							me  직원삭제
 	   @RequestMapping(value = "/DELENROLL", method = { RequestMethod.GET, RequestMethod.POST })
 
-	   public String delEnroll(@ModelAttribute Hospital hp) {
+	   public String delEnroll(@ModelAttribute Hospital hp, Model model) {
 
 		   
 		   hp.setSCode("DELENROLL");
-		   mav = am.entrance(hp );
+		   mav = admin.entrance(hp, model);
 	      String page =  "delEnroll";
 	   
 
@@ -239,11 +363,11 @@ public class AdminController {
 	   //							me
 	   @RequestMapping(value = "/ENROLL", method = { RequestMethod.GET, RequestMethod.POST })
 
-	   public String Enroll(@ModelAttribute Hospital hp) {
+	   public String Enroll(@ModelAttribute Hospital hp, Model model) {
 
 		   
 		   hp.setSCode("ENROLL");
-		   mav = am.entrance(hp );
+		   mav = admin.entrance(hp, model);
 	      String page =  "Enroll";
 	   
 
@@ -254,19 +378,88 @@ public class AdminController {
 	   //							me
 	   @RequestMapping(value = "/RESAVAILABLE", method = { RequestMethod.GET, RequestMethod.POST })
 
-	   public String resAvailable(@ModelAttribute Hospital hp) {
+	   public String resAvailable(@ModelAttribute Hospital hp, Model model) {
 
 		   
 		   
 		   hp.setSCode("RESAVAILABLE");
-		   mav = am.entrance(hp );
+		   mav = admin.entrance(hp, model);
 	      String page =  "resAvailable";
 	   
 
 	      return page;
 
 	   }
+	   
+	   @RequestMapping(value = "/CAL", method = { RequestMethod.GET, RequestMethod.POST })
+	   public String cal(@ModelAttribute Hospital hp, Model model) {
 
+	      String page =  "cal";
+	      hp.setSCode("TEST");
+	      mav=admin.entrance(hp, model);
+	      return  page;
 
+	   }
+	   
+	   @RequestMapping(value = "/RESERVECHECK", method = { RequestMethod.GET, RequestMethod.POST })
+	   @ResponseBody
+	   public String RESERVECHECK(@ModelAttribute Hospital hp, Model model) throws UnsupportedEncodingException {
+		   	System.out.println(hp.getFAJUMIN());
+		   	System.out.println(hp.getDrCode());
+		   	System.out.println(hp.getHpCode());
+		   	System.out.println(hp.getTMCODE());
+	      
+	      mav=admin.entrance(hp, model);
+	      return  URLEncoder.encode(mav.getModel().get("msg2").toString(),"UTF-8");
+
+	   }
+	   
+	   @RequestMapping(value = "/REJECTU", method = { RequestMethod.GET, RequestMethod.POST })
+	   @ResponseBody
+	   public String REJECTU(@ModelAttribute Hospital hp, Model model) throws UnsupportedEncodingException {
+		   	System.out.println(hp.getFAJUMIN());
+		   	System.out.println(hp.getDrCode());
+		   	System.out.println(hp.getHpCode());
+		   	System.out.println(hp.getTMCODE());
+	      
+	      mav=admin.entrance(hp, model);
+	      return  URLEncoder.encode(mav.getModel().get("msg2").toString(),"UTF-8");
+
+	   }
+	   @RequestMapping(value = "/HPSCCHANGE", method = { RequestMethod.GET, RequestMethod.POST })
+	   public String HPSCCHANGE(@ModelAttribute Hospital hp, Model model) {
+
+	      mav=admin.entrance(hp, model);
+	      return  mav.getViewName();
+
+	   }
+	   @RequestMapping(value = "/HPBREAK", method = { RequestMethod.GET, RequestMethod.POST })
+	   @ResponseBody
+	   public String HPBREAK(@ModelAttribute Hospital hp, Model model) throws UnsupportedEncodingException {
+
+	      mav=admin.entrance(hp, model);
+	      return  URLEncoder.encode(mav.getModel().get("msg").toString(),"UTF-8");
+
+	   }
+	   @RequestMapping(value = "/SHOWDOC", method = { RequestMethod.GET, RequestMethod.POST })
+	   @ResponseBody
+	   public String SHOWDOC(@ModelAttribute Hospital hp, Model model) throws UnsupportedEncodingException {
+
+	      mav=admin.entrance(hp, model);
+	      return  URLEncoder.encode(mav.getModel().get("DInfo").toString(),"UTF-8");
+
+	   }
+	   @RequestMapping(value = "/SHOWDOCTIME", method = { RequestMethod.GET, RequestMethod.POST })
+	   @ResponseBody
+	   public String SHOWDOCTIME(@ModelAttribute Hospital hp, Model model) throws UnsupportedEncodingException {
+
+	      mav=admin.entrance(hp, model);
+	      model.addAttribute("getDrsDay",mav.getModel().get("aa"));
+	      mav.addObject("getDrsDay2",mav.getModel().get("aa"));
+	      return  URLEncoder.encode(mav.getModel().get("drsInfo").toString(),"UTF-8");
+
+	   }
+	   
+	   
 
 }

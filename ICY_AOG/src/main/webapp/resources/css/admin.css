@@ -1,0 +1,216 @@
+@charset "UTF-8";
+body {
+	width: 400px;	
+	height : 800px;
+  font-family: "Open Sans", sans-serif;
+  display: flex;
+  flex-direction: column;
+  margin: 10px;
+}
+#main_logo : img{
+	width: 5cm;
+	height : 5cm;
+}
+.in{
+	width: 7.37cm;
+	height: 43px;
+	line-height : 43px;
+	font-size : 16px;
+	font-weight : bold;
+	align-content: center;
+	margin: auto;
+	text-align: center;
+	margin : 5px; 
+	border: none;	
+	position: relative;
+    top: 80px;
+    left: 25px;
+}
+.main_btn{
+	width: 3.5cm;
+    height: 1.16cm;
+    line-height: 44px;
+    font-size: 21px;
+    font-weight: bold;
+    border: 1px solid black;
+    margin: auto;
+    text-align: center;
+    background-color: RGB(68,114,196);
+    margin: 8px;
+    position: relative;
+    top: 84px;
+    left: 6%;
+    display: inline-block;
+}
+#FIND{
+	    font-size: 10.5pt;
+    color: rgb(59, 56, 56);
+    position: relative;
+    top: 137px;
+    left: 183px;
+}
+#admin-box{
+	width: 330%;
+	height : 340%;
+	background-color : RGB(218,227,243);
+	margin : 8px; 
+}
+#little img{
+	    position: relative;
+    left: 10px;
+    width: 1.9cm;
+    height: 2.1cm;
+}
+table#calendar {
+    float: left;
+}
+.span-hplist{
+        background-color: #F7F7F7;
+    position: relative;
+    bottom: 423px;
+    left: 25px;
+    padding: 18px 5px;
+    margin: 7px 5px;
+    width: 316%;
+}
+.admin_title{
+	    display: flex;
+}
+.admin_btn1{
+	    line-height: 1.5cm;
+    margin: 10px;
+    background-color: #3057B9;
+    padding: 21px;
+    width: 7.0cm;
+    height: 1.5cm;
+    border-radius: 22px;
+    position: relative;
+    left: 6px;
+    color: white;
+    font-size: 29pt;
+    text-align: center;
+    font-weight: bold;
+    cursor: pointer;
+}
+.admin_btn11{
+	    line-height: 1.5cm;
+    margin: 10px;
+    background-color: #3057B9;
+    padding: 21px;
+    width: 3cm;
+    height: 1cm;
+    border-radius: 22px;
+    position: relative;
+    left: 6px;
+    color: white;
+    font-size: 29pt;
+    text-align: center;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.span-hplist{
+	display: none;
+}
+.desk{
+	width: 300px;
+	height: 300px;
+	background-color:white;
+}
+   td{
+            width: 30px;
+            height: 30px;
+            text-align: center;
+            font-size: 20px;
+            font-family: 굴림;
+            border:2px border-color:#3333FF;
+            border-radius: 8px;/*모서리 둥글게*/
+        }
+        .admin_dtn2 {
+	background-color: gold;
+	line-height: 2cm;
+	margin: 10px;
+	display: flex;
+	padding: 21px;
+	width: 11.0cm;
+	height: 2cm;
+	border-radius: 22px;
+	position: relative;
+	left: 41px;
+	color: white;
+	font-size: 34pt;
+	text-align: center;
+	font-weight: bold;
+	display: none;
+}
+
+.stfupdate {
+	
+	line-height: 1cm;
+	
+	width: 3cm;
+	border-radius: 22px;	
+	left: 1000px;
+	
+	font-size: 18pt;
+
+	font-weight: bold;
+	display: none;
+}
+
+.admin_dtn3 {
+	background-color: gold;
+	line-height: 2cm;
+	margin: 10px;
+	display: flex;
+	padding: 21px;
+	width: 11.0cm;
+	height: 2cm;
+	border-radius: 22px;
+	position: relative;
+	left: 41px;
+	color: white;
+	font-size: 34pt;
+	text-align: center;
+	font-weight: bold;
+	display: none;
+}
+
+.am {
+	left: 164px;
+	top: -30px;
+	left: 164px;
+	width: 1.5cm;
+	height: 1cm;
+	fontSize: 20px;
+	backgroundColor: "#6182D6";
+	fontWeight: "bolder";
+	color: "White";
+	margin: "0px 9px";
+}
+
+.admi {
+	line-height: 2cm;
+	margin: 10px;
+	display: flex;
+	height: 2cm;
+	border-radius: 22px;
+	position: relative;
+	font-size: 18pt;
+	text-align: center;
+	border: 1px solid black;
+	border-width: 3px thin;
+	display: block;
+}
+
+}
+.admin {
+	position: relative;
+	font-size: 34pt;
+	text-align: center;
+}
+
+.addstf {
+	display: none;
+}
+

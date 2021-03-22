@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="icy.aog.mapper.MemberIF">
+	<select id = "lsearchInfo" resultType="icy.aog.beans.AuthBean">
+   SELECT SI_NAME AS SINAME
+   		  FROM SI
+  
+   </select>
+   
+   	<select id="seachHospital" resultType="icy.aog.beans.AuthBean">
+		SELECT
+		'('||HP_POST||')'||HP_ADDR AS aHpAddr,
+		HP_NAME AS aHpName,
+		HP_PHONE AS aHpPhone,
+		HP_CODE as aHpCode
+		FROM HP WHERE HP_NAME LIKE '%'||#{mWord}||'%'
+	</select>
+
+	<select id="isState" resultType="string">
+		SELECT MM_STCODE FROM MM WHERE MM_ID = #{MId} AND MM_PW = #{MPw}
+	</select>
+	<select id="isUser" resultType="int">
+		SELECT COUNT(*) FROM MM WHERE MM_ID = #{MId} AND MM_PW = #{MPw}
+	</select>
+	<select id="isAdmin" resultType="int">
+		SELECT COUNT(*) FROM STF WHERE STF_CODE = #{AId} AND STF_PW = #{APw}
+	</select>
+	<select id="insMember" resultType="icy.aog.beans.AuthBean">
+		INSERT INTO MM(MM_ID, MM_STCODE, MM_PW) VALUES(#{MId},'A',#{MPw})
+	</select>
+	<select id="insFamily" resultType="icy.aog.beans.AuthBean">
+		INSERT INTO FA(FA_JUMIN, FA_MMID, FA_NAME, FA_PHONE, FA_ADDR, FA_STCODE)
+		VALUES(#{MJumin}||FA_JUMIN_SEQ.NEXTVAL,#{MId},#{MName},#{MPhone},#{MAddr},'M')
+	</select>
+	<select id="insStaff" resultType="icy.aog.beans.AuthBean">
+		INSERT INTO STF(STF_CODE, STF_HPCODE, STF_PW, STF_RANK, STF_NAME, STF_PHONE)
+		VALUES(#{AId},#{AHpCode},#{APw},#{ARank},#{AName},#{APhone})
+	</select>
+	<select id="insHp" resultType="icy.aog.beans.AuthBean">
+		INSERT INTO HP(HP_CODE, HP_NAME, HP_ADDR, HP_PHONE, HP_IMG, HP_PARK)
+		VALUES(#{AHpCode},#{AHpName},#{AHpAddr},#{AHpPhone},#{AHpImg},#{AHpPark})
+	</select>
+	<select id="insSedewon" resultType="icy.aog.beans.AuthBean">
+		INSERT INTO FA(FA_JUMIN, FA_MMID, FA_NAME, FA_PHONE, FA_ADDR, FA_STCODE)
+		VALUES(#{FJumin}||FA_JUMIN_SEQ.NEXTVAL,#{MId},#{FName},#{FPhone},#{FAddr},'F')
+	</select>
+	<select id="insHt1" resultType="icy.aog.beans.AuthBean">
+		INSERT INTO HT(HT_TAG, HT_HPCODE)
+		VALUES(#{AHpHt1},#{AHpCode})
+	</select>
+	<select id="insHt2" resultType="icy.aog.beans.AuthBean">
+		INSERT INTO HT(HT_TAG, HT_HPCODE)
+		VALUES(#{AHpHt2},#{AHpCode})
+	</select>
+	<select id="insHt3" resultType="icy.aog.beans.AuthBean">
+		INSERT INTO HT(HT_TAG, HT_HPCODE)
+		VALUES(#{AHpHt3},#{AHpCode})
+	</select>
+
+		<select id="upHp" resultType="icy.aog.beans.AuthBean">
+		UPDATE HP SET 
+		HP_STATE='1', 
+		HP_PHONE=#{AHpPhone} 
+		WHERE HP_CODE=#{AHpCode}
+	</select>
+	<select id="upHS" resultType="icy.aog.beans.AuthBean">
+		UPDATE HS SET 
+		HS_HPPARK=#{aHpPark},
+		HS_HPIMG=#{aHpImg}
+		WHERE HS_HPCODE=#{aHpCode}
+	</select>
+	<select id="insSC" resultType="icy.aog.beans.AuthBean">
+		INSERT INTO SC(SC_HPCODE, SC_ADDR, SC_HPNAME, SC_PANAME, SC_SUBWAY)
+		VALUES(#{AHpCode},#{AHpAddr},#{AHpName}, '00', #{AHpSubway})
+	</select>
+	
+	<!-- 카카오 api 로그인 -->
+	<select id="isKakaoUser" resultType="int">
+		SELECT COUNT(*) FROM MM WHERE MM_ID = 'kakao'||#{MId} 
+	</select>
+	<select id="insKakaoMember" resultType="icy.aog.beans.AuthBean">
+		INSERT INTO MM(MM_ID, MM_STCODE, MM_PW) VALUES('kakao'||#{MId},'A',#{MPw})
+	</select>
+	<select id="insKakaoFamily" resultType="icy.aog.beans.AuthBean">
+		INSERT INTO FA(FA_JUMIN, FA_MMID, FA_NAME, FA_PHONE, FA_ADDR, FA_STCODE)
+		VALUES(BIRTH_SEQ.NEXTVAL||#{MJumin}||FA_JUMIN_SEQ.NEXTVAL,'kakao'||#{MId},#{MName},'-','-','M')
+	</select>
+	<!-- 네이버 api 로그인 -->
+	<select id="isNaverUser" resultType="int">
+		SELECT COUNT(*) FROM MM WHERE MM_ID = 'naver'||#{MId} 
+	</select>
+	<select id="insNaverMember" resultType="icy.aog.beans.AuthBean">
+		INSERT INTO MM(MM_ID, MM_STCODE, MM_PW) VALUES('naver'||#{MId},'A',#{MPw})
+	</select>
+	<select id="insNaverFamily" resultType="icy.aog.beans.AuthBean">
+		INSERT INTO FA(FA_JUMIN, FA_MMID, FA_NAME, FA_PHONE, FA_ADDR, FA_STCODE)
+		VALUES(BIRTH_SEQ.NEXTVAL||#{MJumin}||FA_JUMIN_SEQ.NEXTVAL,'naver'||#{MId},#{MName},'-','-','M')
+	</select>
+	<!-- 구글 api 로그인 -->
+	<select id="isGoogleUser" resultType="int">
+		SELECT COUNT(*) FROM MM WHERE MM_ID = 'google'||#{MId} 
+	</select>
+	<select id="insGoogleMember" resultType="icy.aog.beans.AuthBean">
+		INSERT INTO MM(MM_ID, MM_STCODE, MM_PW) VALUES('google'||#{MId},'A',#{MPw})
+	</select>
+	<select id="insGoogleFamily" resultType="icy.aog.beans.AuthBean">
+		INSERT INTO FA(FA_JUMIN, FA_MMID, FA_NAME, FA_PHONE, FA_ADDR, FA_STCODE)
+		VALUES('990101'||FA_JUMIN_SEQ.NEXTVAL,'google'||#{MId},#{MName},'-','-','M')
+	</select>
+</mapper>

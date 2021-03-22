@@ -1,0 +1,407 @@
+
+ body {
+	width: 400px;	
+	height : 800px;
+  font-family: "Open Sans", sans-serif;
+  display: flex;
+  flex-direction: column;
+  margin: 10px;
+  cursor: pointer;
+}
+#box{
+	    width: 340px;
+    height: 680px;
+    /* background-color: RGB(218,227,243); */
+    margin: 8px;
+    border: 7px solid #5F73C2;
+}
+
+.select{
+	width: 3.91cm;
+    height: 1cm;
+    font-size: 16pt;
+    font-weight: bold;
+    text-align: center;
+    background-color: RGB(68,114,196);
+    margin: 8px;
+    margin-bottom: 150px;
+    position: relative;
+    top: 126px;
+    left: 2%;
+    float: left;
+}
+
+
+.btn{
+    width: 2.4cm;
+    height: 0.65cm;
+    background-color: #C0CDEF;
+    top: -160px;
+    left: 230px;
+    margin: 1px 6px;
+    line-height: 0.65cm;
+    border: none;
+    border-radius: 7px;
+}
+
+.res{
+   display: inline-flex;
+    position: relative;
+    left: -80px;
+    top: -27px;
+}
+select{
+	width: 4cm;
+    height: 0.91cm;
+    background-color: RGB(68,114,196);
+    position: relative;
+    top: 118px;
+    font-size: 16pt;
+    color: darkgrey;
+    line-height: 0.91cm;
+    align-items: center;
+}
+
+.submit{
+	width: 2cm;
+    height: 2cm;
+    background-color: RGB(68,114,196);
+    font-size: 16pt;
+    color: darkgrey;
+    position: relative;
+    top: 110px;
+    left: 234px;
+    float: left;
+    text-align: center;
+    margin: 11px;
+    line-height: 2cm;
+}
+.part{
+display: inline;
+    background: white;
+    font-weight: 100;
+    font-size: 9pt;
+    width: 2.42cm;
+    height: 0.5cm;
+    border: 1px solid black;
+    border-radius: 8px;
+    margin: 5px;
+    padding: 0px 16px;
+}
+.partform{
+	position: relative;
+    top: 86px;
+    left: 2px;
+}
+.hp-reserve{
+	    height: 128px;
+    border: 1px solid #A4ADED;
+    border-radius: 12px;
+    padding: 20px;
+    margin-bottom: 59px;
+}
+.reserve{
+	color: white;
+    width: 3.9cm;
+    height: 0.95cm;
+    position: relative;
+    top: 93px;
+    left: 96px;
+    background-color: #6182D6;
+    margin: 0px 17px 14px 0px;
+    font-size: 15pt;
+    text-align: center;
+    line-height: 0.95cm;
+  }
+.span-search{
+	    position: relative;
+    top: 11px;
+    left: 17px;
+}
+.span-search input[type="text"]{
+	    width: 7.82cm;
+    height: 1.11cm;
+    border: 3pt solid #455E9D;
+}
+#SEARCH img{
+	    width: 0.66cm;
+    height: 0.71cm;
+    position: relative;
+    right: 36px;
+    top: 8px;
+}
+#little img{
+	    position: relative;
+    left: 10px;
+    width: 1.9cm;
+    height: 2.1cm;
+    
+    /*추가*/
+    z-index : 1;
+}
+#BOOKMARK img{
+	    width: 0.7cm;
+    height: 0.7cm;
+    position: relative;
+    left: 251px;
+    bottom: 11px;
+    padding: 0px;
+}
+.hpname{
+    height: 0px;
+    font-size: 18pt;
+    color: #2C4582;
+    font-weight: bold;
+    position: relative;
+    bottom: 81px;
+    padding: 0px;
+     font-family: 'Noto Sans KR', sans-serif;
+}
+.hppart{
+	     bottom: 43px;
+    font-size: 11pt;
+    color: #A6A6A6;
+    position: relative;
+    left: -2px;
+    padding: 0px;
+    height: 0px;
+}
+.hptime{
+	font-size: 10pt;
+	/* color: #A6A6A6; */
+	position: relative;
+	top: -22px;
+	left: -4px;
+	height: 0px;
+	font-weight: 900;
+}
+
+.ltime{
+	height: 0px;
+    font-size: 10pt;
+    /* color: #A6A6A6; */
+    position: relative;
+    top: -5px;
+    left: 67px;
+    font-weight: 900;
+	/* height: 0px; */
+}
+.span-hplist{
+    background-color: #FFFFFF;
+    position: relative;
+    top: 13px;
+    padding: 18px 5px;
+    margin: 7px 5px;
+    height: 20px;
+}
+/*수정*/
+
+.bk_list{
+    border: 5px solid #A4ADED;
+    position: relative;
+    top: 9px;
+    left: 10px;
+    height: 88px;
+    line-height: 65px;
+    padding: 14px;
+    border-radius: 13px;
+    z-index: 1;
+    padding: 13px;
+    margin-bottom: 21px;
+    width: 7.5cm;
+}
+#HDETAIL{
+	
+    position: relative;
+    border: none;
+    padding: 0px 15px;
+    border-radius: 7px;
+    left: 228px;
+    top: -6px;
+    margin: 0px;
+    font-size: 12px;
+    z-index: 1;
+    background-color: #f0f8ff00;
+
+}
+.hpimage img{
+	    width: 8.64cm;
+    height: 4.8cm;
+    position: relative;
+    left: 8px;
+}
+.btn {
+       width: 2.4cm;
+    height: 0.65cm;
+    background-color: #C0CDEF;
+    position: relative;
+    bottom: 153px;
+    right: 41px;
+    margin: 1px 6px;
+    line-height: 0.65cm;
+    border: none;
+    border-radius: 7px;
+}
+
+.info{
+	    width: 2.53cm;
+    height: 1.03cm;
+    background-color: #6182D6;
+    padding: 0px 4px;
+    margin: 6px 2px;
+    line-height: 1.03cm;
+    text-align: center;
+    font-weight: bold;
+    position: relative;
+    left: 20px;
+}
+.resinfo{
+	width: 5.13cm;
+	height: 1.03cm;
+	background-color: #ECEBEA;
+	 padding: 0px 4px;
+   margin : 6px 24px;
+    line-height: 1.03cm;
+}
+.hpinfo{
+	    position: relative;
+    bottom: 5px;
+    left: -7px;
+    display: inline-flex;
+}
+#doctor{
+	    width: 4cm;
+    height: 0.7cm;
+    line-height: 1.02cm;
+    text-align: center;
+    font-weight: bold;
+    position: relative;
+    top: -14px;
+    left: 15px;
+    font-size: 13pt;
+    color: black;
+    line-height: 0.91cm;
+    align-items: center;
+}
+#doctor-select{
+    background-color: white;
+}
+#FINISH{
+	    width: 2cm;
+    height: 1cm;
+    position: relative;
+    top: 123px;
+    left: 102px;
+     background-color: #6182D6;
+}
+.finish_info{
+	font-weight: bold;
+    text-align: center;
+    position: relative;
+    left: 39px;
+    top: -28px;
+    font-size: 14pt;
+}
+.finish_title{
+	    text-align: center;
+    position: relative;
+    top: 0px;
+    color: #203A7B;
+    font-weight: bold;
+    font-size: 28pt;
+}
+/*수정*/
+.res_btn{
+        position: relative;
+    left: -14px;
+    top: 12px;
+    /* font-size: 11pt; */
+    line-height: 0.59cm;
+    /* width: 8cm; */
+    height: 1cm;
+    font-size: 23px;
+    background-color: #5F73C2;
+    color: #F1F1F1;
+    margin: 4.5px;
+    font-family: 'Do Hyeon', sans-serif;
+    border: none;
+    border-radius: 8px;
+    width: 8cm;
+}
+
+
+.mypage-info{
+	    width: 3.68cm;
+    height: 1.1cm;
+    background-color: #6182D6;
+    padding: 0px 4px;
+    margin: 6px 9px;
+    line-height: 1.03cm;
+    text-align: center;
+    font-weight: bold;
+    position: relative;
+    left: 6px;
+}
+/*임시*/
+.check{
+  }
+.check_info{
+  text-align: center;
+    position: relative;
+    left: -1px;
+    top: -7px;
+    font-size: 14pt;
+}
+.check_content{
+  text-align: center;
+    position: relative;
+    left: -1px;
+    top: -7px;
+    font-size: 14pt;
+}
+.reserve-title{
+	    width: 8.15cm;
+    height: 0.5cm;
+    position: relative;
+    left: 5px;
+    margin: 9px 5px 30px;
+}
+
+.my img{
+	    width: 88px;
+}
+#RESCHECK img{
+	position: relative;
+    top: 211px;
+    left: 7px;
+}
+#BOOKMARKFORM img{
+     position: relative;
+    left: 131px;
+    bottom: -41px;
+    padding: 0px;
+}
+#MYPAGEFORM img{
+    position: relative;
+    bottom: 108px;
+    left: 244px;
+
+}
+#main_logo img{
+	width: 5cm;
+    height: 5cm;
+    position: relative;
+    left: -38px;
+    top: 29px;
+}
+.hpReview_title{
+	    font-family: 'Do Hyeon', sans-serif;
+    font-size: 23pt;
+    text-align: center;
+    color: rgb(32, 58, 123);
+}
+#ORDER{
+	position: relative;
+    top: 149px;
+    left: 30px;
+}

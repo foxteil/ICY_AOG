@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+ 
+ <mapper namespace="icy.aog.mapper.ReservationIF">
+ <select id = "getSearchInfo" resultType="icy.aog.beans.ReservationBean">
+  <![CDATA[
+  SELECT * FROM RINFO WHERE GUNAME=#{guName}
+      ]]>
+ </select>
+<select id="selReserve" resultType="icy.aog.beans.ReservationBean">
+		 SELECT HP_NAME AS HNAME ,
+                   to_char(RE_DRSDATE,'YYYY.MM.DD') AS DRDATE,
+                   RE_CODE AS RECODE,
+                   FA_NAME AS FNAME 
+                   FROM RE INNER JOIN HP ON RE_DRSHPCODE = HP_CODE
+                            INNER JOIN FA ON RE_FAJUMIN = FA_JUMIN
+                            WHERE HP_CODE=#{hpCode} AND RE_DRSDRCODE=#{drCode} AND FA_MMID=#{id} AND RE_DRSPACODE=#{paCode} AND FA_JUMIN=#{mJumin} 
+                            
+                         
+                  
+</select>
+			<insert id="insReserve"  >
+
+                INSERT INTO RE( RE_STCODE, RE_FAJUMIN,RE_FAMMID,
+                    RE_DRSDATE,RE_DRSTMCODE,
+                    RE_DRSDRCODE, RE_DRSPACODE, 
+                    RE_DRSHPCODE,RE_CODE)
+    VALUES ('R',#{mJumin},
+            #{Id},TO_DATE(#{drsDate},'DD'),#{tmCode},#{drCode},
+             #{paCode},#{hpCode},
+            TO_CHAR(SYSDATE,'YYYYMMDDHH24MI')||#{hpCode}||(EX_SEQ.NEXTVAL))
+			
+</insert>
+
+	<select id = "selhpInfo" resultType= "icy.aog.beans.ReservationBean" >
+    SELECT 
+            HS.HS_HPIMG AS HPIMG,
+            HP.HP_NAME AS HPNAME,
+            ICY.SPART.PANAME AS PANAME,
+            HP.HP_PHONE AS HPPHONE,
+            HP.HP_ADDR AS ADDR,    
+            HP.HP_CODE AS HPCODE      
+            FROM HP INNER JOIN HS ON HP_CODE = HS_HPCODE
+                    INNER JOIN DR ON HP_CODE = DR_HPCODE
+                    INNER JOIN ICY.SPART ON ICY.SPART.HPCODE = HP.HP_CODE     
+                     WHERE HP_CODE=#{hpCode}
+                    GROUP BY HS.HS_HPIMG, HP.HP_NAME,HP.HP_PHONE ,HP.HP_ADDR,ICY.SPART.PANAME,HP.HP_CODE
+</select>
+
+   <select id = "gSearchInfo" resultType="icy.aog.beans.ReservationBean">
+   SELECT GU_NAME AS GUNAME FROM
+          GU INNER JOIN SI ON GU_SINUM = SI_NUMBER 
+          WHERE GU_SINUM IN (SELECT SI_NUMBER FROM SI WHERE SI_NAME=#{siNumber}) 
+  
+   </select>
+   
+
+   <select id="resformInfo" resultType="icy.aog.beans.ReservationBean">
+        SELECT HP.HP_NAME AS HPNAME,
+            PA.PA_NAME AS PANAME,
+             DR.DR_NAME AS DRNAME, 
+             PA.PA_CODE AS PACODE,
+            to_char(DRS.DRS_DATE,'YYYYMMDD') AS DRSDATE
+            FROM DR INNER JOIN HP ON DR.DR_HPCODE = HP.HP_CODE
+                    INNER JOIN PA ON DR.DR_PACODE = PA.PA_CODE
+                    INNER JOIN DRS ON DR.DR_CODE = DRS.DRS_DRCODE
+                    INNER JOIN TM ON DRS.DRS_TMCODE = TM.TM_CODE
+                  WHERE HP.HP_CODE=#{hpCode} 
+                  GROUP BY to_char(DRS.DRS_DATE,'YYYYMMDD'),
+                  HP_NAME,PA_NAME,DR_NAME,PA_CODE
+                  ORDER BY  to_char(DRS.DRS_DATE,'YYYYMMDD')
+   
+    </select>
+    <select id="getFamily" resultType="icy.aog.beans.ReservationBean">
+       SELECT
+        FA_NAME AS NAME,
+        FA_JUMIN AS MJUMIN
+        FROM FA WHERE FA_MMID=#{Id}
+    </select>
+    
+    <select id="getDrsInfo" resultType="icy.aog.beans.ReservationBean">
+      SELECT
+       DISTINCT TO_CHAR(DRS_DATE,'DD') AS DAY
+       FROM DRS WHERE DRS_DRHPCODE = #{hpCode} 
+    </select>
+    <select id="getDrsTime" resultType="icy.aog.beans.ReservationBean">
+    SELECT to_char(DRS.DRS_DATE,'DD') AS DRSDATE,
+            TO_CHAR(TM.TM_START,'HH24:MI') AS DRSTIME,
+            DR_CODE AS DRCODE,
+            DRS.DRS_AVAIL || '/' || DRS.DRS_LIMIT AS personnel
+            FROM DR INNER JOIN HP ON DR.DR_HPCODE = HP.HP_CODE
+                    INNER JOIN DRS ON DR.DR_CODE = DRS.DRS_DRCODE
+                    INNER JOIN TM ON DRS.DRS_TMCODE = TM.TM_CODE
+                  WHERE HP.HP_CODE=#{hpCode} AND TO_CHAR(DRS.DRS_DATE,'MMDD')>=TO_CHAR(SYSDATE,'MMDD')
+                  GROUP BY to_char(DRS.DRS_DATE,'DD'),DR_CODE,
+                  HP_NAME,DR_NAME,DRS_TMCODE,
+                  TO_CHAR(TM.TM_START,'HH24:MI'),DRS.DRS_AVAIL || '/' || DRS.DRS_LIMIT 
+                  ORDER BY DRSTIME ASC
+    
+    </select>
+    
+    <select id="getPostInfo" resultType="icy.aog.beans.ReservationBean">
+      SELECT PO_POST AS POST FROM PO WHERE PO_GU=#{guName}
+    </select>
+   <select id="getbookmark" resultType="icy.aog.beans.ReservationBean">
+   		SELECT HP_NAME AS HPNAME,
+        HP_PHONE AS HPPHONE,
+        HP_CODE AS HPCODE
+        FROM HP INNER JOIN BK ON HP_CODE = BK_HPCODE 
+              WHERE BK_MMID=#{Id}
+   </select>
+   <select id="getDrPAInfo" resultType="icy.aog.beans.ReservationBean">
+   SELECT DRNAME,PANAME FROM ICY.DRINFO WHERE HPCODE=#{hpCode}
+   </select>
+    <select id="getTimecheck" resultType="icy.aog.beans.ReservationBean">
+   SELECT TO_CHAR(TM.TM_START,'HH24:MI') AS DRSTIME,
+                        DRS.DRS_AVAIL || '/' || DRS.DRS_LIMIT AS AL,
+                    TM.TM_CODE AS TMCODE,
+                    DRS_DATE AS DRSDATE
+                  FROM DR INNER JOIN DRS ON DR_HPCODE = DRS_DRHPCODE 
+                  AND DR_CODE =DRS_DRCODE AND DR_PACODE= DRS_DRPACODE
+                            INNER JOIN TM ON DRS_TMCODE = TM_CODE
+                            WHERE DR_HPCODE =#{hpCode} AND TO_CHAR(DRS.DRS_DATE,'DD')=#{drsDate}
+                            ORDER BY DRSTIME ASC
+    </select>
+ </mapper>
+ 
+ 

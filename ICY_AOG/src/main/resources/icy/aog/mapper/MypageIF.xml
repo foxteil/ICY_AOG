@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="icy.aog.mapper.MypageIF">
+<select id="isMInfo" resultType="icy.aog.beans.ReservationBean">
+	SELECT FA_MMID AS ID, FA_NAME AS NAME ,FA_PHONE AS PHONE ,FA_ADDR  AS ADDR FROM FA WHERE FA_MMID=#{Id} AND FA_STCODE='M'
+</select>
+
+<select id="isFaInfo" resultType="icy.aog.beans.ReservationBean">
+SELECT  FA_MMID AS ID, FA_JUMIN AS JUMIN, FA_NAME AS NAME, FA_PHONE AS PHONE, FA_ADDR AS ADDR,FA_STCODE AS STCODE 
+FROM FA WHERE FA_MMID=#{Id} ORDER BY DECODE(FA_STCODE,'M',1,2)
+	</select>
+	
+	<select id="countFaInfo" resultType="Int">
+	SELECT COUNT(*) FROM FA WHERE FA_MMID=#{Id} AND FA_NAME=#{Name} AND FA_PHONE=#{Phone} AND FA_JUMIN=#{Jumin}
+	</select>
+	
+	<select id="isPassword" resultType="icy.aog.beans.ReservationBean">
+	SELECT MM_ID AS ID ,MM_PW AS PASSWORD FROM MM WHERE MM_ID=#{Id}
+	</select>
+	<select id="upMember" resultType="icy.aog.beans.ReservationBean">
+	UPDATE FA SET FA_NAME =#{Name},FA_PHONE = #{Phone},FA_ADDR =#{Addr} WHERE FA_MMID=#{Id} AND FA_STCODE='M'
+	</select>
+	<select id="adUpFamily" resultType="icy.aog.beans.ReservationBean">
+	UPDATE FA SET FA_ADDR=(SELECT FA_ADDR AS ADDR FROM FA WHERE FA_MMID=#{Id} AND FA_STCODE='M') WHERE FA_MMID=#{Id} AND FA_STCODE='F'
+	</select>
+	<select id="upFamily" resultType="icy.aog.beans.ReservationBean">
+	INSERT INTO FA(FA_MMID,FA_JUMIN,FA_NAME,FA_PHONE,FA_ADDR,FA_STCODE) 
+	VALUES(#{Id},( SELECT #{Jumin}||DBMS_RANDOM.STRING('U',1)||
+	TRUNC(DBMS_RANDOM.VALUE(10,20),0) STR FROM DUAL )||ICY.JM_SEQ.NEXTVAL,#{Name},#{Phone}
+	,(SELECT FA_ADDR AS ADDR FROM FA WHERE FA_MMID=#{Id} AND FA_STCODE='M'),'F')
+	</select>
+	<select id="delFamily" resultType="icy.aog.beans.ReservationBean">
+	DELETE FROM FA WHERE FA_MMID=#{Id} AND FA_JUMIN=#{Jumin}
+	</select>
+	
+	<select id="pwSelect" resultType="icy.aog.beans.ReservationBean">
+	SELECT MM_ID AS ID, MM_PW AS PASSWORD FROM MM WHERE MM_ID=#{Id}
+	</select>
+	
+	<select id="selBookmark" resultType="icy.aog.beans.ReservationBean">
+	SELECT MM_ID AS ID, MM_PW AS PASSWORD FROM MM WHERE MM_ID=#{Id}
+	</select>
+	
+	<select id="countFa" resultType="int">
+	SELECT COUNT(*) FROM FA WHERE FA_MMID=#{Id}
+	</select>
+	
+	<select id="updFamily" resultType="icy.aog.beans.ReservationBean">
+	UPDATE FA SET FA_NAME =#{Name},FA_PHONE = #{Phone} WHERE FA_MMID=#{Id} AND FA_STCODE='F'
+	 AND FA_JUMIN=#{Jumin}
+	</select>
+	
+	<select id="isBkList" resultType="icy.aog.beans.ReservationBean">
+	SELECT*FROM ICY.BKLIST WHERE ID=#{Id}
+	</select>	
+	<!-- 추가  -->
+	<select id="isTdList" resultType="icy.aog.beans.ReservationBean">
+	SELECT*FROM ICY.TDLIST
+	</select>	
+	<!-- 추가  -->
+	<select id="islTime" resultType="icy.aog.beans.ReservationBean">
+	SELECT * FROM ICY.LTIME WHERE DRSDATE=TO_CHAR(SYSDATE,'MM/DD')
+	</select>
+	
+<select id="isNull" resultType="icy.aog.beans.ReservationBean"> 	
+SELECT DISTINCT
+HL.HL_HPNAME  AS HPNAME,
+HL.HL_HPADDR AS HPADDR,
+HL.HL_HPPHONE AS HPPHONE,
+ICY.SPART.PANAME AS PANAME,
+BK.BK_MMID AS BKLIST,
+HP.HP_CODE AS HPCODE
+FROM HP INNER JOIN DR ON HP.HP_CODE = DR.DR_HPCODE
+        INNER JOIN PA ON PA.PA_CODE = DR.DR_PACODE
+        INNER JOIN ICY.SPART ON ICY.SPART.HPCODE = HP.HP_CODE
+        FULL OUTER JOIN HL ON HP.HP_ADDR = HL.HL_HPADDR
+        FULL OUTER JOIN BK ON HP.HP_CODE = BK.BK_HPCODE
+        WHERE HL.HL_HPADDR LIKE '%구월%'
+        
+</select>
+	<select id="isPart" resultType="icy.aog.beans.ReservationBean">
+	SELECT HPCODE
+	,regexp_replace (LISTAGG(CAST(PANAME AS VARCHAR(50)),',') 
+	WITHIN GROUP(ORDER BY PANAME),'([^,]+)(,\1)+', '\1') PANAME
+	FROM ICY.PAINFO GROUP BY HPCODE
+	</select>
+	
+	<select id="countBkt" resultType="int">
+	SELECT COUNT(*) FROM BK WHERE BK_MMID=#{Id}
+	</select>
+	
+	<select id="countBk" resultType="int">
+	SELECT COUNT(*) FROM BK WHERE BK_MMID=#{Id} AND BK_HPCODE=#{hpCode}
+	</select>
+	
+	<select id="delBk" resultType="icy.aog.beans.ReservationBean">
+	DELETE FROM BK WHERE BK_MMID=#{Id} AND BK_HPCODE=#{hpCode}
+	</select>
+	
+	<select id="insBk" resultType="icy.aog.beans.ReservationBean">
+	INSERT INTO BK(BK_MMID,BK_HPCODE) VALUES(#{Id},#{hpCode});
+	</select>
+	
+	<select id="reInfo" resultType="icy.aog.beans.ReservationBean">
+	SELECT*FROM ICY.REINFO WHERE ID=#{Id}
+	</select>
+	
+	<select id="rvInfo" resultType="icy.aog.beans.ReservationBean">
+	 SELECT*FROM ICY.RVINFO WHERE HPCODE=#{hpCode}
+	</select>
+	
+	<select id="myReview" resultType="icy.aog.beans.ReservationBean">
+	 SELECT*FROM ICY.RVINFO WHERE ID = #{Id} <!-- 추가 -->
+	</select>
+	
+	<select id="insReview" resultType="icy.aog.beans.ReservationBean">
+	INSERT INTO RV(RV_RESTCODE,RV_REFAJUMIN,RV_REFAMMID,RV_REDRSDATE,RV_REDRSTMCODE
+	,RV_REDRSDRCODE,RV_REDRSPACODE,RV_REDRSHPCODE,RV_GRADE,RV_COMMENT,RV_DATE)
+	VALUES('G'
+	,(SELECT RE_FAJUMIN FROM RE WHERE RE_CODE=#{reCode})
+	,(SELECT RE_FAMMID FROM RE WHERE RE_CODE=#{reCode})
+	,(SELECT RE_DRSDATE FROM RE WHERE RE_CODE=#{reCode})
+	,(SELECT RE_DRSTMCODE FROM RE WHERE RE_CODE=#{reCode})
+	,(SELECT RE_DRSDRCODE FROM RE WHERE RE_CODE=#{reCode})
+	,(SELECT RE_DRSPACODE FROM RE WHERE RE_CODE=#{reCode})
+	,(SELECT RE_DRSHPCODE FROM RE WHERE RE_CODE=#{reCode})
+	,#{grade},#{rComment},SYSDATE)
+	</select>
+	
+	<select id="infoReview" resultType="icy.aog.beans.ReservationBean">
+	 SELECT*FROM ICY.REINFO WHERE ID=#{Id} AND RECODE=#{reCode}
+	</select>
+	<select id="updStCode" resultType="icy.aog.beans.ReservationBean">
+	UPDATE RE SET RE_STCODE='G' WHERE RE_CODE=#{reCode}
+	</select>
+	
+</mapper>
