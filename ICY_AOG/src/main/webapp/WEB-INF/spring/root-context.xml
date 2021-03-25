@@ -16,7 +16,7 @@
 	
 	<!-- DB연결 정보 -->
 	
-	<bean id="SAJO" class="com.zaxxer.hikari.HikariConfig">  <!-- HikariConfig BSBS = new HikariConfig() -->
+	<bean id="FOX" class="com.zaxxer.hikari.HikariConfig">  <!-- HikariConfig BSBS = new HikariConfig() -->
 		<property name="driverClassName" value="oracle.jdbc.driver.OracleDriver"></property>
 		<property name="jdbcUrl" value="jdbc:oracle:thin:@db.icy.hoonzzang.com:7021:xe"></property>
 		<property name="username" value="FOX"></property>
@@ -27,7 +27,7 @@
 	
 	<bean id="dbsource" class="com.zaxxer.hikari.HikariDataSource" destroy-method="close">
 		
-		<constructor-arg ref="SAJO"/>
+		<constructor-arg ref="FOX"/>
 		
 	</bean>
 	
@@ -43,6 +43,8 @@
    <bean id="tran" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
    		<property name="dataSource" ref="dbsource"></property>
    </bean>
+   
+     <bean id="passwordEncoder" class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder"></bean>
    
    <mybatis-spring:scan base-package="icy/aog/mapper"/>
 		

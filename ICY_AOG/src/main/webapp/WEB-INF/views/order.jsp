@@ -9,7 +9,7 @@
 <link rel="icon" type="/resources/img/png" href="/resources/img/gtg.png">
 <title>예약리스트</title>
 </head>
-<body onLoad="init()" >
+<body onLoad=init()>
   <div id="box">
     <a id="little">
       <img src="/resources/img/gtg_main.png">
@@ -20,84 +20,146 @@
 		  <img src="/resources/img/search.png">
 		</a>
 	</span>
-	<div id=orderList>
+    
+	<div id="orderList" onclick="order(this)"></div>
 	<div class="span-hplist" >
-		<span id="RESFORM" onclick="order(this)">
-			<span class="hpname" style="position:relative; left:12px;">인천일보의원</span>
-			<span class="hppart" style="position: relative;left: 93px;">이비인후과</span>
-			</span>
-	<a onclick="doDisplay()" style="    position: relative; top: 21px; left: 22px; font-size: 12px;">>>상세보기 </a>
-		<div id="current" style="display:none">
-			<span class="hptime"> <br>평일   09:00 - 21:00 | 토요일 09:00 - 17:00|
-			<br>일요일 09:00 - 16:00 | 공휴일 09:00 - 16:00
-		</span>
+
+		<span id="RESFORM"  class="span_resform"></span>
+		<div id="current" >
+		
 		<button id="HDETAIL" onclick="order(this)">자세히</button>
 	</div>
 	</div>
 	</div>
 
-  </div>
+  
   
 </body>
 
 <script type="text/javascript">
-alert("${hpInfo}");
+
+var idInfo = "${idInfo}";
 	function order(obj) {
 		var form = document.createElement("form");
-		form.action = obj.id + "?word=" + obj.value;
+		form.action = obj.id;
 		form.method = "post";
 		document.body.appendChild(form);
 		form.submit();
-		
-		
-		
+			
 	}
 	
+	
+
+	let detail ;
+	let bk;
 	function init(){
-		let resform =document.getElementById("RESFORM");
-		let jsonhp= JSON.parse("${hpInfo}");
+		
+		
+		let order =document.getElementById("RESFORM");
+		let jsonhp= JSON.parse('${hpInfo}');
+		let book= JSON.parse('${bkInfo}');
+		 let hp = document.createElement('div');
+		
+		for(j=0;j<book.length;j++){
+			let hpName= document.createElement('div');
+			hpName.innerHTML= book[j].hpName;
+			hpName.style.position="relative";
+			hpName.style.left="12px";
+			hpName.className = "book";
+			order.appendChild(hpName);
 			
+	
+			let button = document.createElement('button');
+			if(book[j].hpName !=null){		
+			button.innerHTML="자세히";
+			
+			bk = document.createElement('div');
+			
+			bk.value = book[j].hpCode;
+			console.log(book[j].hpCode);
+			order.appendChild(bk);
+			let val = bk.value;
+			
+			button.onclick= function() {bkdetail(val);};
+			
+			}else{
+				button.style.display="none";
+			}order.appendChild(button);
+
+		}
 		
-		let hName = document.createElement('Div');		
-		hName.textContent = jsonhp[0].hpName;
-		hName.classname = "jsonhp";
-		resform.appendChild(hName);
 		
-		let hPart = document.createElement('div');
-		hPart.textContent = jsonhp[0].paName;
-		hPart.clessname = "jsonhp";
-		resform.appendChild(hPart);
+		
+		
+		
+		for(i=0;i<jsonhp.length;i++){
+			
+   
+		
+		let hpName = document.createElement('div');		
+		hpName.innerHTML = jsonhp[i].hpName;
+		hpName.style.position="relative";
+		hpName.style.left="12px";
+		hpName.className = "jsonhp";
+		order.appendChild(hpName);
+		
 
 		
+		let hpPhone = document.createElement('div');
+		hpPhone.innerHTML = jsonhp[i].hpPhone;
+		order.appendChild(hpPhone);
 		
-	}
-	
-	
-	function doDisplay(){
-		var con = document.getElementById("current");
-		con.style.display="blcok";
-		if(con.style.display=='none'){
-			con.style.display=  'block';
+		let button = document.createElement('button');
+		if(jsonhp[i].hpCode !=null){		
+		button.textContent="자세히";
+		
+		detail = document.createElement('div');
+		
+		detail.value = jsonhp[i].hpCode;
+		order.appendChild(detail);
+		
+		let val = detail.value;
+		
+		button.onclick=function() {hdetail(val);};
+		
 		}else{
-			con.style.display = 'none';
+			button.style.display="none";
+		}order.appendChild(button);
 		}
 	}
 	
 	
 	function hdetail(opt){
-		
-		
-		
-		alert("${dInfo}");
+		alert(opt);
 		var form = document.createElement("form");
-		form.action = opt.id+"?hpCode=123456789A";
+		let Id= document.createElement("Input");
+		Id.name = "Id";
+		Id.value = idInfo;
+		Id.type = "text";
+		form.action ="HDETAIL?hpCode="+opt;
 		form.method = "post";
+		
+		form.appendChild(Id);
 		document.body.appendChild(form);
 		form.submit();
 		
 	}
-	
-
+	function bkdetail(opt){
+		
+		alert(opt);
+		var form = document.createElement("form");
+		let Id= document.createElement("Input");
+		Id.name = "Id";
+		Id.value = idInfo;
+		Id.type = "text";
+		form.action ="HDETAIL?hpCode="+opt;
+		form.method = "post";
+		form.appendChild(Id);
+		
+		
+		document.body.appendChild(form);
+		form.submit();
+	}
 
 	
 	

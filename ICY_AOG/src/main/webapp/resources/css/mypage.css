@@ -1,59 +1,140 @@
+
 @charset "UTF-8";
+@media ( max-width: 768px ) {
+}
+
+@media ( min-width: 768px ) {
+  B
+}
+@media ( min-width: 1024px ) {
+  C
+}
+
 /*기본*/
 body {
-	width: 400px;	
-	height : 800px;
+   width: 400px;   
+   height :  auto;
   font-family: "Open Sans", sans-serif;
   display: flex;
   flex-direction: column;
   margin: 10px;
-}
-#box{
-	width: 340px;
-	height : 680px;
-	background-color : RGB(218,227,243);
-	margin : 8px; 
-}
-#main_logo : img{
-	width: 5cm;
-	height : 5cm;
-}
-#box{
-	width: 340px;
-	height : 680px;
-	background-color : RGB(218,227,243);
-	margin : 8px; 
-}
-#little img{
-	    position: relative;
-    left: 10px;
-    width: 1.9cm;
-    height: 2.1cm;
+  cursor: pointer;
 }
 
-.span-hplist{
-    background-color: #F7F7F7;
+#main_logo : img{
+   width: 5cm;
+   height : 5cm;
+}
+#box{
+       height: 789px;
+    /* background-color: RGB(218,227,243); */
+    margin: 8px;
+    border: 7px solid #5F73C2;
     position: relative;
-    top: 13px;
+    left: 97px;
+}
+#little img{
+       position: relative;
+    left: 21px;
+    width: 1.9cm;
+    height: 2.1cm;
+    top: 21px;
+    z-index: 1;
+}
+
+
+
+.span-hplist{
+        background-color: #FFFFFF;
+    /* position: relative; */
+    /* top: 23px; */
+    /* width: 319px; */
     padding: 18px 5px;
     margin: 7px 5px;
+    height: 583px;
+    width: 8.5cm;
+    height: 16.74cm;
+    position: absolute;
+    left: 17px;
+    top: 18px;
 }
 
 .mypage-info{
-	    width: 3.68cm;
+       z-index: 1;
+    width: 3.68cm;
     height: 1.1cm;
-    background-color: #6182D6;
+    /* background-color: #7626E0; */
+    color: white;
+    font-family: 'Do Hyeon', sans-serif;
     padding: 0px 4px;
     margin: 6px 9px;
     line-height: 1.03cm;
     text-align: center;
-    font-weight: bold;
+    /* font-weight: bold; */
     position: relative;
     left: 6px;
+    bottom: -125px;
+    font-size: 17pt;
+    line-height: 1.1cm;
 }
 
+.mypage-info img {
+    width: 3.68cm;
+    height: 3.1cm;
+    position: relative;
+    left: 17px;
+}
+
+.mypage-btn{
+   width: 8cm;
+    height: 1cm;
+    font-size: 23px;
+    background-color: #5F73C2;
+    color: #F1F1F1;
+    margin: 4.5px;
+    font-family: 'Do Hyeon', sans-serif;
+    border: none;
+    border-radius: 8px;
+    position: relative;
+    left: -4px;
+}
+#insfamily{
+    width: 8cm;
+    height: 1cm;
+    font-size: 23px;
+    background-color: #5F73C2;
+    color: #F1F1F1;
+    margin: 4.5px;
+    font-family: 'Do Hyeon', sans-serif;
+    border: none;
+    border-radius: 8px;
+    position: relative;
+    left: -19px;
+        top: 56px;
+   }
+.btn-img{
+       width: 2.68cm;
+    height: 3.1cm;
+    margin: 5px 26px;
+    position: relative;
+    left: 6px;
+    top: 20px;
+}
+
+.mypage-list{
+   cursor: pointer;
+    width: 8cm;
+    height: 0.9cm;
+    border-radius: 15px;
+    text-align: center;
+    font-size: 17px;
+    border: none;
+    margin: 3px 0px;
+    font-family: 'Noto Sans KR', sans-serif;
+    border: 2px solid #A4ADED;
+}
 .mypage-upinfo{
-	width: 2.6cm;
+   width: 2.6cm;
     height: 1cm;
     background-color: #6182D6;
     padding: 0px 4px;
@@ -65,11 +146,77 @@ body {
     left: 6px;
     top: -7px;
     font-size: 11.5pt;
+    font-family: 'Do Hyeon', sans-serif;
     
 }
-
+#Member{
+   position: absolute;
+    top: 100px;
+    left: 26px;
+}
+#memberDiv{
+    position: relative;
+    left: -14px;
+}
+.family{
+   
+}
+.family-btn{
+    position: relative;
+    bottom: -48px;
+    left: 215px;
+    width: 1.2cm;
+    height: 0.7cm;
+    font-size: 13px;
+    background-color: rgb(231, 234, 241);
+    border-radius: 9px;
+    margin: 4px 9px;
+    display: block;
+}
+#family0{
+       position: relative;
+    background-color: #99A9E8;
+    top: 60px;
+    border: none;
+    width: 95%;
+    color: white;
+}
+.familyList{
+        cursor: pointer;
+    /* background-color: rgb(211, 219, 232); */
+    text-align: center;
+    font-size: 17px;
+    margin: -52px 14px 4px 1px;
+    width: 93%;
+    position: relative;
+    left: -11px;
+    top: 118px;
+    border-radius: 10px;
+    font-weight: 550;
+    border: 2.5px solid #99A9E8;
+}
+.divfamily{
+       position: relative;
+    top: 79px;
+}
+.upd{
+       cursor: pointer;
+    width: 8cm;
+    height: 1cm;
+    border-radius: 15px;
+    text-align: center;
+    font-size: 20px;
+    border: none;
+    margin: 3px 0px;
+    font-family: 'Noto Sans KR', sans-serif;
+    border: 2px solid #A4ADED;
+    background-color: white;
+    position: relative;
+    top: 8px;
+    left: 8px;
+}
 .info_title{
-	text-align: center;
+   text-align: center;
     position: relative;
     top: 0px;
     color: #203A7B;
@@ -77,7 +224,7 @@ body {
     font-size: 27pt;
 }
 .info_content{
-	font-weight: bold;
+   font-weight: bold;
     text-align: center;
     position: relative;
     left: 39px;
@@ -85,7 +232,7 @@ body {
     font-size: 14pt;
 }
 .info_content2{
-	font-weight: bold;
+   font-weight: bold;
     text-align: center;
     position: relative;
     left: 39px;
@@ -94,14 +241,14 @@ body {
     color : gray;
 }
 .info_line{
-	font-weight: bold;
+   font-weight: bold;
     text-align: center;
     position: relative;
     left: -32px;
     top: 0px;
 }
 .fainfo_content{
-	font-weight: bold;
+   font-weight: bold;
     text-align: center;
     position: relative;
     left: 39px;
@@ -109,7 +256,7 @@ body {
     font-size: 16pt;
 }
 .fainfo_content2{
-	font-weight: bold;
+   font-weight: bold;
     text-align: center;
     position: relative;
     left: 39px;
@@ -117,7 +264,7 @@ body {
     font-size: 16pt;
 }
 .fainfo_line{
-	    font-weight: bold;
+       font-weight: bold;
     text-align: center;
     position: relative;
     left: -29px;
@@ -126,7 +273,7 @@ body {
 }
 
 .fainfo_input{
-	font-weight: bold;
+   font-weight: bold;
     text-align: center;
     font-size: 16pt;
     width: 153px;
@@ -144,10 +291,239 @@ body {
     display: flex;
 }
 .confirm{
-	    position: relative;
+       position: relative;
     top: 37px;
     color: gray;
     font-size: 10pt;
     display: flex;
 }
+
+/* 내 정보*/
+*{
+    margin: 0;
+    padding: 0;
+}
+.rate {
+        float: left;
+    height: 46px;
+    padding: 0 10px;
+    /* text-align: center; */
+    position: relative;
+    left: 145px;
+}
+.rate:not(:checked) > input {
+    position:absolute;
+    top:-9999px;
+}
+.rate:not(:checked) > label {
+    float:right;
+    width:1em;
+    overflow:hidden;
+    white-space:nowrap;
+    cursor:pointer;
+    font-size:30px;
+    color:#ccc;
+}
+.rate:not(:checked) > label:before {
+    content: '♥';
+}
+.rate > input:checked ~ label {
+    color: #6182D6;    
+}
+.rate:not(:checked) > label:hover,
+.rate:not(:checked) > label:hover ~ label {
+    color:#6182D6;  
+}
+.rate > input:checked + label:hover,
+.rate > input:checked + label:hover ~ label,
+.rate > input:checked ~ label:hover,
+.rate > input:checked ~ label:hover ~ label,
+.rate > label:hover ~ input:checked ~ label {
+    color: #6182D6;
+}
+
+/*별정*/
+.point img{
+       height: 23px;
+    position: relative;
+    bottom: 0pt;
+    left: 163px;
+}
+
+.point a{
+   
+}
+.title-hpreview{
+    background-color: #F7F7F7;
+    position: relative;
+    top: 13px;
+    padding: 18px 5px;
+    margin: 7px 5px;
+    height: 15px;
+    line-height: 15px;
+    z-index: 1;
+}
+.rv_title{
+   position: relative;
+    top: 3px;
+    left: 53px;
+    font-size: 21pt;
+    color: #203A7B;
+    font-weight: bold;
+    padding: 0px;
+    margin: 0px;
+}
+.rv_content{
+       position: relative;
+       top: 39px;
+       left: 8px;
+       font-size: 12pt;
+       color: gray;
+       display: inline-flex;
+       border: 1px solid black;
+       border-radius: 6px;
+       width: 304px;
+       height: 29px;
+       z-index: 1;
+       line-height: 29px;
+       margin: 2px;
+}
+
+.rv_content1{
+       width: 85px;
+       padding: 0px;
+       margin: 0px -1px 0px 19px;
+       font-size: 11pt;
+}
+.rv_content2{
+       position: relative;
+       top: 0px;
+       left: 138px;
+}
+.rv_content3{
+   width: 192px;
+   margin: 0px -15px 0px 14px;
+   border-right: 1px solid black;
+}
+.point{
+       top: 73px;
+    left: 10px;
+    height: 3cm;
+    width: 7.5cm;
+    position: relative;
+    border: 1px solid black;
+    padding: 11px;
+    border-radius: 7px;
+}
+textarea{
+       margin: 5px;
+    height: 261px;
+    width: 285px;
+    padding: 11px;
+    resize: none;
+    border: 1px solid #A4ADED;
+    border-radius: 12px;
+}
+
+/*임시*/
+.check{
+  }
+.check_info{
+  text-align: center;
+    position: relative;
+    left: -1px;
+    top: -7px;
+    font-size: 14pt;
+}
+.check_content{
+  text-align: center;
+    position: relative;
+    left: -1px;
+    top: -7px;
+    font-size: 14pt;
+}
+.hpReview_mm{
+   position: relative;
+    top: 90px;
+}
+.hpReview_title{
+       font-family: 'Do Hyeon', sans-serif;
+    font-size: 23pt;
+    text-align: center;
+    color: rgb(32, 58, 123);
+}
+.hpReview_content{
+       font-size: 20px;
+    cursor: pointer;
+    width: 8cm;
+    height: 0.9cm;
+    border-radius: 12px;
+    text-align: center;
+    font-size: 20px;
+    border: none;
+    margin: 5px 0px;
+    font-family: 'Noto Sans KR', sans-serif;
+    border: 1px solid #A4ADED;
+    font-weight: 500;
+    position: relative;
+    left: 9px;
+}
+.submit{
+       position: relative;
+    left: 8px;
+    padding: 0px;
+    margin: 0px;
+}
+
+.submit input[type="button"]{
+   width: 8cm;
+    height: 1cm;
+    font-size: 23px;
+    background-color: #5F73C2;
+    color: #F1F1F1;
+    margin: 4.5px;
+    font-family: 'Do Hyeon', sans-serif;
+    border: none;
+    border-radius: 8px;
+    position: relative;
+    left: -4px;
+}
+.rv_review{
+       position: relative;
+    top: 107px;
+}
+.hptime{
     
+}
+
+.agree{
+       background-image: url(/resources/img/checkbox.png);
+    background-repeat: no-repeat;
+    background-size: cover;
+    display: inline-block;
+    border: 0;
+    width: 20px;
+    height: 20px;
+    vertical-align: top;
+    -webkit-appearance: none;
+    cursor: pointer;
+    outline: none;
+    position: relative;
+    top: 11px;
+    left: 8px;
+}
+
+.agree:checked{
+   width:10px;
+   background-image: url("/resources/img/checkbox-checked.png");
+    background-repeat: no-repeat;
+    background-size: cover;
+    display: inline-block;
+    border: 0;
+    width: 20px;
+    height: 20px;
+    vertical-align: top;
+    -webkit-appearance: none;
+    cursor: pointer;
+    outline: none;
+}

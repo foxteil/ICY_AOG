@@ -3,277 +3,225 @@
 <!DOCTYPE html>
 <html>
 <head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="/resources/css/reserve.css">
+	<link rel="icon" type="/resources/img/png" href="/resources/img/gtg.png">
+	<title>메인페이지</title>
+<script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>	
 
-<meta charset="UTF-8">
-<link rel="stylesheet" href="/resources/css/reserve.css">
-<link rel="icon" type="/resources/img/png" href="/resources/img/gtg.png">
-
-
-<script >
-
-function enterSearch() {
-	var evt_code = (window.netscape) ? ev.which : event.keyCode;
-	if (evt_code == 13) {    
-		event.keyCode = 0;  
-		getAddr(); 
-	} 
-}
-
-//특수문자, 특정문자열(sql예약어의 앞뒤공백포함) 제거
-function checkSearchedWord(obj){
- if(obj.value.length >0){
- //특수문자 제거
- var expText = /[%=><]/ ;
- if(expText.test(obj.value) == true){
- alert("특수문자를 입력 할수 없습니다.") ;
- obj.value = obj.value.split(expText).join(""); 
- return false;
- }
- 
- //특정문자열(sql예약어의 앞뒤공백포함) 제거
- var sqlArray = new Array(
- "OR", "SELECT", "INSERT", "DELETE", "UPDATE","CREATE", "DROP", "EXEC", "UNION","FETCH", "DECLARE", "TRUNCATE" );
- 
- var regex;
- for(var i=0; i<sqlArray.length; i++){
- regex = new RegExp( sqlArray[i] ,"gi") ;
- 
- if (regex.test(obj.value) ) {
- obj.value =obj.value.replace(regex, "");
- return false;
- }
- }
- }
- return true ;
-}
-function searchJuso(){
-	if(!checkSearchedWord(document.form.keyword)){
-		 return;
-	}
-}
-function setAddr(){
-	let road = document.getElementById("roadAddr").innerHTML;
-	let zipno = document.getElementById("zipno").innerHTML;
-	let siNm = document.getElementById("siNm").innerHTML;
-	let sggNm = document.getElementById("sggNm").innerHTML;
-	let emdNm = document.getElementById("emdNm").innerHTML;
-	let liNm = document.getElementById("liNm").innerHTML;
-	
-	
-	let f_name = $("#form_name").val();
-	let in_addr= $("#set_addr").val();
-	let in_detail = $("#set_detail").val();
-	let in_zip = $("#set_zipno").val();
-	
-	if($("#"+f_name+" #"+in_addr).length>0){
-		$("#"+f_name+" #"+in_addr).val(road);
-	}else{
-		$(".zipcode").each(function(){
-			if($(this).attr("data-focus") == 'Y'){
-				$(this).parent().find("input[name=\'"+in_addr+"']").val(road);
-			}
-		})
-	}
-	if($("#"+f_name+" #"+in_zip).length>0){
-		$("#"+f_name+" #"+in_zip).val(zipno);
-	}else{
-		$(".zipcode").each(function(){
-			if($(this).attr("data-focus") == 'Y'){
-				$(this).parent().find("input[name=\'"+in_zip+"']").val(zipno);
-			}
-		})
-	}
-	 jboxClose();	
-	 $(".zipcode").prevAll().find("#"+in_addr).focus();
-	
-}
-function getAddr(){
-	// 적용예 (api 호출 전에 검색어 체크) 	
-	if (!checkSearchedWord(document.form.keyword)) {
-		return ;
-	}
-
-	$.ajax({
-		 url :"/sample/getAddrApi.do" 
-		,type:"post"
-		,data:$("#form").serialize()
-		,dataType:"jsonp"
-		,crossDomain:true
-		,success:function(jsonStr){
-			$("#list").html("");
-			var errCode = jsonStr.results.common.errorCode;
-			var errDesc = jsonStr.results.common.errorMessage;
-			if(errCode != "0"){
-				alert(errCode+"="+errDesc);
-			}else{
-				if(jsonStr != null){
-					makeListJson(jsonStr);
-				}
-			}
-		}
-	    ,error: function(xhr,status, error){
-	    	alert("에러발생");
-	    }
-	});
-}
-function makeListJson(jsonStr){
-	var htmlStr = "";
-	htmlStr += "<table>";
-	$(jsonStr.results.juso).each(function(){
-		htmlStr += "<tr>";
-	htmlStr += "<td><a id='roadAddr' href='javascript:setAddr()'>"+this.roadAddr+"</a></td>";
-		htmlStr += "<td><a id='zipno' href='javascript:setAddr()'>"+this.zipNo+"</a></td>";
-		htmlStr +="<td><a id='siNm' href='javascript:setAddr()'>"+this.siNm+"</a></td>";
-		htmlStr += "<td><a id='sggNm' href='javascript:setAddr()'>"+this.sggNm+"</a></td>";
-		htmlStr += "<td><a id='emdNm' href='javascript:setAddr()'>"+this.emdNm+"</a></td>";
-		htmlStr += "<td><a id='liNm' href='javascript:setAddr()'>"+this.liNm+"</a></td>";
-		htmlStr += "</tr>";
-	});
-	$("#list").html(htmlStr);
-}
-
-</script>
-
-<title>메인페이지</title>
+<title>메인페이지</title>		
 </head>
-<body>
-	<div id="box">
+<body  onLoad=init()>
+	                                                                                                               
+	<br>
+	<br>			
+	<div>
 		<button class="btn" id="main" onclick="reserve(this)">로그아웃</button>
 		<a id="main_logo" href="start.jsp"> <img src="/resources/img/gtg_main.png"
-			style="width: 5cm; height: 5cm; position: relative; left: -8px; top: 80px;">
+			style="width: 5cm; height: 5cm; position: relative; left: -45px; ">
 		</a>
-	<form name="form" id="form" method="post">	 
- 		<input type="hidden" name="form_name" id="form_name" value="${form_name }"/> 
-		<input type="hidden" name="set_addr" id="set_addr" value="${set_addr }"/> 
-		<input type="hidden" name="set_detail" id="set_detail" value="${set_detail }"/> 
-		<input type="hidden" name="set_zipno" id="set_zipno" value="${set_zipno }"/> 
-		<input type="hidden" name="resultType"  value="json"/> 
 		
-		<input type="hidden" name="currentPage" id="currentPage" value="${currentPage }"/> 
-		<input type="hidden" name="countPerPage"  value="5"/> 
-		<input type="hidden" name="confmKey" id="confmKey" value="devU01TX0FVVEgyMDIxMDMxMDE4MjcwNDExMDg5ODA="/> 
-		
-		
-		
-	
-		<div class="search">
-			<div class="search_Key">
-				<label for="keyword">검색어 :</label>
-				<input type="text" id="keywordRoad" name="keyword" title="검색어" class="w250"  onkeydown="enterSearch();" ><br>
-			</div>
-			
-		<input type="button" onClick="getAddr();" value="주소검색하기"/>
-		</div>
-	
-	
-</form>
-
-	
-
-<!-- 		<div class="res">
-			<select class="reserve" id="LSEARCH" onChange="optionClick()">
-				<option selected="selected">지역선택 </option>
-				<option value="서울">서울</option>
-				<option value="인천">인천</option>
-				<option value="경기">경기</option>
-				<option value="강원">강원</option>
-				<option value="대전">대전</option>
-				<option value="충청북도">충북</option>
-				<option value="충청남도">충남</option>
-				<option value="세종">세종</option>
-				<option value="부산">부산</option>
-				<option value="울산">울산</option>
-				<option value="경상남도">경남</option>
-				<option value="경상북도">경북</option>
-				<option value="대구">대구</option>
-				<option value="광주">광주</option>
-				<option value ="전라남도">전남</option>
-				<option value="전주">전주</option>
-				<option value="전라북도">전북</option>
-				<option value="제주">제주</option>
-			</select>
-
-			<div class="reserve" id="GU" onChange="lguoption()"></div> --> 
-			
-	
-		<div class="partform">
-		<h5 class="part" id="PART" onclick="reserve(this)">이비인후과</h5>
-		<h5 class="part" onclick="reserve(this)">정형외과</h5>
-		<h5 class="part" onclick="reserve(this)">안  과</h5> <br/>
-		<h5 class="part" onclick="reserve(this)">통증의학과</h5>
-		<h5 class="part" onclick="reserve(this)">내  과</h5>
-		<h5 class="part" onclick="reserve(this)">치  과</h5>
-		<h5 class="part" onclick="reserve(this)">기  타</h5>
-		</div>
-		<h2 class="reserve" id="ORDER" onclick="reserve(this)">
+    	<select name="siName" id="si" style=" top: 50px;" onchange="guCheck(this)">
+           <option value="지역" class="doctor-select" >지	  역 </option>     
+        </select>       		
+		<select name="guName" id="gu" style=" top: 50px;" onchange= "optionClick(this)">
+           <option value="시군구" class="doctor-select" >시  군   구</option>
+         
+        </select>   
+		<h2 class="reserve" id="ORDER" onclick="reserve(this)" style="cursor : pointer">
 			예약하러가기
 		</h2>
-		</div>
-		
 		<div class="mypage">
-		<h2 class="my" id="RESCHECK" onclick="reserve(this)"> 
+		<h2 class="my" id="RESCHECK" onclick="rescheck(this)"> 
 			예약<br/>확인
 		</h2>
-		<h2 class="my" id="BOOKMARKFORM" onclick="reserve(this)">
+		<h2 class="my" id="BOOKMARKFORM" onclick="bookmarklist(this)">
 			관심<br/>병원
 		</h2>
-		<h2 class="my" id="MYPAGEFORM" onclick="reserve(this)">
+		<h2 class="my" id="MYPAGEFORM" onclick="mypage(this)">
 			MY
+		</h2>   
+		<h2 class="my" id="RDETAIL" onclick="rdetail()"> 
+			예약<br/>상세 (임시)
 		</h2>
 		</div>
 	</div>
+	
+
+
 </body>
 
 <script>
+ 
+var idInfo = "${idInfo}";
 
-function goSeachApi(){
 
-}
+
+function init(){
 	
-
-
-function optionClick(){
+ 
+	var LInfo = JSON.parse('${sInfo}'); 
 	
-	let a = document.getElementById("LSEARCH");
-	alert(a.value);
- let request = new XMLHttpRequest();
- request.onreadystatechange = function(){
-	 if(this.readyState == 4 && this.status == 200){
-		 let jsonData = decodeURIComponent(request.response);
+	if(LInfo[0].siName != null){
+		let selection = document.getElementById('si');
 		
-		 
-	  
-	 }
- };
- request.open("POST", "GU",true);
- request.setRequestHeader("Content-Type","application/x-www-form-urlencoded;charset=UTF-8");
-
- request.send("sCode=LSEARCH&Addr="+a.value);
-
-	
+	for(i=0;i<LInfo.length;i++){
+		let options = document.createElement('option');
 		
-}
-function lguoption(json){
-	let gu = document.getElementById("GU");
-	gu.style.display="none";
-	
-	
-
+		options.value = LInfo[i].siName;
+		options.innerHTML = LInfo[i].siName;
+		
+		selection.appendChild(options);
+		}
 	}
 	
 	
+}
+
+function guCheck(opt){
+	
+	
+    var objSel = document.getElementById("gu");
+    //alert(objSel.options[i].text +"//"+ objSel.options[i].value +"//"+ i);
+    for(i=objSel.length; i>=0; i--){
+      objSel.options[i]=null;
+    }
+	
+	let gInfo;
+	let sele= document. getElementById('si');
+	
+	let request = new XMLHttpRequest();
+	 request.onreadystatechange = function(){
+		 if(this.readyState == 4 && this.status == 200){
+			 let jsonData = decodeURIComponent(request.response);
+			 gInfo = JSON.parse(jsonData); 
+			
+			
+			 if(gInfo[0].guName != null){
+					let selection = document.getElementById('gu');
+					
+				for(i=0;i<gInfo.length;i++){
+					let options = document.createElement('option');
+					options.value = gInfo[i].guName;
+					options.innerHTML = gInfo[i].guName;
+					
+					selection.appendChild(options);
+					}
+				}
+		 }
+	 };
+	 request.open("POST", "GU",true);
+	 request.setRequestHeader("Content-Type","application/x-www-form-urlencoded;charset=UTF-8");
+	 request.send("sCode=GU&siNumber="+sele.value);
 	
 
+	
+	 
+	
+	
+}
+let local;
+let postnum;
+let GuName;
+function optionClick(opt){//구선택 
+	
+	
+	local = document.getElementById("gu");
+	let gu2 =local.value;
+	GuName=gu2;
+	
+	
+	let request = new XMLHttpRequest();
+	 request.onreadystatechange = function(){
+		 if(this.readyState == 4 && this.status == 200){
+			 let jsonData = decodeURIComponent(request.response);
+			postnum = JSON.parse(jsonData); 
+			 
+			 
+			 let poin = document.createElement("input");
+				poin.name = "post";
+				//poin.value=po[].value;
+				
+		 }
+	 };
 
-	function reserve(opt) {
-		
-		var form = document.createElement("form");
-		form.action = opt.id;
-		form.method = "post";
-		document.body.appendChild(form);
-		form.submit();
-	}
+	 request.open("POST", "GU2",true);
+	 request.setRequestHeader("Content-Type","application/x-www-form-urlencoded;charset=UTF-8");
+	 request.send("sCode=GU2&guName="+gu2);
+	
+}
+
+function reserve(obj) {//예약하러가기 눌럿을때 
+	
+
+	let order =document.getElementById("ORDER");
+	var form = document.createElement("form");	
+	let id = document.createElement("Input");
+	id.name = "Id";
+	id.value = idInfo;
+	id.type= "text";
+	
+	let gu = document.createElement("Input");
+	gu.name = "guName";
+	gu.value = GuName;
+	gu.type = "text";
 
 	
+	form.action = "ORDER";
+	form.method = "post";
+	
+	form.appendChild(id);
+	form.appendChild(gu);
+	document.body.appendChild(form);
+	form.submit();  
+
+	
+}
+
+function rescheck(obj) {
+	var form = document.createElement("form");
+	
+	let id = document.createElement("Input");
+	id.name = "Id";
+	id.value = idInfo;
+	form.appendChild(id);
+	
+	form.action = "RESCHECK";
+	form.method = "post";
+
+	document.body.appendChild(form);
+	form.submit();
+}
+
+function bookmarklist() {
+	var form = document.createElement("form");
+	let id = document.createElement("Input");
+	id.name = "Id";
+	id.value = idInfo;
+	form.appendChild(id);
+	
+	form.action = "BOOKMARKFORM";
+	form.method = "post";
+	document.body.appendChild(form);
+	form.submit();
+	
+}
+
+function mypage(obj) {
+	var form = document.createElement("form");
+	let id = document.createElement("Input");
+	id.name = "Id";
+	id.value = idInfo;
+	form.appendChild(id);
+	
+	form.action = "MYPAGEFORM";
+	form.method = "post";
+	document.body.appendChild(form);
+	form.submit();
+
+}
+
 </script>
 </html>

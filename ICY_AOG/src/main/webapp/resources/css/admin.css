@@ -1,49 +1,309 @@
 @charset "UTF-8";
 body {
-	width: 400px;	
-	height : 800px;
+   width: 400px;   
+   height : 800px;
   font-family: "Open Sans", sans-serif;
   display: flex;
   flex-direction: column;
   margin: 10px;
+  cursor: pointer;
+}
+#main_logo : img{
+   width: 5cm;
+   height : 5cm;
+}
+#box{
+    width: 340px;
+    height: auto;
+    /* background-color: RGB(218,227,243); */
+    margin: 8px;
+    border: 7px solid #5F73C2;
+}
+.div{
+   
+}
+.in{
+   width: 7.37cm;
+   height: 43px;
+   line-height : 43px;
+   font-size : 16px;
+   font-weight : bold;
+   align-content: center;
+   margin: auto;
+   text-align: center;
+   margin : 5px; 
+   border: none;   
+   position: relative;
+    top: 80px;
+    left: 25px;
+}
+.in2{
+       cursor: pointer;
+    width: 18.5cm;
+    height: 0.9cm;
+    border-radius: 15px;
+    text-align: center;
+    font-size: 20px;
+    border: none;
+    margin: 3px 0px;
+    font-family: 'Noto Sans KR', sans-serif;
+    border: 2px solid #A4ADED;
+    background-color: white;
+    position: relative;
+    top: 0px;
+    left: 26px;
+    display: block;
+}
+.main_btn{
+   width: 3.5cm;
+    height: 1.16cm;
+    line-height: 44px;
+    font-size: 21px;
+    font-weight: bold;
+    border: 1px solid black;
+    margin: auto;
+    text-align: center;
+    background-color: RGB(68,114,196);
+    margin: 8px;
+    position: relative;
+    top: 84px;
+    left: 6%;
+    display: inline-block;
+}
+#FIND{
+       font-size: 10.5pt;
+    color: rgb(59, 56, 56);
+    position: relative;
+    top: 137px;
+    left: 183px;
 }
 #admin-box{
-	width: 500%;
-	height : 150%;
-	background-color : RGB(218,227,243);
-	margin : 8px; 
+          width: 1329px;
+    height: 734px;
+    background-color: RGB(218,227,243);
+    margin: 8px;
 }
+td {
+    width: 46px;
+    text-align: center;
+}
+table#calendar {
+        width: fit-content;
+    float: left;
+    border-collapse: collapse;
+}
+
+    td{
+               width: 45px;
+    height: 45px;
+    text-align: center;
+    font-size: 20px;
+    font-family: 'Noto Sans KR';
+    border: 2px border-color:#3333FF;
+    border-radius: 8px;
+        }
+        .admin_dtn2 {
+   background-color: gold;
+   line-height: 2cm;
+   margin: 10px;
+   display: flex;
+   padding: 21px;
+   width: 11.0cm;
+   height: 2cm;
+   border-radius: 22px;
+   position: relative;
+   left: 41px;
+   color: white;
+   font-size: 34pt;
+   text-align: center;
+   font-weight: bold;
+   display: none;
+}
+
+.stfupdate {
+   
+   line-height: 1cm;
+   width: 3cm;
+   border-radius: 22px;   
+   left: 1000px;
+   font-size: 18pt;
+   font-weight: bold;
+   display: none;
+}
+
+.admin_dtn3 {
+   background-color: gold;
+   line-height: 2cm;
+   margin: 10px;
+   display: flex;
+   padding: 21px;
+   width: 11.0cm;
+   height: 2cm;
+   border-radius: 22px;
+   position: relative;
+   left: 41px;
+   color: white;
+   font-size: 34pt;
+   text-align: center;
+   font-weight: bold;
+   display: none;
+}
+
+.am {
+   left: 164px;
+   top: -30px;
+   left: 164px;
+   width: 1.5cm;
+   height: 1cm;
+   fontSize: 20px;
+   backgroundColor: "#6182D6";
+   fontWeight: "bolder";
+   color: "White";
+   margin: "0px 9px";
+}
+
+.admi {
+   line-height: 2cm;
+   margin: 10px;
+   display: flex;
+   height: 2cm;
+   border-radius: 22px;
+   position: relative;
+   font-size: 18pt;
+   text-align: center;
+   border: 1px solid black;
+   border-width: 3px thin;
+   display: block;
+}
+
+}
+.admin {
+   position: relative;
+   font-size: 34pt;
+   text-align: center;
+}
+
+.addstf {
+   display: none;
+}
+img#drImg {
+    width: 100px;
+}
+span#desklet2 {
+    display: flex;
+}
+div {
+    width: max-content;
+}
+
+table.retimetb {
+       position: relative;
+    left: 21px;
+}
+.retimetb td{
+          font-size: 20pt;
+    padding: 2px 64px 4px;
+    width: 5cm;
+    border: 1px solid;
+}
+
+table.relists {
+       position: relative;
+    left: 44px;
+}
+.relists td{
+       width: 17cm;
+    font-size: 19pt;
+    padding: 5px;
+        position: relative;
+    top: 20px;
+}
+
+td input{
+       position: relative;
+    left: 172px;
+    top: -14px;
+    margin: 12px;
+    /* width: 4cm; */
+    /* height: 1cm; */
+    width: 3.7cm;
+    height: 1cm;
+    border: none;
+    background-color: rgb(97, 130, 214);
+    color: white;
+    font-size: 20px;
+}
+
+.tableCal table{
+   display: block;
+    position: relative;
+    top: 15px;
+    left: 17px;
+    width: 339px;
+    border-collapse: collapse;
+    border: 1px solid;
+    font-size: 18px;
+    font-weight: bold;
+}
+
 #little img{
-	    position: relative;
+       position: relative;
     left: 10px;
     width: 1.9cm;
     height: 2.1cm;
 }
 .span-hplist{
-       background-color: #F7F7F7;
+        background-color: #F7F7F7;
     position: relative;
-    top: -5px;
-    left: 39px;
+    bottom: 423px;
+    left: 25px;
     padding: 18px 5px;
     margin: 7px 5px;
-    width: 95%;
-    height: 64%;
+    width: 316%;
 }
 .admin_title{
-	    display: flex;
+       display: flex;
 }
 .admin_btn1{
-	    line-height: 2cm;
+       line-height: 1.5cm;
     margin: 10px;
     background-color: #3057B9;
     padding: 21px;
-    width: 11.0cm;
-    height: 2cm;
+    width: 7.0cm;
+    height: 1.5cm;
     border-radius: 22px;
     position: relative;
-    left: 41px;
+    left: 6px;
     color: white;
-    font-size: 34pt;
+    font-size: 29pt;
     text-align: center;
     font-weight: bold;
+}
+.inImg{
+       height: 42px;
+    width: 321px;
+}
+.hpInfo{
+   
+}
+.hpSub{
+   
+}
+.hpStf{
+   
+}
+#desk{
+        background-color: white;
+    width: 1270px;
+    height: 500px;
+    margin-left: 30px;
+    display: inline-table;
+    position: relative;
+    left: -11px;
+}
+.bkhp{
+   
+}
+.hpBk{
+   
 }

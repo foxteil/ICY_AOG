@@ -25,22 +25,23 @@
 	<!-- Gson -->
 	<beans:bean id="gson" class="com.google.gson.Gson"></beans:bean>
 	
-	<!-- Spring Email Service -->
-	<beans:bean id="springMail" class="org.springframework.mail.javamail.JavaMailSenderImpl">
-		<beans:property name="host" value="smtp.naver.com"></beans:property>
-		<beans:property name="port" value="465"></beans:property>
-		<beans:property name="username" value="coqlstn@naver.com"></beans:property>
-		<beans:property name="password" value="!!coco707160"></beans:property>
-		<beans:property name="javaMailProperties">
-			<beans:props>
-				<beans:prop key="mail.smtp.starttls.enable">true</beans:prop>
-				<beans:prop key="mail.smtps.ssl.trust">*</beans:prop>
-				<beans:prop key="mail.smtp.auth">true</beans:prop>
-				<beans:prop key="mail.smtps.ssl.checkserveridentity">true</beans:prop>
-				<beans:prop key="mail.smtp.socketFactory.class">javax.net.ssl.SSLSocketFactory</beans:prop>
-			</beans:props>
-		</beans:property>
-	</beans:bean>
+<beans:bean id="multipartResolver1" class="org.springframework.web.multipart.commons.CommonsMultipartResolver" >	
+	   <beans:property name="maxUploadSize" value="10485760"/>
+	   </beans:bean>
+	   <beans:bean id="uploadPath1" class="java.lang.String">
+	   <beans:constructor-arg value="C:\Users\ICY\git\ICY_AOG\ICY_AOG\src\main\webapp\resources\img"/><!-- 컴퓨터 경로로 줘야한다 -->
+	   </beans:bean>
+	   
+	   <beans:bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver" >	
+	   <beans:property name="maxUploadSize" value="10485760"/>
+	   </beans:bean>
+	   <beans:bean id="uploadPath" class="java.lang.String">
+	   <beans:constructor-arg value="C:\Users\ICY\git\ICY_AOG\ICY_AOG\src\main\webapp\resources\img"/><!-- 컴퓨터 경로로 줘야한다 -->
+	   </beans:bean>
+	
+	
+	<beans:bean id="enc" class="icia.oap.utils.Encryption"></beans:bean>
+	<beans:bean id="pu" class="icia.oap.utils.ProjectUtils"></beans:bean>
 	
 	
 	<context:component-scan base-package="icy.aog.controller"/>

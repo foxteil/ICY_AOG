@@ -6,6 +6,215 @@
 		<select id="getDr" resultType="icy.aog.beans.Hospital">
 		SELECT DR_NAME AS drName FROM DR
 		</select>
+		<select id="getdrsDay" resultType="icy.aog.beans.Hospital">
+		SELECT 
+        DISTINCT
+        TO_CHAR(DRS_DATE,'DD') AS drsDate
+   		FROM DRS
+	    WHERE DRS_DRCODE=#{DRSdrCode} AND DRS_DRHPCODE=#{hpCode}
+        ORDER BY TO_CHAR(DRS_DATE,'DD')
+		
+		</select>
+		<select id="docSchInfo" resultType="icy.aog.beans.Hospital">
+		SELECT 
+    	TO_CHAR(DRS_DATE,'DD') AS drsDate,
+   		TM_CODE AS TMCODE,
+	    TO_CHAR(TM_START,'HH24:MI') || '~' || TO_CHAR(TM_END,'HH24:MI') AS STIME,
+	    DRS_AVAIL AS drsAvail,
+	    DRS_LIMIT AS LIMIT
+	    FROM DRS INNER JOIN TM ON DRS_TMCODE = TM_CODE 
+	    WHERE DRS_DRCODE= #{DRSdrCode} AND DRS_DRHPCODE= #{hpCode}
+	    ORDER BY DRS_DATE,DRS_TMCODE
+		</select>
+		
+		
+		<select id="showDoc" resultType="icy.aog.beans.Hospital">
+		SELECT 
+		DISTINCT 
+   		DR_CODE AS drCode,
+    	DR_NAME AS drName
+		FROM DR 
+ 		WHERE DR_HPCODE =#{hpCode}
+		
+		</select>
+		
+		<update id="upHpBreak" >
+		UPDATE DRS SET DRS_STCODE = 'B' WHERE TO_CHAR(DRS_DATE,'DD')=#{hpBDay} AND DRS_DRHPCODE= #{hpCode}
+		</update>
+		
+		<select id="selHpBreak" resultType='String'>
+		SELECT DISTINCT DRS_STCODE AS STCODE FROM DRS WHERE TO_CHAR(DRS_DATE,'DD')=#{hpBDay} AND DRS_DRHPCODE= #{hpCode}
+		</select>
+		
+		
+		<update id="upReserve" >
+			UPDATE RE SET RE_STCODE='I' WHERE RE_FAJUMIN= #{FAJUMIN}
+                            and RE_DRSDRCODE=#{drCode} 
+                            and RE_DRSHPCODE=#{hpCode} 
+                            and RE_DRSTMCODE=#{TMCODE}
+			
+		</update>
+		<update id="upReserveC" >
+			UPDATE RE SET RE_STCODE='r' WHERE RE_FAJUMIN= #{FAJUMIN}
+                            and RE_DRSDRCODE=#{drCode} 
+                            and RE_DRSHPCODE=#{hpCode} 
+                            and RE_DRSTMCODE=#{TMCODE}
+			
+		</update>
+		
+		
+		<select id="getMb" resultType="icy.aog.beans.AuthBean">
+		SELECT MM_ID AS MID FROM MM
+		</select>
 
+		<select id="getReserver" resultType="icy.aog.beans.Hospital">
+		SELECT 
+		TO_CHAR(RE.RE_DRSDATE, 'YYMMDDHH24MI') AS RDATE, 
+		FA.FA_NAME AS FNAME, 
+		FA.FA_PHONE AS FPHONE
+		FROM RE INNER JOIN FA ON RE.RE_FAMMID = FA.FA_MMID AND RE.RE_FAJUMIN = FA.FA_JUMIN WHERE RE_DRSDRCODE= #{drCode}
+		</select>
+		
+		<select id="getReview" resultType="icy.aog.beans.Hospital">
+		SELECT
+		RV_REFAMMID AS rvId,
+		RV_GRADE AS rvGrade,
+		RV_COMMENT AS rvComment,
+		TO_CHAR(RV_DATE,'YYMMDD:HH24MI') AS rvDate
+		FROM RV where RV_REDRSHPCODE= #{hpCode}
+		</select>
 
+		<select id="getDrs" resultType="icy.aog.beans.Hospital">
+		SELECT
+		DRS_TMCODE AS TMCODE,
+		TO_CHAR(TM_START,'HH24:MI') AS STIME,
+		TO_CHAR(TM_END,'HH24:MI') AS ETIME,
+		DRS_AVAIL AS AVAIL,
+		DRS_LIMIT AS LIMIT
+		FROM DRS INNER JOIN TM ON DRS_TMCODE=TM_CODE
+         		 INNER JOIN PA ON DRS_DRPACODE=PA_CODE
+        WHERE DRS_DRHPCODE= #{hpCode} 
+        </select>
+        
+        
+        <select id="getDate" resultType="icy.aog.beans.Hospital">
+		select
+		TO_CHAR(DRS_DATE,'YY') AS REYEAR,
+		TO_CHAR(drs_date,'MM') AS REMONTH,
+		TO_CHAR(DRS_DATE,'DD') AS REDAY,
+        TO_CHAR(TM_START,'HH24:MI') AS RESTART ,
+        DRS_TMCODE AS RETIME
+		FROM DRS INNER JOIN TM ON DRS_TMCODE = TM_CODE
+        WHERE DRS_DRHPCODE= #{hpCode}
+		GROUP BY DRS_DATE,DRS_TMCODE,TM_START
+        ORDER BY DRS_TMCODE
+        </select>
+        
+        <select id="getReList" resultType="icy.aog.beans.Hospital">
+        SELECT 
+		SUBSTR(FA.FA_JUMIN,1,6) AS FJUMIN, 
+		FA.FA_NAME AS FNAME, FA.FA_PHONE AS FPHONE,
+		SUBSTR(RE_FAJUMIN,1,2)||' 년 '|| SUBSTR(RE_FAJUMIN,3,2)||'월 '||SUBSTR(RE_FAJUMIN,5,2)||'일' AS FAJUMIN,
+		RE_FAJUMIN AS JUMIN,
+		RE_DRSDRCODE AS DRCODE,
+		RE_DRSTMCODE AS TMCODE
+		FROM RE INNER JOIN FA ON RE.RE_FAMMID = FA.FA_MMID AND RE.RE_FAJUMIN = FA.FA_JUMIN 
+		WHERE RE_DRSHPCODE= #{hpCode} AND RE_DRSTMCODE= #{TMCODE}
+        
+        </select>
+        
+        	<!--의사정보추가-->	
+ 	<insert id="insDr">
+INSERT INTO DR(DR_CODE,DR_PACODE,DR_HPCODE,DR_NAME,DR_IMG) 
+ 	VALUES (#{drCode},#{drPart},#{hpCode},#{drName},null)
+ 	</insert>
+ 	
+ 	<!-- 의사 이름 이미지 변경 -->
+ 	<update id="upDr" >
+	UPDATE DR SET DR_IMG =#{drImg}
+    WHERE DR_CODE=#{drCode}AND DR_HPCODE=#{hpCode}
+ 	</update>	
+ 		<!-- 의사등록 파트폼OK -->
+ 	<select id="selpa" resultType="icy.aog.beans.Hospital">
+     SELECT PA_NAME AS paName,
+     PA_CODE AS drPart FROM PA
+ 	</select>
+ 	
+ 	
+ 	<!--의사정보 삭제  -->
+ 	<delete id="delDr">
+ 	DELETE FROM DR WHERE DR_NAME=#{drName}
+ 	</delete>
+ 
+ 	<!-- 병원 사진 추가 -->
+ 	<insert id="insHp">
+ 	INSERT INTO HP(HP_IMG)VALUES(#{hpImg})	
+ 	</insert>
+ 	<!-- 병원 사진 변경 -->
+ 	<update id="upHp" >
+ 	 UPDATE HP SET
+ 	 HP_IMG=#{drImg} 
+ 	 WHERE HP_CODE =#{hpCode}	
+ 	</update>
+ 	
+ 		<!-- 병원정보 OK -->
+ 	<select id ="selhp" resultType="icy.aog.beans.Hospital">
+ 	 SELECT  HS_HPIMG as hpImg,
+                 HS_HPPARK as hpPark            
+                 FROM HS WHERE HS_HPCODE=#{hpCode}
+ 	</select>	
+ 	
+ 	
+ 	
+ 	
+ 	
+ 	
+ 	
+ 	
+ 	<!--직원등록  --> 
+ 	<insert id="insStaff">
+ 	INSERT INTO STF (STF_CODE,STF_HPCODE,STF_PW,STF_RANK,STF_NAME,STF_PHONE)
+ 	 VALUES(#{stfCode},#{hpCode},#{stfPw},#{stfRank},#{stfName},#{stfPhone})
+ 	</insert>
+ 	<!-- 직원정보 -->
+ 	<select id="selstf" resultType="icy.aog.beans.Hospital">
+	SELECT    
+	STF_NAME as stfName,
+	STF_RANK as stfRank, 	
+	STF_CODE as stfCode
+    FROM STF WHERE STF_HPCODE =#{hpCode} 
+ 	</select>
+ 	<!-- 병원정보 -->
+ 
+ 	<!-- 의사정보 -->
+ 	<select id="seldr" resultType="icy.aog.beans.Hospital">
+						SELECT distinct 
+                        DR_NAME AS drName,
+                        DR_HPCODE AS hpCode,
+                        DR_IMG AS drImg,                      
+                        DR_PACODE AS drPart,
+                        DR_CODE AS drCode                                              
+                 FROM DR INNER JOIN DRS ON DR_HPCODE=DRS_DRHPCODE
+                 WHERE   DRS_DRHPCODE=#{hpCode} 
+    </select>
+	<!-- 병원 주차 여부 변경  OK -->
+ 	<update id="uppark" >
+ 	      UPDATE HS SET  HS_HPPARK=#{hpPark} WHERE HS_HPCODE=#{hpCode}
+ 	</update>
+ 	<!-- 병원이미지 변경  OK-->
+ 	<update id="uphpimg">
+ 	UPDATE HS SET HS_HPIMG=#{imgData} WHERE HS_HPCODE=#{uhpCode}
+ 	</update>
+ 	<!-- 스태프 정보 변경 -->
+ 	<update id="upstf">
+ 	UPDATE STF SET STF_PW =#{ustfPw}, STF_RANK=#{ustfRank} WHERE STF_HPCODE=#{hpCode} AND STF_CODE=#{ustfCode}
+ 	</update>
+ 	<!-- 스태프 정보 확인 -->
+ 	<select id="idcheck" resultType="int">
+ 	SELECT COUNT(*) FROM STF WHERE STF_CODE=#{stfCode} AND STF_PW=#{stfPw};
+ 	</select>
+ 	<delete id="delstf">
+ 		DELETE  FROM STF  WHERE STF_NAME=#{dstfName}AND STF_HPCODE=#{hpCode}AND STF_CODE=#{dstfCode}
+ 	</delete>
+        
 </mapper>

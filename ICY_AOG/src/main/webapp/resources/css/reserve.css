@@ -1,75 +1,44 @@
 body {
-	width: 400px;	
-	height : 800px;
-  font-family: "Open Sans", sans-serif;
+   width: 400px;   
+   height : 800px;
+   font-family: 'Noto Sans KR', sans-serif;
   display: flex;
   flex-direction: column;
   margin: 10px;
+  cursor: pointer;
+}
+
+
+#main_logo img{
+        width: 5cm;
+    height: 5cm;
+    position: relative;
+    left: 82px;
+    top: 47px;
 }
 #box{
-	width: 340px;
-	height : 680px;
-	background-color : RGB(218,227,243);
-	margin : 8px; 
-}
-
-.select{
-	width: 3.91cm;
-    height: 1cm;
-    font-size: 16pt;
-    font-weight: bold;
-    text-align: center;
-    background-color: RGB(68,114,196);
+       /* width: 340px; */
+    height: 789px;
+    /* background-color: RGB(218,227,243); */
     margin: 8px;
-    margin-bottom: 150px;
+    border: 7px solid #5F73C2;
     position: relative;
-    top: 126px;
-    left: 2%;
-    float: left;
+    left: 97px;
 }
 
-.my{
-	    width: 2cm;
-    height: 2cm;
-    font-size: 18pt;
-    font-weight: bold;
-    margin: auto;
-    text-align: center;
-    background-color: #F2F2F2;
-    margin: 18px;
-    position: relative;
-    top: 245px;
-    left: 1%;
-    float: left;
-}
 
-.btn{
-	width: 2.08cm;
-    height: 0.85cm;
-	background-color: RGB(68,114,196);
-    position: relative;
-    bottom: 144px;
-    left: 247px;
-	
-}
+
 
 .res{
-    
-}
-select{
-	width: 4cm;
-    height: 0.91cm;
-    background-color: RGB(68,114,196);
+   display: inline-flex;
     position: relative;
-    top: 118px;
-    font-size: 16pt;
-    color: darkgrey;
-    line-height: 0.91cm;
-    align-items: center;
+    left: -80px;
+    top: -27px;
 }
 
+
 .submit{
-	width: 2cm;
+   width: 2cm;
     height: 2cm;
     background-color: RGB(68,114,196);
     font-size: 16pt;
@@ -95,163 +64,298 @@ display: inline;
     padding: 0px 16px;
 }
 .partform{
-	position: relative;
+   position: relative;
     top: 86px;
     left: 2px;
 }
+.hp-reserve{
+       height: 140px;
+    width: 300px;
+    border: 1px solid #A4ADED;
+    border-radius: 12px;
+    padding: 20px;
+    margin-bottom: 59px;
+    position: relative;
+    left: 14px;
+}
 .reserve{
-	    color: white;
+   color: white;
     width: 3.9cm;
     height: 0.95cm;
     position: relative;
     top: 93px;
     left: 96px;
     background-color: #6182D6;
-    margin: 0px -11px 14px 0px;
+    margin: 0px 17px 14px 0px;
     font-size: 15pt;
     text-align: center;
     line-height: 0.95cm;
-  
   }
 .span-search{
-	    position: relative;
+       position: relative;
     top: 11px;
     left: 17px;
+    
 }
 .span-search input[type="text"]{
-	    width: 7.82cm;
+       width: 7.82cm;
     height: 1.11cm;
     border: 3pt solid #455E9D;
 }
 #SEARCH img{
-	    width: 0.66cm;
+       width: 0.66cm;
     height: 0.71cm;
     position: relative;
     right: 36px;
     top: 8px;
 }
 #little img{
-	    position: relative;
-    left: 10px;
+       position: relative;
+    left: 21px;
     width: 1.9cm;
     height: 2.1cm;
+    top: 21px;
+    z-index: 1;
 }
 #BOOKMARK img{
-	width: 0.7cm;
+       width: 0.7cm;
     height: 0.7cm;
     position: relative;
-    left: 294px;
-    bottom: 13px;
+    left: 251px;
+    bottom: 11px;
+    padding: 0px;
 }
 .hpname{
-	font-size: 18pt;
+    height: 0px;
+    font-size: 18pt;
     color: #2C4582;
     font-weight: bold;
     position: relative;
-    right: +22px;
+    bottom: 81px;
+    padding: 0px;
+     font-family: 'Noto Sans KR', sans-serif;
 }
 .hppart{
-	     font-size: 11pt;
+        bottom: 43px;
+    font-size: 11pt;
     color: #A6A6A6;
     position: relative;
-    left: 35px;
-
+    left: -2px;
+    padding: 0px;
+    height: 0px;
 }
 .hptime{
-	font-size: 11pt;
-    color: #A6A6A6;
-    position: relative;
-    top: 17px;
-    left: 14px;
+   font-size: 10pt;
+   /* color: #A6A6A6; */
+   position: relative;
+   top: -22px;
+   left: -4px;
+   height: 0px;
+   font-weight: 900;
 }
-.span-hplist{
-    background-color: #F7F7F7;
+
+.ltime{
+   height: 0px;
+    font-size: 10pt;
+    /* color: #A6A6A6; */
     position: relative;
-    top: 13px;
-    padding: 18px 5px;
+    top: -5px;
+    left: 67px;
+    font-weight: 900;
+   /* height: 0px; */
+}
+
+.hpTimeL{
+     /* background-color: #FFFFFF; */
+    position: relative;
+    top: -18px;
+    padding: 5px 5px;
     margin: 7px 5px;
+    overflow: scroll;
+    -ms-overflow-style: none;
+    overflow: scroll;
+}
+.hpTimeL::-webkit-scrollbar{ 
+   display:none;
+ }
+ 
+.span-hplist{
+        /* background-color: #FFFFFF; */
+    position: relative;
+    top: 33px;
+    padding: 5px 5px;
+    margin: 7px 5px;
+    height: 608px;
+}
+.hpDiv{
+       position: relative;
+    top: 18px;
+    left: -8px;
+    padding: 5px 5px;
+    margin: 7px 5px;
+    overflow: scroll;
+    -ms-overflow-style: none;
+    height: 380px;
+    overflow: scroll;
+}
+
+.hpDiv::-webkit-scrollbar{ 
+   display:none;
+ }
+ 
+ .hpBk{
+       position: relative;
+    top: 23px;
+    padding: 5px 5px;
+    margin: 7px 5px;
+    overflow: scroll;
+    -ms-overflow-style: none;
+    height: 136px;
+    overflow: scroll;
+    left: -8px;
+}
+
+.hpBk::-webkit-scrollbar{ 
+   display:none;
+ }
+#bkName{
+       font-size: 23px;
+    /* width: 0px; */
+    line-height: au;
+    /* height: 0px; */
+    padding: 6px;
+    position: relative;
+    left: 10px;
+    text-align: justify;
+    top: -12px;
+}
+.bkhp{
+   cursor: pointer;
+    width: 8.5cm;
+    height: 38px;
+    line-height: 48px;
+    border-radius: 15px;
+    text-align: center;
+    font-size: 20px;
+    border: none;
+    margin: 3px 0px;
+    font-family: 'Noto Sans KR', sans-serif;
+    border: 3px solid #A4ADED;
+    background-color: white;
+    position: relative;
+    top: -2px;
+    left: 9px;
+}
+/*수정*/
+
+.bk_list{
+    border: 5px solid #A4ADED;
+    position: relative;
+    top: 9px;
+    left: 10px;
+    height: 88px;
+    line-height: 65px;
+    padding: 14px;
+    border-radius: 13px;
+    z-index: 1;
+    padding: 13px;
+    margin-bottom: 21px;
+    width: 7.5cm;
 }
 #HDETAIL{
-	background-color: #F7F7F7;
+   
     position: relative;
-    border: 1px solid black;
+    border: none;
     padding: 0px 15px;
-    border-radius: 11px;
-    left: 264px;
-    top: 17px;
+    border-radius: 7px;
+    left: 228px;
+    top: -6px;
     margin: 0px;
-    font-size:11px;
+    font-size: 12px;
+    z-index: 1;
+    background-color: #f0f8ff00;
+
 }
 .hpimage img{
-	    width: 8.64cm;
+       width: 8.64cm;
     height: 4.8cm;
     position: relative;
     left: 8px;
 }
 .btn {
-    width: 2.4cm;
+       width: 2.4cm;
     height: 0.65cm;
     background-color: #C0CDEF;
-    top: 2px;
-    left: 13px;
+    position: relative;
+    bottom: 90%;
+    right: -88%;
     margin: 1px 6px;
     line-height: 0.65cm;
     border: none;
     border-radius: 7px;
 }
+
 .info{
-	    width: 2.53cm;
-    height: 1.03cm;
-    background-color: #6182D6;
-    padding: 0px 4px;
-    margin: 6px 2px;
-    line-height: 1.03cm;
+    cursor: pointer;
+    width: 120px;
+    padding: 0px 91px 1px;
+    height: 33px;
+    line-height: 0.9cm;
+    border-radius: 15px;
     text-align: center;
-    font-weight: bold;
+    font-size: 17px;
+    border: none;
+    margin: 3px 0px;
+    background: url(/resources/img/selectbox.png) no-repeat 95% 45%;
+    background-size: 23px;
+    font-family: 'Noto Sans KR', sans-serif;
+    border: 2px solid #A4ADED;
     position: relative;
-    left: 20px;
+    left: 30px;
+    top: 12px;
 }
 .resinfo{
-	width: 5.13cm;
-	height: 1.03cm;
-	background-color: #ECEBEA;
-	 padding: 0px 4px;
-   margin : 6px 24px;
-    line-height: 1.03cm;
+   cursor: pointer;
+    width: 8cm;
+    height: 1cm;
+    line-height: 1cm;
+    border-radius: 15px;
+    text-align: center;
+    font-size: 17px;
+    border: none;
+    margin: 3px 0px;
+    font-family: 'Noto Sans KR', sans-serif;
+    /* border: 2px solid #A4ADED; */
+    background-color: #c9cfff;
+    position: relative;
+    left: 14px;
+    top: 53px;
 }
 .hpinfo{
-	    position: relative;
+       position: relative;
     bottom: 5px;
     left: -7px;
     display: inline-flex;
 }
-#doctor{
-	    width: 4cm;
-    height: 0.7cm;
-    line-height: 1.02cm;
-    text-align: center;
-    font-weight: bold;
-    position: relative;
-    top: -14px;
-    left: 15px;
-    font-size: 13pt;
-    color: black;
-    line-height: 0.91cm;
-    align-items: center;
-}
+
 #doctor-select{
     background-color: white;
 }
 #FINISH{
-	    width: 2cm;
+       width: 3cm;
     height: 1cm;
     position: relative;
-    top: 123px;
-    left: 102px;
-     background-color: #6182D6;
+    top: 108px;
+    left: 248px;
+    background-color: #6182D6;
+    /* font-weight: bold; */
+    color: white;
+    font-size: 14pt;
+    border: none;
+    /* font-family: 'Do Hyeon', sans-serif;*/
 }
 .finish_info{
-	font-weight: bold;
+   font-weight: bold;
     text-align: center;
     position: relative;
     left: 39px;
@@ -259,40 +363,35 @@ display: inline;
     font-size: 14pt;
 }
 .finish_title{
-	    text-align: center;
+       text-align: center;
     position: relative;
     top: 0px;
     color: #203A7B;
     font-weight: bold;
     font-size: 28pt;
 }
+/*수정*/
 .res_btn{
-	    width: 6.74cm;
-    height: 1.14cm;
-    margin: 5px;
-    position: relative;
-    bottom: 283px;
-    left: 40px;
-    font-size: 16pt;
-}
-.check_info{
-    text-align: center;
-    position: relative;
-    left: 39px;
-    top: -7px;
-    font-size: 14pt;
-}
-.res_btn{
-	    position: relative;
-    left: 39px;
-    top: -7px;
-    width: 2.52cm;
-    height: 0.59cm;
-    font-size: 11pt;
+       position: relative;
+    left: -25px;
+    top: -3px;
+    /* font-size: 11pt; */
     line-height: 0.59cm;
+    width: 300px;
+    height: 1cm;
+    font-size: 23px;
+    background-color: #5F73C2;
+    color: #F1F1F1;
+    margin: 4.5px;
+    font-family: 'Do Hyeon', sans-serif;
+    border: none;
+    border-radius: 8px;
+    width: 340px
 }
+
+
 .mypage-info{
-	    width: 3.68cm;
+       width: 3.68cm;
     height: 1.1cm;
     background-color: #6182D6;
     padding: 0px 4px;
@@ -303,3 +402,366 @@ display: inline;
     position: relative;
     left: 6px;
 }
+/*임시*/
+.check{
+   display: flex;
+
+  }
+.check_info{
+       position: relative;
+    left: -1px;
+    top: -7px;
+    font-size: 14pt;
+    width: 138px;
+    border-right: 1px solid black;
+}
+.check_content{
+        position: relative;
+    left: 15px;
+    top: -7px;
+    font-size: 14pt;
+}
+.reserve-title{
+       width: 8.15cm;
+    height: 0.5cm;
+    position: relative;
+    left: 5px;
+    margin: 9px 5px 30px;
+}
+
+.my img{
+       width: 88px;
+}
+#RESCHECK img{
+       position: relative;
+    top: 297px;
+    left: 20px;
+}
+#BOOKMARKFORM img{
+          position: relative;
+    left: 144px;
+    bottom: -125px;
+    padding: 0px;
+}
+#MYPAGEFORM img{
+      position: relative;
+    bottom: 24px;
+    left: 259px;
+
+}
+#main_logo img{
+       width: 5cm;
+    height: 5cm;
+    position: relative;
+    left: -17px;
+    top: 60px;
+}
+.hpReview_title{
+   font-family: 'Do Hyeon', sans-serif;
+    font-size: 26pt;
+    text-align: center;
+    color: rgb(32, 58, 123);
+    position: relative;
+    top: 12px;
+}
+#ORDER{
+       position: relative;
+    top: 149px;
+    left: 112px;
+    height: 46px;
+    line-height: 46px;
+}
+
+select {
+    width: 153px;
+    padding: .8em .5em;
+    border: 1px solid #999;
+    font-family: inherit;
+    background: url(/resources/img/selectbox.png) no-repeat 95% 45%;
+    background-size: 23px;
+    border-radius: 0px;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+}
+
+select ::-ms-expand {
+   display: none;
+}
+select.focus {
+    border-color: #66afe9;
+    -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075), 0 0 8px rgba(102, 175, 233, .6);
+    box-shadow: inset 0 1px 1px rgba(0,0,0,.075), 0 0 8px rgba(102, 175, 233, .6);
+}
+
+
+
+
+#si{
+   position: relative;
+    top: 81px;
+    left: 24px;
+}
+
+#gu{
+       position: relative;
+    top: 81px;
+    left: 41px;
+}
+
+.lSearch{
+       /* border: 1px solid black; */
+    /* font-family: 'Noto Sans KR', sans-serif; */
+    /* border: 2px solid #A4ADED; */
+    cursor: pointer;
+    width: 8.5cm;
+    height: 2.2cm;
+    border-radius: 15px;
+    text-align: center;
+    font-size: 20px;
+    border: none;
+    margin: 3px 0px;
+    font-family: 'Noto Sans KR', sans-serif;
+    border: 3px solid #A4ADED;
+    background-color: white;
+    position: relative;
+    top: -2px;
+    left: 9px;
+    margin: 0px 0px 8px 0px;
+}
+#hpName{
+       font-size: 31px;
+    /* width: 0px; */
+    height: 0px;
+    padding: 6px;
+    position: relative;
+    left: 10px;
+    text-align: justify;
+    font-family: 'Do Hyeon', sans-serif;
+}
+#pName{
+       cursor: pointer;
+    width: 8.1cm;
+    padding: 0px 91px 1px;
+    height: 1cm;
+    line-height: 0.9cm;
+    border-radius: 15px;
+    text-align: center;
+    font-size: 17px;
+    border: none;
+    margin: 3px 0px;
+    font-family: 'Noto Sans KR', sans-serif;
+    border: 2px solid #A4ADED;
+    position: relative;
+    left: -24px;
+    top: 56px;
+}
+
+#doctor{
+       cursor: pointer;
+    width: 8.1cm;
+    padding: 0px 91px;
+    height: 1cm;
+    line-height: 1cm;
+    border-radius: 15px;
+    text-align: center;
+    font-size: 17px;
+    border: none;
+    margin: 3px 0px;
+    font-family: 'Noto Sans KR', sans-serif;
+    border: 2px solid #A4ADED;
+    position: relative;
+    left: 31px;
+    top: -6px;
+}
+
+.hpPhone{
+   position: relative;
+    top: 36px;
+    left: -10px;
+    text-align: end;
+}
+#REVIEW img{   
+        width: 104px;
+    /* background-color: white; */
+    position: relative;
+    left: 25px;
+    top: 135px;
+}
+#RESFORM img{   
+       width: 104px;
+    /* background-color: white; */
+    position: relative;
+    left: 8px;
+    top: 135px;
+}
+#MAP img{   
+       width: 104px;
+    /* background-color: white; */
+    position: relative;
+    left: 36px;
+    top: 135px;
+}
+#hpN{
+   font-size: 32px;
+    font-family: 'Do Hyeon', sans-serif;
+    position: relative;
+    left: 21px;
+    top: 51px;
+}
+#hpP{
+       position: relative;
+        left: 242px;
+    top: 54px;
+}
+#hPhone{
+   position: relative;
+       left: 23px;
+    top: 34px;
+        width: 329px;
+}
+#addr{
+       position: relative;
+    top: 48px;
+    left: 20px;
+}
+#btnList{
+       position: relative;
+    top: -88%;
+    left: -89px;
+}
+td {
+    width: 46px;
+    text-align: center;
+}
+table#calendar {
+    width: fit-content;
+    float: left;
+}
+
+.tableCal table{
+   display: block;
+    position: relative;
+    top: 15px;
+    left: 17px;
+    width: 339px;
+    border-collapse: collapse;
+    border: 1px solid;
+    font-size: 18px;
+    font-weight: bold;
+}
+td,tr{
+}
+
+td:nth-child(1){
+}
+
+#target{
+       cursor: pointer;
+    width: 8.1cm;
+    padding: 0px 91px 1px;
+    height: 1cm;
+    line-height: 0.9cm;
+    border-radius: 15px;
+    text-align: center;
+    font-size: 17px;
+    border: none;
+    margin: 3px 0px;
+    font-family: 'Noto Sans KR', sans-serif;
+    border: 2px solid #A4ADED;
+    position: relative;
+    left: 32px;
+    top: 19px;
+}
+
+.sub{
+       height: 11px;
+    position: relative;
+    top: 25px;
+    left: 30px;
+    padding: 5px 0px 47px;
+}
+
+.timeTable{
+       width: 4cm;
+    border: 2px solid #A4ADED;
+    border-radius: 19px;
+    display: inline-block;
+    margin: 8px;
+}
+
+.timeRes{
+       font-size: 17pt;
+    text-align: center;
+    position: relative;
+    top: -15px;
+}
+.possRes{
+       text-align: center;
+    position: relative;
+    top: -8px;
+}
+
+#send{
+       position: relative;
+    left: 69%;
+    top: -4%;
+    width: 150px;
+    height: 42px;
+    border: none;
+    background-color: #6182D6;
+    color: white;
+    font-size: 14pt;
+}
+
+.timeTable input{
+ width:20px;
+    height:20px;
+  background-image: url("/resources/img/radio-off.png");
+    background-repeat: no-repeat;
+    background-size: cover;
+    display: inline-block;
+    border: 0;
+    vertical-align: top;
+    -webkit-appearance: none;
+    cursor: pointer;
+    outline: none;
+}
+
+.timeTable input:checked{
+    width:20px;
+    height:20px;
+  background-image: url("/resources/img/radio-on.png");
+    background-repeat: no-repeat;
+    background-size: cover;
+    display: inline-block;
+    border: 0;
+    vertical-align: top;
+    -webkit-appearance: none;
+    cursor: pointer;
+    outline: none;
+
+}
+
+#scroll {
+    height: 579px;
+    overflow: scroll;
+    position: relative;
+    top: 1px;
+}
+
+#scroll::-webkit-scrollbar{ 
+   display:none;
+}
+    
+#bkhpList {
+        height: 587px;
+    overflow: scroll;
+    position: relative;
+    top: 20px;
+    left: 14px;
+}
+
+#bkhpList::-webkit-scrollbar{ 
+   display:none;
+}    

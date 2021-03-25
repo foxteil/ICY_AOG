@@ -8,49 +8,127 @@
 <link rel="icon" type="/resources/img/png" href="/resources/img/gtg.png">
 <title>병원상세페이지</title>
 </head>
-<body>
+<body onLoad=init()>
+
 	<div id="box">
 		<a id="little">
       		<img src="/resources/img/gtg_main.png">
-    	</a>
-    	<a class="hpimage">
-    		<img src="/resources/img/hpimage.png">
-    	</a>
-    	<div class="span-hplist" style="position: relative; top: 0px; padding: 9px 0px 38px 0px;">
-		<span id="RESFORM" onclick="order(this)">
-			<span class="hpname" style="position:relative; left:12px;">인천일보의원</span>
-			<span class="hppart" style="position: relative;left: 93px;">이비인후과</span><br/>
-			<span class="hptime"> ☎  032-439-0011</span><br/>
-			<span class="hptime">--------------------------------------------------</span>
-			<span class="hptime">
-			<br>평일   09:00 - 21:00 | 토요일 09:00 - 17:00|
-			<br>일요일 09:00 - 16:00 | 공휴일 09:00 - 16:00
-			</span><br/>
-			<span class="hptime">--------------------------------------------------</span>
-			<span class="hptime"> 
-			<br>인천 남동구 논고개로 121 <br>	 
-			<img src="/resources/img/subway.png" style="width: 1.93cm;
-    height: 0.7cm;
-    position: relative;
-    top: 14px;">인천 논현역 4번 출구에서 218m
-
-			</span>
-			</span>
-		</div>
+    	</a> 
+    	<div id="detailList"></div>
+<!-- 		<img src="/resources/img/subway.png" style="width: 1.93cm; -->
+<!--      height: 0.7cm; -->
+<!--      position: relative; --> 
+<!--     top: 14px;">인천 논현역 4번 출구에서 218m -->
+		
+		
 			<button class="btn" id="REVIEW" onclick="detail(this)">리뷰보러가기</button>
-			<button class="btn" id="RESFORM" onclick="detail(this)">예약하기</button>
-			<button class="btn" id="MAP" onclick="detail(this)">지도보기</button>
-	</div>
+			<button class="btn" id="RESFORM" onclick="reserve(this)">예약하기</button>
+			<button class="btn" id="MAP" >지도보기</button>
+		</div>
+<button class ="btn" id="START" onclick="click()">MAIN</button>
+<button class="btn" id="MYPAGE" onclick="click()">MYPAGE</button>
 </body>
 
 <script>
-	function detail(obj){
-		var form = document.createElement("form");
-		form.action = obj.id;
+
+let map; 
+let detail;
+let re;
+var idInfo = "${idInfo}";
+function init(){
+	
+	 detail = document.getElementById("detailList");
+	let hdetail= JSON.parse('${dInfo}');
+	
+	let dImage= document.createElement('img');
+	dImage.setAttribute("src","/resources/img/" + hdetail[0].hpImg);
+	dImage.innerHTML=hdetail[0].hpImg;
+	dImage.style.width="8.64cm";
+	dImage.style.height="4.8cm";
+	dImage.style.left="8px";
+	dImage.style.position="relative";
+	dImage.className = "hdetail";
+	detail.appendChild(dImage);
+	
+	let hpName = document.createElement('span');
+	hpName.textContent = hdetail[0].hpName;
+	hpName.className = "hdetail";
+	hpName.style.position="relative";
+	detail.appendChild(hpName);
+	
+	let paName = document.createElement('span');
+	paName.textContent =hdetail[0].paName;
+	paName.className = "hdetail";
+	paName.style.position="relative";
+	detail.appendChild(paName);
+	
+	
+	let hPhone =document.createElement('span');
+	hPhone.textContent = hdetail[0].hpPhone;
+	hPhone.className = "hdetail";
+	hPhone.style.position="relative";
+	detail.appendChild(hPhone);
+	
+	
+	let addr = document. createElement('span');
+	addr.textContent = hdetail[0].Addr;
+	addr.className =  "hdetail";
+	addr.style.position="relative";
+	detail.appendChild(addr);
+	
+ 	map = document.getElementById("MAP");
+ 	map.addEventListener('click',function(){mapview(hdetail[0].hpCode);});
+ 	
+//  	re = document. getElementById("RESFORM");
+//  	re.addEventListener('click',function(){reserve(hdetail[0].hpCode);});
+}
+
+
+	function reserve(obj){
+		let info = JSON.parse('${dInfo}');		
+		
+		
+	
+		var form=document.createElement("form");
+		let res = document.createElement("input");
+		res.name = "hpCode";
+		res.value=info.hpCode;
+		res.type = "button";
+		
+
+		form.action = "RESFORM?hpCode="+info[0].hpCode+"&Id="+idInfo;
 		form.method = "post";
+		
+		form.appendChild(res);
+	
 		document.body.appendChild(form);
+		
 		form.submit();
 		
 	}
-</script>
+	
+	function mapview(obj){
+		
+	
+		//alert(obj);
+		var form=document.createElement("form");
+		let hpost = document.createElement("input");
+
+		hpost.name = "hpCode";
+		hpost.value=obj;
+		hpost.type = "button";
+	
+		form.action = "MAP?hpCode="+obj+"&Id="+idInfo;
+		form.method = "post";
+		
+
+		form.appendChild(hpost);
+		document.body.appendChild(form);
+		detail.appendChild(map);
+		form.submit();
+	}
+	
+
+	
+</script>   
 </html>
